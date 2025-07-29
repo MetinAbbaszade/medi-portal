@@ -8,7 +8,7 @@
         align-items: center;
         justify-content: space-around;
         padding: 1rem;
-        
+
         .navbar-l {
             display: flex;
             align-items: center;
@@ -24,7 +24,6 @@
         .navbar-m {
             display: flex;
             column-gap: 3rem;
-            color: #2c3e50;
 
             button {
                 display: flex;
@@ -34,6 +33,13 @@
                 padding: 8px 15px;
                 transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
                 border-radius: 10px;
+
+                a {
+                    display: flex;
+                    align-items: center;
+                    text-decoration: none;
+                    color: #2c3e50;
+                }
 
                 span:first-of-type {
                     margin-right: 4px;
@@ -49,7 +55,10 @@
             button:hover {
                 background-color: rgba(20, 164, 212, 0.1);
                 cursor: pointer;
-                color: #14a4d4;
+
+                a {
+                    color: #14a4d4;
+                }
 
                 span:first-of-type {
                     transform: translateY(-2px);
