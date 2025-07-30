@@ -1,0 +1,14 @@
+.wrapper {
+    width: 100%;
+
+    .hero-container {
+        min-height: 85vh;
+        background: linear-gradient(170deg, #14a4d4, #171717);
+        display: flex;
+        align-items: center;
+
+        .hero-wrapper{
+            margin: 0 auto;
+        }
+    }
+}
