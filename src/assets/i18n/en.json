@@ -1,0 +1,8 @@
+{
+    "HOME": {
+        "TITLE": "Welcome to our application!",
+        "DESCRIPTION": "This is an example of ngx-translate configuration."
+    },
+    "BUTTON_TEXT": "Change Language",
+    "HELLO_USER": "Hello, {{name}}!"
+}

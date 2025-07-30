@@ -1,9 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { IRoutes } from './app.interface';
-import { MatToolbarRow } from "@angular/material/toolbar";
 import { MatIconModule } from '@angular/material/icon';
+import { MainNavbar } from "./shared/components/main-navbar/main-navbar";
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -12,39 +12,17 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     RouterOutlet,
     MatSidenavModule,
-    MatToolbarRow,
     MatIconModule,
-    RouterLink
-],
+    MainNavbar
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('MediPortal');
 
-  routes: IRoutes[] = [
-    {
-      icon: 'local_hospital', // 🏥 Hospital icon
-      label: 'Hospitals',
-      href: 'hospital'
-    },
-    {
-      icon: 'medical_services', // 🩺 Doctor/medical-related icon
-      label: 'Doctors',
-      href: 'doctor'
-    },
-    {
-      icon: 'info', // ℹ️ About icon
-      label: 'About',
-      href: 'about'
-    },
-    {
-      icon: 'mail', // ✉️ Contact icon
-      label: 'Contact',
-      href: 'contact'
-    }
-  ]
-
-  languages: string[] = ['aze', 'rus', 'en']
-
+  constructor(
+    translate: TranslateService
+  ) {
+    console.log(translate.getBrowserLang())
+  }
 }
