@@ -4,5 +4,17 @@
         "doctor": "Həkimlər",
         "about": "Haqqında",
         "contact": "Əlaqə"
+    },
+    "MainHero": {
+        "welcomeTitle": "MediPortal-a xoş gəlmisiniz",
+        "welcomeDescription": "Ən yaxşı xəstəxanaları tapın, görüş təyin edin və dərhal tibbi yardım alın.",
+        "assistantHeader": "MediPortal Köməkçisi",
+        "assistantGreeting": "Salam! Mən MediPortal köməkçisiyəm. Sizə necə kömək edə bilərəm?",
+        "recommendations": "Baş ağrısı və başgicəllənmə"
+    },
+    "MainAbout": {
+        "title": "MediPortal haqqında",
+        "description": "MediPortal, Azərbaycanın aparıcı səhiyyə platforması olaraq, xəstələri ölkə üzrə ən yaxşı xəstəxanalar və tibb mütəxəssisləri ilə birləşdirir. Missiyamız hər kəs üçün səhiyyəni əlçatan və səmərəli etməkdir."
     }
+    
 }
