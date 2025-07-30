@@ -4,6 +4,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MainNavbar } from "./shared/components/main-navbar/main-navbar";
 import { TranslateService } from '@ngx-translate/core';
+import { Translation } from './translation';
 
 
 @Component({
@@ -21,14 +22,16 @@ import { TranslateService } from '@ngx-translate/core';
 export class App {
 
   constructor(
-    private translate: TranslateService
+    private translate: TranslateService,
+    private translateService: Translation
   ) {
-    this.translate.addLangs(['en', 'es']); 
-    this.translate.setDefaultLang('en');
+    this.translate.addLangs(['en', 'az']); 
     const browserLang = this.translate.getBrowserLang();
-    const preferredLang = browserLang?.match(/en|es/) ? browserLang : 'en';
-    this.translate.use(preferredLang);
-    localStorage.setItem('language', preferredLang);
-    console.log(translate.getBrowserLang())
+    const preferredLang = browserLang?.match(/en|az/) ? browserLang : 'en';
+    this.translateService.setLang(preferredLang)
+  }
+
+  change(lang: string){
+    this.translateService.setLang(lang)
   }
 }

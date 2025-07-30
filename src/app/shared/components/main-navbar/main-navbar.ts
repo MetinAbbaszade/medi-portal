@@ -1,11 +1,14 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { IRoutes } from '../../../app.interface';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule, MatToolbarRow } from "@angular/material/toolbar";
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { RouterLink } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedTranslateModule } from '../../modules/shared-translate.module';
+import { ILanguage } from './modules/interface';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-main-navbar',
@@ -16,37 +19,41 @@ import { SharedTranslateModule } from '../../modules/shared-translate.module';
     RouterLink,
     SharedTranslateModule,
     MatToolbarModule,
+    MatMenuModule,
+    CommonModule
   ],
   templateUrl: './main-navbar.html',
   styleUrl: './main-navbar.css'
 })
 export class MainNavbar {
-  private translate = inject(TranslateService);
+  @Input() changeLang!: (lang: string) => void;
+  public translate = inject(TranslateService);
+  // Uses the 'inject' function to get an instance of the TranslateService.
   constructor(
-  ) { }
+  ) { 
+  }
 
   routes: IRoutes[] = [
     {
       icon: 'local_hospital', // 🏥 Hospital icon
-      label: 'Hospitals',
       href: 'hospital'
     },
     {
       icon: 'medical_services', // 🩺 Doctor/medical-related icon
-      label: 'Doctors',
       href: 'doctor'
     },
     {
       icon: 'info', // ℹ️ About icon
-      label: 'About',
       href: 'about'
     },
     {
       icon: 'mail', // ✉️ Contact icon
-      label: 'Contact',
       href: 'contact'
     }
   ]
 
-  // languages: string[] = ['aze', 'rus', 'en']
+  languages: ILanguage = {
+    'az': "Azərbaycanca",
+    'en': "English"
+  }
 }

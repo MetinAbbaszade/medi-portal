@@ -1,5 +1,8 @@
 {
-    "MAINNAVBAR": {
-        "hospital": "Salam"
+    "Navigation": {
+        "hospital": "Hospital",
+        "doctor": "Doctors",
+        "about": "About",
+        "contact": "Contact"
     }
 }

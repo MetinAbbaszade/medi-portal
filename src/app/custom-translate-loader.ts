@@ -4,23 +4,28 @@ import { TranslateLoader } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
+  // providedIn: 'root': This tells Angular that this service should be available application-wide (singleton instance)
+  // and automatically configured when the app starts.
   providedIn: 'root'
 })
+// This means it promises to provide the 'getTranslation' method as required by the interface.
 export class CustomTranslateLoader implements TranslateLoader {
+
+  // This gets an instance of HttpClient, which will be used to make the actual HTTP request to fetch translation files.
   private httpClient = inject(HttpClient);
-  private basePath: string = '/assets/i18n/'; // Default path, can be changed dynamically
+  private basePath: string = '/assets/i18n/';
 
   constructor() { }
 
-  // Method to set the base path dynamically
   public setBasePath(path: string): void {
     this.basePath = path;
   }
 
+  // It takes a 'lang' parameter (e.g., 'en', 'es') and must return an Observable that emits the translation object for that language.
   getTranslation(lang: string): Observable<any> {
-    // Construct the URL dynamically based on the current basePath
+
     const url = `${this.basePath}${lang}.json`;
-    console.log(`Loading translation from: ${url}`); // For debugging
+    // Uses the injected HttpClient to make an HTTP GET request to the constructed URL.
     return this.httpClient.get(url);
   }
 }

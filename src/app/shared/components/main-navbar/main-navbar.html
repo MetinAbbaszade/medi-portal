@@ -8,17 +8,22 @@
         <button>
             <a [routerLink]='item.href'>
                 <span class="material-icons">{{item.icon}}</span>
-                <span>{{item.label}}</span>
+                <span>{{'Navigation.'+ item.href | translate}}</span>
             </a>
         </button>
         }
-        <div>{{ 'MAINNAVBAR.hospital' | translate }}</div>
     </mat-toolbar-row>
     <mat-toolbar-row class="navbar-r">
         <button>
             <span class="material-icons">public</span>
-            <span>Language</span>
-            <span class="material-icons">arrow_drop_down</span>
+            <mat-menu #belowMenu="matMenu" xPosition="before">
+                <button *ngFor="let item of translate.getLangs()" (click)="changeLang(item)"
+                    [ngClass]="item === translate.currentLang ? 'selected_lang' : ''" mat-menu-item>
+                    <span>{{ languages[item] }}</span>
+                </button>
+            </mat-menu>
+
+            <span class=" material-icons">arrow_drop_down</span>
         </button>
         <div>
         </div>
