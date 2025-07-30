@@ -17,6 +17,7 @@ export class Translation {
 
   setLang(lang: string): void {
     localStorage.setItem('lang', lang)
+    this.translate.use(lang)
   }
 
   getLang() {

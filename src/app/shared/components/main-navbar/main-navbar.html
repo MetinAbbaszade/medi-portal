@@ -14,7 +14,7 @@
         }
     </mat-toolbar-row>
     <mat-toolbar-row class="navbar-r">
-        <button>
+        <button [matMenuTriggerFor]="belowMenu">
             <span class="material-icons">public</span>
             <mat-menu #belowMenu="matMenu" xPosition="before">
                 <button *ngFor="let item of translate.getLangs()" (click)="changeLang(item)"
@@ -22,8 +22,8 @@
                     <span>{{ languages[item] }}</span>
                 </button>
             </mat-menu>
-
-            <span class=" material-icons">arrow_drop_down</span>
+            <span>Languages</span>
+            <span class="material-icons">arrow_drop_down</span>
         </button>
         <div>
         </div>

@@ -32,6 +32,7 @@ export class App {
   }
 
   change(lang: string){
+    console.log(lang)
     this.translateService.setLang(lang)
   }
 }
