@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IRoutes } from '../../../app.interface';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarRow } from "@angular/material/toolbar";
+import { MatToolbarModule, MatToolbarRow } from "@angular/material/toolbar";
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { SharedTranslateModule } from '../../modules/shared-translate.module';
 
 @Component({
   selector: 'app-main-navbar',
@@ -11,12 +13,18 @@ import { RouterLink } from '@angular/router';
     MatSidenavModule,
     MatToolbarRow,
     MatIconModule,
-    RouterLink
+    RouterLink,
+    SharedTranslateModule,
+    MatToolbarModule,
   ],
   templateUrl: './main-navbar.html',
   styleUrl: './main-navbar.css'
 })
 export class MainNavbar {
+  private translate = inject(TranslateService);
+  constructor(
+  ) { }
+
   routes: IRoutes[] = [
     {
       icon: 'local_hospital', // 🏥 Hospital icon
@@ -40,5 +48,5 @@ export class MainNavbar {
     }
   ]
 
-  languages: string[] = ['aze', 'rus', 'en']
+  // languages: string[] = ['aze', 'rus', 'en']
 }

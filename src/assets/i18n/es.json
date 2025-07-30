@@ -1,8 +1,5 @@
 {
-    "HOME": {
-        "TITLE": "¡Bienvenido a nuestra aplicación!",
-        "DESCRIPTION": "Este es un ejemplo de configuración de ngx-translate."
-    },
-    "BUTTON_TEXT": "Cambiar Idioma",
-    "HELLO_USER": "¡Hola, {{name}}!"
+    "MAINNAVBAR": {
+        "hospital": "Welcome"
+    }
 }

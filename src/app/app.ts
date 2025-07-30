@@ -21,8 +21,14 @@ import { TranslateService } from '@ngx-translate/core';
 export class App {
 
   constructor(
-    translate: TranslateService
+    private translate: TranslateService
   ) {
+    this.translate.addLangs(['en', 'es']); 
+    this.translate.setDefaultLang('en');
+    const browserLang = this.translate.getBrowserLang();
+    const preferredLang = browserLang?.match(/en|es/) ? browserLang : 'en';
+    this.translate.use(preferredLang);
+    localStorage.setItem('language', preferredLang);
     console.log(translate.getBrowserLang())
   }
 }
