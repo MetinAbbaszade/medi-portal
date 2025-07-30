@@ -7,8 +7,15 @@
         display: flex;
         align-items: center;
 
-        .hero-wrapper{
+        .hero-wrapper {
             margin: 0 auto;
         }
+    }
+
+    .about-container {
+        display: flex;
+        min-height: 60vh;
+        background-color: #f8f9fa;
+        max-width: 100%;
     }
 }
