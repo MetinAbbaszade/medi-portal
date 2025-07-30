@@ -1,7 +1,9 @@
 <div class="navbar-wrapper">
-    <mat-toolbar-row class="navbar-l">
-        <span class="material-icons">local_hospital</span>
-        <h1>MediPortal</h1>
+    <mat-toolbar-row >
+        <a routerLink="/" class="navbar-l">
+            <span class="material-icons">local_hospital</span>
+            <h1>MediPortal</h1>
+        </a>
     </mat-toolbar-row>
     <mat-toolbar-row class="navbar-m">
         @for (item of routes; track $index) {
