@@ -18,4 +18,12 @@
         background-color: #f8f9fa;
         max-width: 100%;
     }
+
+    .contact-container{
+        display: flex;
+        min-height: 60vh;
+        align-items: center;
+        min-width: 100%;
+        justify-content: center;
+    }
 }
