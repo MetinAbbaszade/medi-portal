@@ -6,7 +6,7 @@
 
     .about-wrapper {
         display: flex;
-        max-width: 75%;
+        max-width: 70%;
         column-gap: 20px;
 
         .about-content-wrapper {
@@ -44,7 +44,7 @@
 
 
         .about-image-wrapper>img {
-            border-radius: 20px;
+            border-radius: 10px;
         }
     }
 }

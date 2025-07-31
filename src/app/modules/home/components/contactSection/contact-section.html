@@ -1,46 +1,93 @@
 <div class="contact-wrapper">
     <div class="header">
-        <h3>Contact Us</h3>
+        <h3>{{'Main.Contact.title' | translate}}</h3>
     </div>
     <div class="body">
         <div class="body-info-section">
+            @for(item of aboutData; track $index){
             <div class="info-data-section">
                 <div>
                     <div class="icon-container">
-                        <mat-icon>location_on</mat-icon>
+                        <mat-icon>{{item.icon}}</mat-icon>
                     </div>
                 </div>
                 <div class="data-container">
-                    <span class="data-header">Address</span>
-                    <span class="data-text">123 Healthcare Street, Baku, Azerbaijan</span>
+                    <span class="data-header">{{'Main.Contact.Data.'+ item.label | translate}}</span>
+                    <span class="data-text">{{'Main.Contact.Data.'+ item.value | translate}}</span>
                 </div>
             </div>
-            <div class="info-data-section">
-                <div>
-                    <div class="icon-container">
-                        <mat-icon>call</mat-icon>
-                    </div>
-                </div>
-                <div class="data-container">
-                    <span class="data-header">Phone</span>
-                    <span class="data-text">+994 12 345 67 89</span>
-                </div>
-            </div>
-            <div class="info-data-section">
-                <div>
-                    <div class="icon-container">
-                        <mat-icon>message</mat-icon>
-                    </div>
-                </div>
-                <div class="data-container">
-                    <span class="data-header">Email</span>
-                    <span class="data-text">{{'info@medaze.az'}}</span>
-                </div>
-            </div>
+            }
 
         </div>
-        <div>
-            
+        <div [formGroup]="form" class="form-wrapper">
+            <div class="input-wrapper">
+                @if (name!.invalid && (name!.dirty || name!.touched)) {
+                <div class="alert alert-danger">
+                    @if (name!.hasError('required')) {
+                    <div>
+                        Name is required.
+                    </div>
+                    }
+                    @if (name!.hasError('minlength')) {
+                    <div>
+                        Name must be at least 4 characters long.
+                    </div>
+                    }
+                    @if (name!.hasError('forbiddenName')) {
+                    <div>
+                        Name cannot be Bob.
+                    </div>
+                    }
+                </div>
+                }
+                <mat-form-field appearance="outline" class="form-control">
+                    <input matInput type="text" id="name" class="form-control" formControlName="name" required
+                        placeholder="{{'Main.Contact.PlaceHolder.namePlaceholder' | translate}}" />
+                </mat-form-field>
+            </div>
+            <div class="input-wrapper">
+                @if(email!.invalid && (email!.dirty || email!.touched)){
+                <div class="alert alert-danger">
+
+                    @if(email?.hasError('required')){
+                    <div>
+                        Email is required
+                    </div>
+                    }
+                    @if(email?.hasError('email')){
+                    <div>
+                        Email format need
+                    </div>
+                    }
+                </div>
+                }
+                <mat-form-field appearance="outline" class="form-control">
+                    <input matInput placeholder="{{'Main.Contact.PlaceHolder.emailPlaceholder' | translate}}"
+                        formControlName="email" required>
+                </mat-form-field>
+            </div>
+            <div class="input-wrapper">
+                @if(message!.invalid && (message!.dirty || message!.touched)){
+                <div class="alert alert-danger">
+                    @if(email?.hasError('required')){
+                    <div>
+                        Message is required
+                    </div>
+                    }
+                </div>
+                }
+                <mat-form-field appearance="outline" class="form-control">
+                    <textarea matInput placeholder="{{'Main.Contact.PlaceHolder.messagePlaceholder' | translate}}"
+                        formControlName="message"></textarea>
+                </mat-form-field>
+
+            </div>
+            <div class="button-wrapper">
+                <button type="submit" (click)="submitForm()"
+                    [disabled]="(email!.invalid || name!.invalid || message!.invalid)">
+                    {{"Main.Contact.PlaceHolder.sendButton" | translate}}
+                </button>
+            </div>
         </div>
     </div>
 </div>
