@@ -21,7 +21,7 @@ import { Translation } from '../../../translation';
     SharedTranslateModule,
     MatToolbarModule,
     MatMenuModule,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './main-navbar.html',
   styleUrl: './main-navbar.css'
