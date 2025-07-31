@@ -1,0 +1,104 @@
+<div class="footer-wrapper">
+    <div class="main-footer-wrapper">
+        <div class="first-section">
+            <div class="section-links">
+                <i class="fas fa-hospital-alt me-2"></i>
+                <span>MediPortal</span>
+            </div>
+            <div class="footer-description">{{'Main.Footer.trustedPartner' | translate}}</div>
+            <div class="footer-social-medias">
+                <div>
+                    <i class="fab fa-facebook-f"></i>
+                </div>
+                <div>
+                    <i class="fab fa-twitter"></i>
+                </div>
+                <div>
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <div>
+                    <i class="fab fa-linkedin-in"></i>
+                </div>
+            </div>
+        </div>
+        <div class="second-section">
+            <div class="section-links">
+                <i class="fas fa-link me-2"></i>
+                <span>
+                    {{'Main.Footer.quickLinks' | translate}}
+                </span>
+            </div>
+            <div class="section-list">
+                <ul>
+                    @for(item of quickLinks; track $index){
+                    <li>
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>
+                            {{'Main.Footer.'+item.data | translate}}
+                        </span>
+                    </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="third-section">
+            <div class="section-links">
+                <i class="fas fa-stethoscope me-2"></i>
+                <span>
+                    {{'Main.Footer.services' | translate}}
+                </span>
+            </div>
+            <div class="section-list">
+                <ul>
+                    @for(items of services; track $index){
+                    <li>
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        <span>
+                            {{'Main.Footer.'+items.label | translate}}
+                        </span>
+                    </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="fourth-section">
+            <div class="section-links">
+                <i class="fas fa-phone-alt me-2"></i>
+                <span>Contact Info</span>
+            </div>
+            <div class="section-list">
+                <ul>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        123 Medical Center, City
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        +994 50 123 45 67
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        {{'info@medaze.com'}}
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-social-medias">
+                <div>
+                    <i class="fab fa-facebook-f"></i>
+                </div>
+                <div>
+                    <i class="fab fa-twitter"></i>
+                </div>
+                <div>
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <div>
+                    <i class="fab fa-linkedin-in"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rights-container">
+        <div>2025 MEDIPORTAL. All rights reserved.</div>
+    </div>
+</div>

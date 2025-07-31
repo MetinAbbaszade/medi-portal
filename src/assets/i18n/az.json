@@ -3,7 +3,8 @@
         "hospital": "Xəstəxana",
         "doctor": "Həkimlər",
         "about": "Haqqında",
-        "contact": "Əlaqə"
+        "contact": "Əlaqə",
+        "translate": "Dilləri dəyiş"
     },
     "Main": {
         "Hero": {
@@ -33,6 +34,24 @@
                 "messagePlaceholder": "Mesaj",
                 "sendButton": "Mesajı Göndər"
             }
+        },
+        "Footer": {
+            "trustedPartner": "Sizin etibarlı səhiyyə tərəfdaşınız. Biz xəstələri Azərbaycanın ən yaxşı xəstəxana və həkimləri ilə birləşdiririk.",
+            "quickLinks": "Sürətli keçidlər",
+            "hospitals": "Xəstəxanalar",
+            "doctors": "Həkimlər",
+            "about": "Haqqımızda",
+            "contact": "Əlaqə",
+            "login": "Giriş",
+            "services": "Xidmətlər",
+            "bookAppointment": "Görüş təyin et",
+            "findDoctor": "Həkim tap",
+            "emergencyCare": "Təcili yardım",
+            "insurance": "Sığorta",
+            "contactInfo": "Əlaqə məlumatları",
+            "address": "123 Tibb Mərkəzi, Şəhər",
+            "phone": "+994 50 123 45 67",
+            "email": "info@medaze.com"
         }
     }
 }

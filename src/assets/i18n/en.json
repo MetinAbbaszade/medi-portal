@@ -3,7 +3,8 @@
         "hospital": "Hospital",
         "doctor": "Doctors",
         "about": "About",
-        "contact": "Contact"
+        "contact": "Contact",
+        "translate": "Change Languages"
     },
     "Main": {
         "Hero": {
@@ -33,6 +34,24 @@
                 "messagePlaceholder": "Message",
                 "sendButton": "Send Message"
             }
+        },
+        "Footer": {
+            "trustedPartner": "Your trusted partner in healthcare management. We connect patients with the best hospitals and doctors in Azerbaijan.",
+            "quickLinks": "Quick Links",
+            "hospitals": "Hospitals",
+            "doctors": "Doctors",
+            "about": "About Us",
+            "contact": "Contact",
+            "login": "Login",
+            "services": "Services",
+            "bookAppointment": "Book Appointment",
+            "findDoctor": "Find Doctor",
+            "emergencyCare": "Emergency Care",
+            "insurance": "Insurance",
+            "contactInfo": "Contact Info",
+            "address": "123 Medical Center, City",
+            "phone": "+994 50 123 45 67",
+            "email": "info@medaze.com"
         }
     }
 }
