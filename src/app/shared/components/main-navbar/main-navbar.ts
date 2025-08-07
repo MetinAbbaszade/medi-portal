@@ -28,8 +28,9 @@ import { Translation } from '../../../translation';
 })
 export class MainNavbar {
   @Input() changeLang!: (lang: string) => void;
-  public translate = inject(TranslateService);
+
   // Uses the 'inject' function to get an instance of the TranslateService.
+  public translate = inject(TranslateService);
   constructor(
     private translateService: Translation
   ) { 
@@ -37,19 +38,19 @@ export class MainNavbar {
 
   routes: IRoutes[] = [
     {
-      icon: 'local_hospital', // 🏥 Hospital icon
+      icon: 'local_hospital', 
       href: 'hospital'
     },
     {
-      icon: 'medical_services', // 🩺 Doctor/medical-related icon
+      icon: 'medical_services',
       href: 'doctor'
     },
     {
-      icon: 'info', // ℹ️ About icon
+      icon: 'info',
       href: 'about'
     },
     {
-      icon: 'mail', // ✉️ Contact icon
+      icon: 'mail',
       href: 'contact'
     }
   ]
