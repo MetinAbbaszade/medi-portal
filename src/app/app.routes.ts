@@ -4,13 +4,12 @@ import { Hospital } from './modules/hospital/pages/hospital/hospital';
 import { Doctor } from './modules/doctors/pages/doctor/doctor';
 import { About } from './modules/about/pages/about/about';
 import { Contact } from './modules/contact/pages/contact/contact';
-import { Auth } from './modules/auth/pages/login/auth';
 
 export const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'home'
+        redirectTo: 'auth/login'
     },
     {
         path: '',
@@ -37,7 +36,8 @@ export const routes: Routes = [
             },
             {
                 path: 'auth',
-                component: Auth
+                loadChildren: () =>
+                    import('./modules/auth/auth.routes').then(m => m.authRoutes)
             }
         ]
     }

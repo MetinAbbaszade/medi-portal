@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Signup } from './signup';
+import { ErrorHandling } from './error-handling';
 
-describe('Signup', () => {
-  let component: Signup;
-  let fixture: ComponentFixture<Signup>;
+describe('ErrorHandling', () => {
+  let component: ErrorHandling;
+  let fixture: ComponentFixture<ErrorHandling>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Signup]
+      imports: [ErrorHandling]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Signup);
+    fixture = TestBed.createComponent(ErrorHandling);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,6 +1,8 @@
 <mat-sidenav-container>
     <mat-sidenav-content class="wrapper">
+        @if(!getHideNavbar){
         <app-main-navbar [changeLang]="change"></app-main-navbar>
+        }
         <div>
             <router-outlet></router-outlet>
         </div>
