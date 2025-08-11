@@ -1,6 +1,6 @@
 <div class="contact-wrapper">
     <div class="header">
-        <h3>{{'Main.Contact.title' | translate}}</h3>
+        <h3>{{'Main.title' | translate}}</h3>
     </div>
     <div class="body">
         <div class="body-info-section">
@@ -12,8 +12,8 @@
                     </div>
                 </div>
                 <div class="data-container">
-                    <span class="data-header">{{'Main.Contact.Data.'+ item.label | translate}}</span>
-                    <span class="data-text">{{'Main.Contact.Data.'+ item.value | translate}}</span>
+                    <span class="data-header">{{'Main.'+ item.label | translate}}</span>
+                    <span class="data-text">{{'Main.'+ item.value | translate}}</span>
                 </div>
             </div>
             }
@@ -42,7 +42,7 @@
                 }
                 <mat-form-field appearance="outline" class="form-control">
                     <input matInput type="text" id="name" class="form-control" formControlName="name" required
-                        placeholder="{{'Main.Contact.PlaceHolder.namePlaceholder' | translate}}" />
+                        placeholder="{{'Main.PlaceHolder.namePlaceholder' | translate}}" />
                 </mat-form-field>
             </div>
             <div class="input-wrapper">
@@ -62,7 +62,7 @@
                 </div>
                 }
                 <mat-form-field appearance="outline" class="form-control">
-                    <input matInput placeholder="{{'Main.Contact.PlaceHolder.emailPlaceholder' | translate}}"
+                    <input matInput placeholder="{{'Main.PlaceHolder.emailPlaceholder' | translate}}"
                         formControlName="email" required>
                 </mat-form-field>
             </div>
@@ -77,7 +77,7 @@
                 </div>
                 }
                 <mat-form-field appearance="outline" class="form-control">
-                    <textarea matInput placeholder="{{'Main.Contact.PlaceHolder.messagePlaceholder' | translate}}"
+                    <textarea matInput placeholder="{{'Main.PlaceHolder.messagePlaceholder' | translate}}"
                         formControlName="message"></textarea>
                 </mat-form-field>
 
@@ -85,7 +85,7 @@
             <div class="button-wrapper">
                 <button type="submit" (click)="submitForm()"
                     [disabled]="(email!.invalid || name!.invalid || message!.invalid)">
-                    {{"Main.Contact.PlaceHolder.sendButton" | translate}}
+                    {{"Main.PlaceHolder.sendButton" | translate}}
                 </button>
             </div>
         </div>

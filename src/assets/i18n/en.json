@@ -7,51 +7,38 @@
         "translate": "Change Languages"
     },
     "Main": {
-        "Hero": {
-            "welcomeTitle": "Welcome to MediPortal",
-            "welcomeDescription": "Find the best hospitals, book appointments, and get instant medical assistance.",
-            "assistantHeader": "MediPortal Assistant",
-            "assistantGreeting": "Hello! I am the MediPortal assistant. How can I help you?",
-            "recommendations": "Headache and dizziness"
-        },
-        "About": {
-            "title": "About MediPortal",
-            "description": "MediPortal is Azerbaijan's leading healthcare platform, connecting patients with the best hospitals and medical professionals across the country. Our mission is to make healthcare accessible and efficient for everyone."
-        },
-        "Contact": {
-            "title": "Contact Us",
-            "Data": {
-                "addressLabel": "Address",
-                "addressValue": "123 Healthcare Street, Baku, Azerbaijan",
-                "phoneLabel": "Phone",
-                "phoneValue": "+994 12 345 67 89",
-                "emailLabel": "Email",
-                "emailValue": "info@medaze.az"
-            },
-            "PlaceHolder": {
-                "namePlaceholder": "Your Name",
-                "emailPlaceholder": "Email",
-                "messagePlaceholder": "Message",
-                "sendButton": "Send Message"
-            }
-        },
-        "Footer": {
-            "trustedPartner": "Your trusted partner in healthcare management. We connect patients with the best hospitals and doctors in Azerbaijan.",
-            "quickLinks": "Quick Links",
-            "hospitals": "Hospitals",
-            "doctors": "Doctors",
-            "about": "About Us",
-            "contact": "Contact",
-            "login": "Login",
-            "services": "Services",
-            "bookAppointment": "Book Appointment",
-            "findDoctor": "Find Doctor",
-            "emergencyCare": "Emergency Care",
-            "insurance": "Insurance",
-            "contactInfo": "Contact Info",
-            "address": "123 Medical Center, City",
-            "phone": "+994 50 123 45 67",
-            "email": "info@medaze.com"
-        }
+        "welcomeTitle": "Welcome to MediPortal",
+        "welcomeDescription": "Find the best hospitals, book appointments, and get instant medical assistance.",
+        "assistantHeader": "MediPortal Assistant",
+        "assistantGreeting": "Hello! I am the MediPortal assistant. How can I help you?",
+        "recommendations": "Headache and dizziness",
+        "description": "MediPortal is Azerbaijan's leading healthcare platform, connecting patients with the best hospitals and medical professionals across the country. Our mission is to make healthcare accessible and efficient for everyone.",
+        "title": "Contact Us",
+        "addressLabel": "Address",
+        "addressValue": "123 Healthcare Street, Baku, Azerbaijan",
+        "phoneLabel": "Phone",
+        "phoneValue": "+994 12 345 67 89",
+        "emailLabel": "Email",
+        "emailValue": "info@medaze.az",
+        "namePlaceholder": "Your Name",
+        "emailPlaceholder": "Email",
+        "messagePlaceholder": "Message",
+        "sendButton": "Send Message",
+        "trustedPartner": "Your trusted partner in healthcare management. We connect patients with the best hospitals and doctors in Azerbaijan.",
+        "quickLinks": "Quick Links",
+        "hospitals": "Hospitals",
+        "doctors": "Doctors",
+        "about": "About Us",
+        "contact": "Contact",
+        "login": "Login",
+        "services": "Services",
+        "bookAppointment": "Book Appointment",
+        "findDoctor": "Find Doctor",
+        "emergencyCare": "Emergency Care",
+        "insurance": "Insurance",
+        "contactInfo": "Contact Info",
+        "address": "123 Medical Center, City",
+        "phone": "+994 50 123 45 67",
+        "email": "info@medaze.com"
     }
 }

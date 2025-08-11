@@ -7,51 +7,38 @@
         "translate": "Dilləri dəyiş"
     },
     "Main": {
-        "Hero": {
-            "welcomeTitle": "MediPortal-a xoş gəlmisiniz",
-            "welcomeDescription": "Ən yaxşı xəstəxanaları tapın, görüş təyin edin və dərhal tibbi yardım alın.",
-            "assistantHeader": "MediPortal Köməkçisi",
-            "assistantGreeting": "Salam! Mən MediPortal köməkçisiyəm. Sizə necə kömək edə bilərəm?",
-            "recommendations": "Baş ağrısı və başgicəllənmə"
-        },
-        "About": {
-            "title": "MediPortal haqqında",
-            "description": "MediPortal, Azərbaycanın aparıcı səhiyyə platforması olaraq, xəstələri ölkə üzrə ən yaxşı xəstəxanalar və tibb mütəxəssisləri ilə birləşdirir. Missiyamız hər kəs üçün səhiyyəni əlçatan və səmərəli etməkdir."
-        },
-        "Contact": {
-            "title": "Bizimlə əlaqə",
-            "Data": {
-                "addressLabel": "Ünvan",
-                "addressValue": "123 Healthcare küçəsi, Bakı, Azərbaycan",
-                "phoneLabel": "Telefon",
-                "phoneValue": "+994 12 345 67 89",
-                "emailLabel": "Email",
-                "emailValue": "info@medaze.az"
-            },
-            "PlaceHolder": {
-                "namePlaceholder": "Adınız",
-                "emailPlaceholder": "Email",
-                "messagePlaceholder": "Mesaj",
-                "sendButton": "Mesajı Göndər"
-            }
-        },
-        "Footer": {
-            "trustedPartner": "Sizin etibarlı səhiyyə tərəfdaşınız. Biz xəstələri Azərbaycanın ən yaxşı xəstəxana və həkimləri ilə birləşdiririk.",
-            "quickLinks": "Sürətli keçidlər",
-            "hospitals": "Xəstəxanalar",
-            "doctors": "Həkimlər",
-            "about": "Haqqımızda",
-            "contact": "Əlaqə",
-            "login": "Giriş",
-            "services": "Xidmətlər",
-            "bookAppointment": "Görüş təyin et",
-            "findDoctor": "Həkim tap",
-            "emergencyCare": "Təcili yardım",
-            "insurance": "Sığorta",
-            "contactInfo": "Əlaqə məlumatları",
-            "address": "123 Tibb Mərkəzi, Şəhər",
-            "phone": "+994 50 123 45 67",
-            "email": "info@medaze.com"
-        }
+        "welcomeTitle": "MediPortal-a xoş gəlmisiniz",
+        "welcomeDescription": "Ən yaxşı xəstəxanaları tapın, görüş təyin edin və dərhal tibbi yardım alın.",
+        "assistantHeader": "MediPortal Köməkçisi",
+        "assistantGreeting": "Salam! Mən MediPortal köməkçisiyəm. Sizə necə kömək edə bilərəm?",
+        "recommendations": "Baş ağrısı və başgicəllənmə",
+        "title": "MediPortal haqqında",
+        "description": "MediPortal, Azərbaycanın aparıcı səhiyyə platforması olaraq, xəstələri ölkə üzrə ən yaxşı xəstəxanalar və tibb mütəxəssisləri ilə birləşdirir. Missiyamız hər kəs üçün səhiyyəni əlçatan və səmərəli etməkdir.",
+        "addressLabel": "Ünvan",
+        "addressValue": "123 Healthcare küçəsi, Bakı, Azərbaycan",
+        "phoneLabel": "Telefon",
+        "phoneValue": "+994 12 345 67 89",
+        "emailLabel": "Email",
+        "emailValue": "info@medaze.az",
+        "namePlaceholder": "Adınız",
+        "emailPlaceholder": "Email",
+        "messagePlaceholder": "Mesaj",
+        "sendButton": "Mesajı Göndər",
+        "trustedPartner": "Sizin etibarlı səhiyyə tərəfdaşınız. Biz xəstələri Azərbaycanın ən yaxşı xəstəxana və həkimləri ilə birləşdiririk.",
+        "quickLinks": "Sürətli keçidlər",
+        "hospitals": "Xəstəxanalar",
+        "doctors": "Həkimlər",
+        "about": "Haqqımızda",
+        "contact": "Əlaqə",
+        "login": "Giriş",
+        "services": "Xidmətlər",
+        "bookAppointment": "Görüş təyin et",
+        "findDoctor": "Həkim tap",
+        "emergencyCare": "Təcili yardım",
+        "insurance": "Sığorta",
+        "contactInfo": "Əlaqə məlumatları",
+        "address": "123 Tibb Mərkəzi, Şəhər",
+        "phone": "+994 50 123 45 67",
+        "email": "info@medaze.com"
     }
 }
