@@ -33,17 +33,13 @@ export class MainNavbar {
   public translate = inject(TranslateService);
   constructor(
     private translateService: Translation
-  ) { 
+  ) {
   }
 
   routes: IRoutes[] = [
     {
-      icon: 'local_hospital', 
+      icon: 'local_hospital',
       href: 'hospital'
-    },
-    {
-      icon: 'medical_services',
-      href: 'doctor'
     },
     {
       icon: 'info',
