@@ -37,11 +37,15 @@ export const routes: Routes = [
                 path: 'auth',
                 loadChildren: () =>
                     import('./modules/auth/auth.routes').then(m => m.authRoutes)
+            },
+            {
+                path: 'page-not-found',
+                component: Pagenotfoundcomponent
             }
         ]
     },
     {
         path: '**',
-        component: Pagenotfoundcomponent
+        redirectTo: 'page-not-found'
     }
 ];

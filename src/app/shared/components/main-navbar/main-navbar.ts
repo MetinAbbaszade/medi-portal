@@ -9,7 +9,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { SharedTranslateModule } from '../../modules/shared-translate.module';
 import { ILanguage } from './modules/interface';
 import { CommonModule } from '@angular/common';
-import { Translation } from '../../../translation';
 
 @Component({
   selector: 'app-main-navbar',
