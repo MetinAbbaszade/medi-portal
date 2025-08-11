@@ -4,15 +4,18 @@ import { Hospital } from './modules/hospital/pages/hospital/hospital';
 import { Doctor } from './modules/doctors/pages/doctor/doctor';
 import { About } from './modules/about/pages/about/about';
 import { Contact } from './modules/contact/pages/contact/contact';
+import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'auth/login'
+        redirectTo: 'home',
+        data: { breadcrumb: 'mediPortal' }
     },
     {
         path: '',
+        canActivate: [AuthGuard],
         children: [
             {
                 path: 'home',

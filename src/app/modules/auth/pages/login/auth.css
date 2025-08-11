@@ -23,7 +23,7 @@
     background-color: #fff;
     width: 800px;
     max-width: 95vw;
-    height: 600px;
+    min-height: 600px;
     position: relative;
     overflow-x: hidden;
     border-radius: 20px;
@@ -42,9 +42,9 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    height: 600px;
+    min-height: 600px;
     transition: all 0.6s ease-in;
-    padding: 0 40px;
+    padding: 40px;
 }
 
 .form-control h2 {
@@ -368,6 +368,32 @@
 .change .intros-container .intro-control.signup-intro {
     opacity: 1;
     z-index: 2;
+}
+
+.intros-container .intro-control {
+    position: relative;
+}
+
+.intros-container .intro-control .icon {
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    display: flex;
+    gap: 10px;
+
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        color: black;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+        padding: 10px;
+        border: none
+    }
 }
 
 @media screen and (max-width: 768px) {

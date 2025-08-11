@@ -2,24 +2,27 @@
     <div class="container" [ngClass]="{ 'change': isSignupMode }">
         <div class="forms-container">
             <div class="form-control signup-form">
-                <form action="#" id="signup-form" [formGroup]="signupForm">
+                <form action="#" id="signup-form" [formGroup]="signupForm" (submit)="signUp()">
                     <h2>Qeydiyyat</h2>
                     <div class="input-group">
                         <div class="input-field">
                             <i class="fas fa-user"></i>
                             <input type="text" id="sign-up-fname" formControlName="firstName" />
                             <label for="sign-up-fname">Ad</label>
+                            <app-form-control-errors [control]="signupForm.get('firstName')"></app-form-control-errors>
                         </div>
 
                         <div class="input-field">
                             <i class="fas fa-user"></i>
                             <input type="text" id="sign-up-lname" formControlName="lastName" />
                             <label for="sign-up-lname">Soyad</label>
+                            <app-form-control-errors [control]="signupForm.get('lastName')"></app-form-control-errors>
                         </div>
                         <div class="input-field">
                             <i class="fas fa-envelope"></i>
                             <input type="email" id="sign-up-email" formControlName="email" />
                             <label for="sign-up-email">Email</label>
+                            <app-form-control-errors [control]="signupForm.get('email')"></app-form-control-errors>
                         </div>
 
                         <div class="input-field">
@@ -29,6 +32,7 @@
                             <label for="sign-up-password">Şifrə</label>
                             <i class="far fa-eye toggle-password"
                                 [ngClass]="passwordVisible ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePassword()"></i>
+                            <app-form-control-errors [control]="signupForm.get('password')"></app-form-control-errors>
                         </div>
                     </div>
 
@@ -45,7 +49,6 @@
             <div class="form-control signin-form">
                 <form action="#" id="login-form" (submit)="login()" [formGroup]="loginForm">
                     <h2>Daxil Ol</h2>
-
                     <div class="input-group">
                         <div class="input-field">
                             <i class="fas fa-envelope"></i>
@@ -78,6 +81,10 @@
 
         <div class="intros-container">
             <div class="intro-control signin-intro">
+                <div class="icon">
+                    <button class="aze" (click)="changeLang('az')">Aze</button>
+                    <button class="en" (click)="changeLang('en')">En</button>
+                </div>
                 <div class="intro-control__inner">
                     <h2>Xoş gəlmisiniz!</h2>
                     <p>
@@ -95,8 +102,6 @@
                         Sizi burada görmək bizi çox sevindirir! Əgər hələ hesab yaratmamısınızsa, indi qeydiyyatdan
                         keçin və tibbi xidmətlərə, xüsusi təkliflərə və daha çoxuna asanlıqla giriş əldə edin!
                     </p>
-                    <p *ngIf="signupForm.invalid">Form is invalid</p>
-                    <p *ngIf="signupForm.valid">Form is valid</p>
                     <button id="signin-btn" class="btn-outline" (click)="toggle()">Artıq hesabınız var? <span>Daxil
                             olun</span></button>
                 </div>

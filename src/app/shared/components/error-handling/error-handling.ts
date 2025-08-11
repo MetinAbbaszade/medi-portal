@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
@@ -6,7 +6,8 @@ import { AbstractControl } from '@angular/forms';
   selector: 'app-form-control-errors',
   templateUrl: './error-handling.html',
   imports: [
-    CommonModule
+    CommonModule,
+    NgIf
   ],
   styleUrls: [
     './error-handling.css'
