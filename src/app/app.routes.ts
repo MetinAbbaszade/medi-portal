@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 import { Main } from './modules/home/pages/main/main';
 import { Hospital } from './modules/hospital/pages/hospital/hospital';
-import { Doctor } from './modules/doctors/pages/doctor/doctor';
 import { About } from './modules/about/pages/about/about';
 import { Contact } from './modules/contact/pages/contact/contact';
 import { AuthGuard } from './auth.guard';
+import { Pagenotfoundcomponent } from './shared/components/pagenotfound/pagenotfoundcomponent';
 
 export const routes: Routes = [
     {
@@ -26,10 +26,6 @@ export const routes: Routes = [
                 component: Hospital
             },
             {
-                path: 'doctor',
-                component: Doctor
-            },
-            {
                 path: 'about',
                 component: About
             },
@@ -43,5 +39,9 @@ export const routes: Routes = [
                     import('./modules/auth/auth.routes').then(m => m.authRoutes)
             }
         ]
+    },
+    {
+        path: '**',
+        component: Pagenotfoundcomponent
     }
 ];

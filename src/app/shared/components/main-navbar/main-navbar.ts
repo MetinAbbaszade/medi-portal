@@ -31,10 +31,6 @@ export class MainNavbar {
 
   // Uses the 'inject' function to get an instance of the TranslateService.
   public translate = inject(TranslateService);
-  constructor(
-    private translateService: Translation
-  ) {
-  }
 
   routes: IRoutes[] = [
     {

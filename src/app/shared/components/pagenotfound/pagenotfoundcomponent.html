@@ -1,0 +1,66 @@
+<main class="notfound" role="main" aria-labelledby="pageTitle">
+    <div class="card">
+        <div class="left">
+            <h1 id="pageTitle" class="title">404 — Page not found</h1>
+            <p class="lead">
+                We couldn't find the page you're looking for. Maybe the appointment was moved,
+                or the link is incorrect.
+            </p>
+
+            <ul class="tips" aria-hidden="false">
+                <li>Check the URL for typos</li>
+                <li>Go back to your dashboard to view appointments</li>
+                <li>If you think this is an error, contact support</li>
+            </ul>
+
+            <div class="actions">
+                <button class="btn primary" (click)="goHome()" aria-label="Go to dashboard">
+                    Go to Dashboard
+                </button>
+                <a class="btn ghost" routerLink="/appointments" aria-label="View appointments">
+                    View Appointments
+                </a>
+            </div>
+
+            <p class="small-muted">If you're a doctor, check your schedule or refresh the page.</p>
+        </div>
+
+        <div class="right" aria-hidden="true">
+            <!-- Inline SVG: hospital/appointment themed illustration -->
+            <svg class="illustration" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" role="img"
+                focusable="false">
+                <defs>
+                    <linearGradient id="g" x1="0" x2="1">
+                        <stop offset="0" stop-color="#4f8ef7" />
+                        <stop offset="1" stop-color="#2b6fe3" />
+                    </linearGradient>
+                </defs>
+                <rect x="32" y="80" width="352" height="320" rx="24" fill="url(#g)" opacity="0.12" />
+                <g transform="translate(64,120)" fill="none" stroke="#2b6fe3" stroke-width="6" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <rect x="0" y="0" width="272" height="216" rx="12" fill="#fff" opacity="0.95" />
+                    <path d="M32 56h208M32 96h120" stroke="#4f8ef7" />
+                </g>
+
+                <!-- calendar / appointment icon -->
+                <g transform="translate(440,140)">
+                    <rect x="0" y="0" width="160" height="128" rx="12" fill="#fff" />
+                    <rect x="6" y="10" width="148" height="36" rx="8" fill="#2b6fe3" />
+                    <text x="80" y="34" text-anchor="middle" font-size="18" fill="#fff"
+                        font-family="Arial">Appointments</text>
+                    <g transform="translate(16,60)" fill="#2b6fe3">
+                        <rect x="0" y="0" width="40" height="40" rx="6" />
+                        <rect x="52" y="0" width="40" height="40" rx="6" />
+                        <rect x="0" y="52" width="40" height="40" rx="6" />
+                        <rect x="52" y="52" width="40" height="40" rx="6" />
+                    </g>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <footer class="brand">
+        <span class="logo">🏥</span>
+        <span class="org">CareFlow — Appointment Management</span>
+    </footer>
+</main>
