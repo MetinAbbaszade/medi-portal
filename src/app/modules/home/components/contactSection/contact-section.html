@@ -42,7 +42,7 @@
                 }
                 <mat-form-field appearance="outline" class="form-control">
                     <input matInput type="text" id="name" class="form-control" formControlName="name" required
-                        placeholder="{{'Main.PlaceHolder.namePlaceholder' | translate}}" />
+                        placeholder="{{'Main.namePlaceholder' | translate}}" />
                 </mat-form-field>
             </div>
             <div class="input-wrapper">
@@ -62,8 +62,8 @@
                 </div>
                 }
                 <mat-form-field appearance="outline" class="form-control">
-                    <input matInput placeholder="{{'Main.PlaceHolder.emailPlaceholder' | translate}}"
-                        formControlName="email" required>
+                    <input matInput placeholder="{{'Main.emailPlaceholder' | translate}}" formControlName="email"
+                        required>
                 </mat-form-field>
             </div>
             <div class="input-wrapper">
@@ -77,7 +77,7 @@
                 </div>
                 }
                 <mat-form-field appearance="outline" class="form-control">
-                    <textarea matInput placeholder="{{'Main.PlaceHolder.messagePlaceholder' | translate}}"
+                    <textarea matInput placeholder="{{'Main.messagePlaceholder' | translate}}"
                         formControlName="message"></textarea>
                 </mat-form-field>
 
@@ -85,7 +85,7 @@
             <div class="button-wrapper">
                 <button type="submit" (click)="submitForm()"
                     [disabled]="(email!.invalid || name!.invalid || message!.invalid)">
-                    {{"Main.PlaceHolder.sendButton" | translate}}
+                    {{"Main.sendButton" | translate}}
                 </button>
             </div>
         </div>

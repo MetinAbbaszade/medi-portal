@@ -44,8 +44,7 @@ export class AuthComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const redirectTo = this.activatedRoute.snapshot.queryParamMap.get('redirectTo')
-    this.redirectTo = redirectTo || '/'
+    this.redirectTo = this.activatedRoute.snapshot.queryParamMap.get('redirectTo') || '/';
     this.loginForm = this.fb.group({
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required]]
