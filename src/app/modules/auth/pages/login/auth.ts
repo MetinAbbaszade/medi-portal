@@ -10,6 +10,7 @@ import { Translation } from '../../../../translation';
 import { AuthService } from '../../services/auth';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
+import { createNewPatientUser, PatientUser } from '../../models';
 
 @Component({
   selector: 'app-auth',
@@ -96,7 +97,29 @@ export class AuthComponent implements OnInit {
   }
 
   signUp() {
-    console.log(this.signupForm.value);
+    let newUser = createNewPatientUser(this.signupForm.value)
+    this.AuthService.postData(newUser)
+      .subscribe(
+        (res) => {
+          if (!res) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error!',
+              text: 'Signup failed',
+              confirmButtonText: 'OK'
+            })
+          } else {
+            localStorage.setItem('token', JSON.stringify(res))
+            Swal.fire({
+              icon: 'success',
+              title: 'Success!',
+              text: 'Welcome back!',
+              confirmButtonText: 'OK'
+            })
+            this.router.navigate([this.redirectTo]);
+          }
+        }
+      )
   }
 
   changeLang(lang: string) {
