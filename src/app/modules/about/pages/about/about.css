@@ -1,0 +1,135 @@
+.wrapper {
+    margin-top: 70px;
+}
+
+/* Hero Banner */
+.about-hero {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    background: linear-gradient(135deg, #14617b, #0f4c5c);
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.about-hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.about-hero p {
+    font-size: 1.1rem;
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* About Story */
+.about-section {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 0 20px;
+    display: grid;
+    gap: 2.5rem;
+}
+
+.about-block h2 {
+    color: #14617b;
+    margin-bottom: 0.8rem;
+}
+
+.about-block p {
+    line-height: 1.6;
+}
+
+/* Core Values */
+.values {
+    background-color: white;
+    padding: 60px 20px;
+}
+
+.values h2 {
+    text-align: center;
+    color: #14617b;
+    margin-bottom: 2rem;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.value-card {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+}
+
+.value-card h3 {
+    margin-top: 1rem;
+    color: #14617b;
+}
+
+/* Call to Action */
+.cta {
+    background: linear-gradient(135deg, #14617b, #0f4c5c);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.cta h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.cta p {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+}
+
+.cta a {
+    background-color: white;
+    color: #14617b;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.cta a:hover {
+    background-color: #0f4c5c;
+    color: white;
+}
+
+/* Footer */
+footer {
+    background-color: #0f4c5c;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .about-hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .about-section {
+        gap: 1.5rem;
+    }
+}
