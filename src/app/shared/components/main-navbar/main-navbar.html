@@ -16,6 +16,13 @@
         }
     </mat-toolbar-row>
     <mat-toolbar-row class="navbar-r">
+        <div class="profile-section">
+            <div class="profile-photo"></div>
+            <div class="profile-info">
+                <span class="profile-name">Metin Abbaszade</span>
+                <span class="user-role">IT Admin</span>
+            </div>
+        </div>
         <button [matMenuTriggerFor]="belowMenu">
             <span class="material-icons">public</span>
             <mat-menu #belowMenu="matMenu" xPosition="before">
@@ -24,10 +31,7 @@
                     <span>{{ languages[item] }}</span>
                 </button>
             </mat-menu>
-            <span>{{"Navigation.translate" | translate}}</span>
             <span class="material-icons">arrow_drop_down</span>
         </button>
-        <div>
-        </div>
     </mat-toolbar-row>
 </div>
