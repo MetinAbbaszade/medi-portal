@@ -1,1 +1,216 @@
-<p>hospital works!</p>
+<section class="container">
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Find The Best Hospitals Near You</h1>
+            <p>Your health matters. Book appointments easily with trusted hospitals.</p>
+            <form class="hero-search" onsubmit="event.preventDefault(); alert('Search submitted!');">
+                <input type="text" placeholder="Search hospitals by city or specialty..."
+                    aria-label="Search hospitals" />
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+    <div class="hospital-overview">
+        <h2>Featured Hospitals</h2>
+        <p class="section-subtitle">Trusted healthcare providers with top-rated services</p>
+
+        <div class="hospital-cards">
+            <div class="hospital-item">
+                <img src="https://via.placeholder.com/400x250" alt="City Care Hospital">
+                <div class="hospital-info">
+                    <h3>City Care Hospital</h3>
+                    <p>24/7 emergency services and 150+ experienced doctors.</p>
+                    <a href="hospital-details.html?id=1" class="view-btn">View Details</a>
+                </div>
+            </div>
+
+            <div class="hospital-item">
+                <img src="https://via.placeholder.com/400x250" alt="Green Valley Medical">
+                <div class="hospital-info">
+                    <h3>Green Valley Medical</h3>
+                    <p>Specialists in pediatrics and cardiology with modern facilities.</p>
+                    <a href="hospital-details.html?id=2" class="view-btn">View Details</a>
+                </div>
+            </div>
+
+            <div class="hospital-item">
+                <img src="https://via.placeholder.com/400x250" alt="Sunrise Health Center">
+                <div class="hospital-info">
+                    <h3>Sunrise Health Center</h3>
+                    <p>Advanced diagnostics and personalized patient care programs.</p>
+                    <a href="hospital-details.html?id=3" class="view-btn">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="filter-sort-bar">
+        <input type="text" id="searchHospital" placeholder="Search hospitals..." />
+
+        <select id="filterSpecialty">
+            <option value="">All Specialties</option>
+            <option value="Cardiology">Cardiology</option>
+            <option value="Neurology">Neurology</option>
+            <option value="Pediatrics">Pediatrics</option>
+            <option value="Diagnostics">Diagnostics</option>
+            <option value="Surgery">Surgery</option>
+        </select>
+
+        <select id="sortHospitals">
+            <option value="">Sort By</option>
+            <option value="name-asc">Name (A-Z)</option>
+            <option value="name-desc">Name (Z-A)</option>
+        </select>
+    </div>
+    <section class="hospital-directory">
+        <h2>All Hospitals</h2>
+        <p class="section-subtitle">Browse through our complete list of partnered hospitals</p>
+
+        <div class="hospital-list">
+            <div class="hospital-card">
+                <img src="https://via.placeholder.com/500x300" alt="City Care Hospital">
+                <div class="card-content">
+                    <h3>City Care Hospital</h3>
+                    <p>Downtown location • 150+ doctors • 24/7 Emergency</p>
+                    <div class="tags">
+                        <span>Cardiology</span>
+                        <span>Neurology</span>
+                    </div>
+                    <a href="hospital-details.html?id=1" class="details-btn">View Details</a>
+                </div>
+            </div>
+
+            <div class="hospital-card">
+                <img src="https://via.placeholder.com/500x300" alt="Green Valley Medical">
+                <div class="card-content">
+                    <h3>Green Valley Medical</h3>
+                    <p>Specializes in pediatrics and cardiology. Modern equipment.</p>
+                    <div class="tags">
+                        <span>Pediatrics</span>
+                        <span>Cardiology</span>
+                    </div>
+                    <a href="hospital-details.html?id=2" class="details-btn">View Details</a>
+                </div>
+            </div>
+
+            <div class="hospital-card">
+                <img src="https://via.placeholder.com/500x300" alt="Sunrise Health Center">
+                <div class="card-content">
+                    <h3>Sunrise Health Center</h3>
+                    <p>Advanced diagnostics • Personalized care programs</p>
+                    <div class="tags">
+                        <span>Diagnostics</span>
+                        <span>Wellness</span>
+                    </div>
+                    <a href="hospital-details.html?id=3" class="details-btn">View Details</a>
+                </div>
+            </div>
+
+            <div class="hospital-card">
+                <img src="https://via.placeholder.com/500x300" alt="Riverside Clinic">
+                <div class="card-content">
+                    <h3>Riverside Clinic</h3>
+                    <p>Family medicine • Outpatient surgery services</p>
+                    <div class="tags">
+                        <span>Family Medicine</span>
+                        <span>Surgery</span>
+                    </div>
+                    <a href="hospital-details.html?id=4" class="details-btn">View Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-choose-us">
+        <h2>Why Choose Us</h2>
+        <p class="section-subtitle">Your health is our priority. Here's why thousands trust us.</p>
+
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="icon">🏥</div>
+                <h3>Verified Hospitals</h3>
+                <p>All hospitals are verified for quality care and accredited services.</p>
+            </div>
+
+            <div class="benefit-item">
+                <div class="icon">📅</div>
+                <h3>Easy Appointments</h3>
+                <p>Book appointments in just a few clicks with instant confirmations.</p>
+            </div>
+
+            <div class="benefit-item">
+                <div class="icon">⏱</div>
+                <h3>24/7 Availability</h3>
+                <p>Access healthcare providers any time of the day, every day.</p>
+            </div>
+
+            <div class="benefit-item">
+                <div class="icon">⭐</div>
+                <h3>Trusted Reviews</h3>
+                <p>Read real patient reviews before choosing your hospital.</p>
+            </div>
+        </div>
+    </section>
+    <section class="testimonials">
+        <h2>What Our Patients Say</h2>
+        <p class="section-subtitle">Trusted by thousands of patients for quality care</p>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-item">
+                <div class="stars">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <p class="review-text">"Booking my appointment was effortless. The staff were attentive, and the doctor
+                    explained everything clearly."</p>
+                <div class="reviewer">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Doe">
+                    <div>
+                        <h4>John Doe</h4>
+                        <span>Patient</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-item">
+                <div class="stars">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
+                </div>
+                <p class="review-text">"I found the right specialist in minutes. The platform’s interface is so
+                    user-friendly and fast."</p>
+                <div class="reviewer">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Emily Smith">
+                    <div>
+                        <h4>Emily Smith</h4>
+                        <span>Patient</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-item">
+                <div class="stars">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <p class="review-text">"From booking to consultation, everything was smooth and stress-free. Highly
+                    recommend this service."</p>
+                <div class="reviewer">
+                    <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Michael Lee">
+                    <div>
+                        <h4>Michael Lee</h4>
+                        <span>Patient</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Your Health, Our Priority</h2>
+            <p>Book your appointment today with the best hospitals and doctors in your area. It only takes a few clicks
+                to get started.</p>
+            <a href="/book-appointment.html" class="cta-button">Book Appointment</a>
+        </div>
+    </section>
+
+    <app-footer-section></app-footer-section>
+
+</section>
