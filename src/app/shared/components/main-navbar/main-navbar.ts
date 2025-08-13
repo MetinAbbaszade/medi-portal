@@ -50,4 +50,8 @@ export class MainNavbar {
     'az': "Azərbaycanca",
     'en': "English"
   }
+
+  handleProfileClick(){
+    
+  }
 }
