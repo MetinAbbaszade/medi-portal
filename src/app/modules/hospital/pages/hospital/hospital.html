@@ -10,39 +10,24 @@
             </form>
         </div>
     </div>
+    @if(hospitalData){
     <div class="hospital-overview">
-        <h2>Featured Hospitals</h2>
-        <p class="section-subtitle">Trusted healthcare providers with top-rated services</p>
+        <div class="header">
+            <h2>Featured Hospitals</h2>
+            <p class="section-subtitle">Trusted healthcare providers with top-rated services</p>
+        </div>
 
         <div class="hospital-cards">
-            <div class="hospital-item">
-                <img src="https://via.placeholder.com/400x250" alt="City Care Hospital">
+            <div class="hospital-item" *ngFor="let item of hospitalData.slice(0,3)">
+                <img [src]="item.image" [alt]="item.name">
                 <div class="hospital-info">
-                    <h3>City Care Hospital</h3>
-                    <p>24/7 emergency services and 150+ experienced doctors.</p>
-                    <a href="hospital-details.html?id=1" class="view-btn">View Details</a>
-                </div>
-            </div>
-
-            <div class="hospital-item">
-                <img src="https://via.placeholder.com/400x250" alt="Green Valley Medical">
-                <div class="hospital-info">
-                    <h3>Green Valley Medical</h3>
-                    <p>Specialists in pediatrics and cardiology with modern facilities.</p>
-                    <a href="hospital-details.html?id=2" class="view-btn">View Details</a>
-                </div>
-            </div>
-
-            <div class="hospital-item">
-                <img src="https://via.placeholder.com/400x250" alt="Sunrise Health Center">
-                <div class="hospital-info">
-                    <h3>Sunrise Health Center</h3>
-                    <p>Advanced diagnostics and personalized patient care programs.</p>
-                    <a href="hospital-details.html?id=3" class="view-btn">View Details</a>
+                    <h3>{{item.name}}</h3>
+                    <p>{{item.description}}</p>
                 </div>
             </div>
         </div>
     </div>
+    }
     <div class="filter-sort-bar">
         <input type="text" id="searchHospital" placeholder="Search hospitals..." />
 
@@ -62,67 +47,31 @@
         </select>
     </div>
     <section class="hospital-directory">
-        <h2>All Hospitals</h2>
-        <p class="section-subtitle">Browse through our complete list of partnered hospitals</p>
+        <div class="header">
+            <h2>All Hospitals</h2>
+            <p class="section-subtitle">Browse through our complete list of partnered hospitals</p>
+        </div>
 
         <div class="hospital-list">
-            <div class="hospital-card">
-                <img src="https://via.placeholder.com/500x300" alt="City Care Hospital">
+            <div class="hospital-card" *ngFor="let item of hospitalData">
+                <img [src]="item.image" [alt]="item.name">
                 <div class="card-content">
-                    <h3>City Care Hospital</h3>
-                    <p>Downtown location • 150+ doctors • 24/7 Emergency</p>
+                    <h3>{{item.name}}</h3>
+                    <p>{{item.description}}</p>
                     <div class="tags">
-                        <span>Cardiology</span>
-                        <span>Neurology</span>
+                        <span *ngFor="let data of item.departments">{{data.name}}</span>
                     </div>
-                    <a href="hospital-details.html?id=1" class="details-btn">View Details</a>
-                </div>
-            </div>
-
-            <div class="hospital-card">
-                <img src="https://via.placeholder.com/500x300" alt="Green Valley Medical">
-                <div class="card-content">
-                    <h3>Green Valley Medical</h3>
-                    <p>Specializes in pediatrics and cardiology. Modern equipment.</p>
-                    <div class="tags">
-                        <span>Pediatrics</span>
-                        <span>Cardiology</span>
-                    </div>
-                    <a href="hospital-details.html?id=2" class="details-btn">View Details</a>
-                </div>
-            </div>
-
-            <div class="hospital-card">
-                <img src="https://via.placeholder.com/500x300" alt="Sunrise Health Center">
-                <div class="card-content">
-                    <h3>Sunrise Health Center</h3>
-                    <p>Advanced diagnostics • Personalized care programs</p>
-                    <div class="tags">
-                        <span>Diagnostics</span>
-                        <span>Wellness</span>
-                    </div>
-                    <a href="hospital-details.html?id=3" class="details-btn">View Details</a>
-                </div>
-            </div>
-
-            <div class="hospital-card">
-                <img src="https://via.placeholder.com/500x300" alt="Riverside Clinic">
-                <div class="card-content">
-                    <h3>Riverside Clinic</h3>
-                    <p>Family medicine • Outpatient surgery services</p>
-                    <div class="tags">
-                        <span>Family Medicine</span>
-                        <span>Surgery</span>
-                    </div>
-                    <a href="hospital-details.html?id=4" class="details-btn">View Details</a>
+                    <a (click)="viewDetails()" class="details-btn">View Details</a>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="why-choose-us">
-        <h2>Why Choose Us</h2>
-        <p class="section-subtitle">Your health is our priority. Here's why thousands trust us.</p>
+        <div class="header">
+            <h2>Why Choose Us</h2>
+            <p class="section-subtitle">Your health is our priority. Here's why thousands trust us.</p>
+        </div>
 
         <div class="benefits-grid">
             <div class="benefit-item">
@@ -151,8 +100,10 @@
         </div>
     </section>
     <section class="testimonials">
-        <h2>What Our Patients Say</h2>
-        <p class="section-subtitle">Trusted by thousands of patients for quality care</p>
+        <div class="header">
+            <h2>What Our Patients Say</h2>
+            <p class="section-subtitle">Trusted by thousands of patients for quality care</p>
+        </div>
 
         <div class="testimonials-grid">
             <div class="testimonial-item">
@@ -204,13 +155,18 @@
 
     <section class="cta-section">
         <div class="cta-content">
-            <h2>Your Health, Our Priority</h2>
-            <p>Book your appointment today with the best hospitals and doctors in your area. It only takes a few clicks
-                to get started.</p>
-            <a href="/book-appointment.html" class="cta-button">Book Appointment</a>
+            <div class="header">
+                <h2>Your Health, Our Priority</h2>
+                <p>Book your appointment today with the best hospitals and doctors in your area. It only takes a few
+                    clicks
+                    to get started.</p>
+            </div>
+            <a routerLink="bookAppointment" class="cta-button">Book Appointment</a>
         </div>
     </section>
 
-    <app-footer-section></app-footer-section>
+    <footer>
+        &copy; 2025 MediPortal. All rights reserved.
+    </footer>
 
 </section>

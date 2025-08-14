@@ -19,8 +19,8 @@
         <a class="profile-section" [routerLink]="'profile'">
             <div class="profile-photo"></div>
             <div class="profile-info">
-                <span class="profile-name">Metin Abbaszade</span>
-                <span class="user-role">IT Admin</span>
+                <span class="profile-name">{{token.name}} {{token.surname}}</span>
+                <span class="user-role">{{token.role?.name}}</span>
             </div>
         </a>
         <button [matMenuTriggerFor]="belowMenu">

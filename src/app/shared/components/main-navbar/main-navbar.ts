@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { SharedTranslateModule } from '../../modules/shared-translate.module';
 import { ILanguage } from './modules/interface';
 import { CommonModule } from '@angular/common';
+import { PatientUser } from '../../../modules/auth/models';
 
 @Component({
   selector: 'app-main-navbar',
@@ -27,6 +28,7 @@ import { CommonModule } from '@angular/common';
 })
 export class MainNavbar {
   @Input() changeLang!: (lang: string) => void;
+  token: PatientUser = JSON.parse(localStorage.getItem('token') || '{}') as PatientUser;
 
   // Uses the 'inject' function to get an instance of the TranslateService.
   public translate = inject(TranslateService);
@@ -45,13 +47,10 @@ export class MainNavbar {
       href: 'contact'
     }
   ]
-
   languages: ILanguage = {
     'az': "Azərbaycanca",
     'en': "English"
   }
 
-  handleProfileClick(){
-    
-  }
+
 }

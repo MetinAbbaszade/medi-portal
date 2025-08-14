@@ -12,7 +12,7 @@ interface IArray {
   providedIn: 'root'
 })
 export class AuthService {
-  baseUrl = url.baseUrl
+  baseUrl = url.baseUrl + "users"
   constructor(
     private http: HttpClient
   ) { }

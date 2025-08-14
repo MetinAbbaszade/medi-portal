@@ -107,7 +107,7 @@
 
 .hospital-item img {
     width: 100%;
-    height: auto;
+    height: 60%;
     display: block;
     object-fit: cover;
 }
@@ -129,24 +129,8 @@
     color: #333;
     font-size: 0.95rem;
     flex-grow: 1;
-    margin-bottom: 1rem;
 }
 
-.view-btn {
-    display: inline-block;
-    background-color: #14617b;
-    color: white;
-    padding: 10px 18px;
-    border-radius: 6px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-    align-self: flex-start;
-}
-
-.view-btn:hover {
-    background-color: black;
-}
 
 .hospital-item:hover {
     transform: translateY(-5px);
@@ -183,73 +167,90 @@
     background-color: #f8f9fa;
     border-radius: 12px;
     overflow: hidden;
-    border: 2px solid #14617b;
+    border: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+
+    height: 400px;
+
+    img {
+        width: 100%;
+        min-height: 100%;
+        object-fit: cover;
+    }
+
+    &:hover .card-content {
+        transform: translateY(-213px);
+    }
+
+    .card-content {
+        background-color: #f8f9fa;
+        padding: 16px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        transition: transform 0.5s;
+
+        h3 {
+            color: #14617b;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            color: #333;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 1rem;
+        }
+
+
+        .tags span {
+            background-color: #14617b;
+            color: white;
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            border-radius: 12px;
+        }
+
+        .details-btn {
+            display: inline-block;
+            background-color: #14617b;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .details-btn:hover {
+            background-color: black;
+        }
+
+    }
 }
 
-.hospital-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-}
 
 .hospital-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 18px rgba(20, 97, 123, 0.25);
 }
 
-.card-content {
-    padding: 16px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
 
-.card-content h3 {
-    color: #14617b;
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-}
 
-.card-content p {
-    color: #333;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-}
-
-.tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 1rem;
-}
-
-.tags span {
-    background-color: #14617b;
-    color: white;
-    padding: 4px 10px;
-    font-size: 0.75rem;
-    border-radius: 12px;
-}
-
-.details-btn {
-    display: inline-block;
-    background-color: #14617b;
-    color: white;
-    padding: 10px 18px;
-    border-radius: 6px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-    align-self: flex-start;
-}
-
-.details-btn:hover {
-    background-color: black;
-}
 
 .filter-sort-bar {
     display: flex;
@@ -494,6 +495,8 @@
     border-radius: 8px;
     text-decoration: none;
     transition: all 0.3s ease;
+    cursor: pointer;
+
 }
 
 .cta-button:hover {
@@ -502,6 +505,22 @@
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
+
+.header {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+footer {
+    background-color: #0f4c5c;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+}
+
+
 
 @media (max-width: 600px) {
     .cta-content h2 {

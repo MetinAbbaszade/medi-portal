@@ -108,6 +108,7 @@
 }
 
 .cta a {
+    cursor: pointer;
     background-color: white;
     color: #14617b;
     padding: 14px 28px;

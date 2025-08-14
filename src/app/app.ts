@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, ComponentFactoryResolver } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -33,8 +33,9 @@ export class App {
     this.translateService.setLang(preferredLang)
   }
 
-  change(lang: string) {
+  change = (lang: string) => {
     this.translateService.setLang(lang)
+    console.log(lang)
   }
 
   get getHideNavbar() {

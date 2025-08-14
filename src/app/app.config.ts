@@ -6,6 +6,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { CustomTranslateLoader } from './custom-translate-loader';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export function CustomLoaderFactory(http: HttpClient) {
   return new CustomTranslateLoader();
@@ -17,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     // Provides the HttpClient service, making it available for injection throughout your app (e.g., in CustomTranslateLoader).
     provideHttpClient(),
     provideAnimations(),
-
+    importProvidersFrom(MatDialogModule),
     importProvidersFrom(
       TranslateModule.forRoot({
         // This configuration object tells TranslateModule how to load translations.
@@ -25,7 +26,7 @@ export const appConfig: ApplicationConfig = {
           // Specifies that you are providing an implementation for the TranslateLoader token.
           provide: TranslateLoader,
           // Tells Angular to use the 'CustomLoaderFactory' function to create the instance of TranslateLoader.
-          useFactory: CustomLoaderFactory, 
+          useFactory: CustomLoaderFactory,
           deps: [HttpClient]
         }
       })
