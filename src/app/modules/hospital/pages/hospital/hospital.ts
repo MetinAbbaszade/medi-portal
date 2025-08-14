@@ -26,7 +26,6 @@ export class Hospital {
   ngOnInit() {
     this.HospitalService.fetchHospitalData()
       .subscribe((res) => {
-        console.log(res)
         this.hospitalData = res;
       })
   }
@@ -34,6 +33,7 @@ export class Hospital {
   viewDetails() {
     this.openDialog(Hospitaldialog)
   }
+  
   openDialog(dialog: ComponentType<any>) {
     this.dialog.open(dialog, {
       minWidth: '70%',
