@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { IHospital } from '../../modules/data';
+import { Capacity, IHospital } from '../../modules/data';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,22 +12,21 @@ import { CommonModule } from '@angular/common';
   styleUrl: './hospitaldialog.css'
 })
 export class Hospitaldialog {
-
   hospitalInfo = [
     {
-      icon: "calendar_today",
-      name: "Established",
-      value: "1896"
+      icon: "emergency",
+      name: "EmergencyCapacity",
+      value: 'emergencyCapacity' as keyof Capacity
     },
     {
       icon: "bed",
       name: "Beds",
-      value: "450"
+      value: "beds" as keyof Capacity
     },
     {
-      icon: "settings_phone",
-      name: "Contact",
-      value: "+39 06 123 4567"
+      icon: "single_bed",
+      name: "IcuBeds",
+      value: "icuBeds" as keyof Capacity
     }
   ];
 
@@ -36,7 +35,9 @@ export class Hospitaldialog {
     private dialogRef: MatDialogRef<Hospitaldialog>
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log(this.data)
+  }
 
   closeDialog() {
     this.dialogRef.close();

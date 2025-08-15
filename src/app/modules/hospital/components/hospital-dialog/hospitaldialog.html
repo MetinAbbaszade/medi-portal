@@ -1,46 +1,46 @@
 <div class="container">
-    <div class="general-information-wrapper">
+    <div class="general-information-wrapper" [ngStyle]="{
+       'background-image': 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + data.image + ')',
+       'background-size': 'cover',
+       'background-position': 'center',
+       'background-repeat': 'no-repeat'
+     }">
         <div class="general-rating-wrapper">
             <span class="material-icons general-star">
                 star
             </span>
             <span class="general-rating">4.8</span>
-            <span class="general-info">General Hospital</span>
+            <span class="general-info">{{data.type}}</span>
         </div>
         <div class="general-name-wrapper">
-            <h3 class="general-name">Bona Dea Hospital</h3>
+            <h3 class="general-name">{{data.name}}</h3>
         </div>
         <div class="general-location-wrapper">
             <span class="material-icons">
                 location_on
             </span>
-            <p class="general-location">Rome, Italy</p>
+            <p class="general-location">{{data.address.city}}, {{data.address.country}}</p>
         </div>
         <button class="material-icons" (click)="closeDialog()">
             close
         </button>
     </div>
     <div class="body-wrapper">
-        <p class="body-description">A leading healthcare institution providing comprehensive medical services with
-            state-of-the-art facilities
-            and expert medical professionals.
+        <p class="body-description">{{data.description}}
         </p>
         <div class="card-wrapper">
             <div class="card" *ngFor="let item of hospitalInfo">
                 <span class="material-icons">{{item.icon}}</span>
                 <div>
                     <span class="info-name">{{item.name}}</span>
-                    <span class="info-data">{{item.value}}</span>
+                    <span class="info-data">{{data.capacity[item.value]}}</span>
                 </div>
             </div>
         </div>
         <div class="specialities-wrapper">
-            <h2 class="header">Medical Specialties</h2>
+            <h2 class="header">Medical Departments</h2>
             <div class="specialities-container">
-                <div class="speciality">Cardiology</div>
-                <div class="speciality">Cardiology</div>
-                <div class="speciality">Cardiology</div>
-                <div class="speciality">Cardiology</div>
+                <div class="speciality" *ngFor="let item of data.departments">{{item.name}}</div>
             </div>
         </div>
         <div class="button-container">
