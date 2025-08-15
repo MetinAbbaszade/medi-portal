@@ -40,34 +40,91 @@
     display: flex;
     justify-content: center;
     gap: 10px;
+    position: relative;
 }
 
-.hero-search input[type="text"] {
-    padding: 12px 16px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 4px 0 0 4px;
-    width: 300px;
-    max-width: 100%;
-    outline: none;
+.filter-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 250px;
+    max-width: 400px;
+}
+
+.hero-search mat-form-field {
+    width: 100%;
+}
+
+.search-results {
+    position: absolute;
+    top: 75%;
+    left: 0;
+    right: 0;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1px;
+
+    .search-result-wrapper {
+        display: flex;
+        align-items: center;
+
+        .search-profile {
+            width: 40px;
+            height: 40px;
+        }
+
+        .search-datas {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            row-gap: 3px;
+
+            .search-name {
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+            .search-adress {
+                display: flex;
+                align-items: center;
+                font-size: 12px;
+                color: #697282;
+
+                span:first-of-type {
+                    font-size: 14px;
+                }
+
+                span:last-of-type {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+.search-results div {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    background-color: #fff;
+    transition: background 0.2s;
+}
+
+.search-results div:hover {
+    background: #f0f0f0;
 }
 
 .hero-search button {
-    background-color: white;
-    color: #14617b;
-    border: none;
-    padding: 12px 24px;
-    font-size: 1rem;
-    font-weight: 700;
-    border-radius: 0 4px 4px 0;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 56px;
+    background-color: #14617b;
 }
 
-.hero-search button:hover {
-    background-color: #0f4c5c;
-    color: white;
-}
 
 .hospital-overview {
     padding: 60px 20px;
@@ -141,6 +198,20 @@
     padding: 60px 20px;
     background-color: white;
     text-align: center;
+    position: relative;
+
+    .filter-wrapper {
+        position: absolute;
+        left: 50px;
+        top: 50px;
+        width: 50px;
+        z-index: 1000;
+    }
+
+    .filter-button-wrapper {
+        margin: 1rem auto;
+        align-self: flex-start;
+    }
 }
 
 .hospital-directory h2 {

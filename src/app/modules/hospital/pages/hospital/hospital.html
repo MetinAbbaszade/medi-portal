@@ -3,11 +3,44 @@
         <div class="hero-content">
             <h1>Find The Best Hospitals Near You</h1>
             <p>Your health matters. Book appointments easily with trusted hospitals.</p>
-            <form class="hero-search" onsubmit="event.preventDefault(); alert('Search submitted!');">
-                <input type="text" placeholder="Search hospitals by city or specialty..."
-                    aria-label="Search hospitals" />
-                <button type="submit">Search</button>
+            <form class="hero-search" [formGroup]="form" (ngSubmit)="handleSubmit()">
+                <div class="filter-wrapper">
+                    <mat-form-field>
+                        <input matInput type="text" placeholder="Search hospitals which you want..."
+                            aria-label="Search hospitals" formControlName="searchData" />
+                    </mat-form-field>
+
+                    <div *ngIf="searchResult.length" class="search-results">
+                        <div *ngFor="let item of searchResult" class="search-result-wrapper"
+                            (click)="viewDetails(item)">
+                            <div [ngStyle]="{
+                                'background-image': 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + item.image + ')',
+       'background-size': 'cover',
+       'background-position': 'center',
+       'background-repeat': 'no-repeat'
+                            }" class="search-profile">
+                            </div>
+                            <div class="search-datas">
+                                <span class="search-name">{{ item.name }}</span>
+                                <span class="search-adress">
+                                    <span class="material-icons">location_on</span>
+                                    <span>
+                                        {{ item.address.country }}
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    @if (click && !searchResult.length)
+                    {
+                    <div class="search-results">
+                        <div>Not found</div>
+                    </div>
+                    }
+                </div>
+                <button mat-raised-button color="primary" type="submit">Search</button>
             </form>
+
         </div>
     </div>
     @if(hospitalData){
@@ -28,25 +61,36 @@
         </div>
     </div>
     }
-    <div class="filter-sort-bar" *ngIf="hospitalData">
-        <input type="text" id="searchHospital" placeholder="Search hospitals..." />
 
-        <select id="filterSpecialty">
-            <option value="">All Specialties</option>
-            <option value="Cardiology">Cardiology</option>
-            <option value="Neurology">Neurology</option>
-            <option value="Pediatrics">Pediatrics</option>
-            <option value="Diagnostics">Diagnostics</option>
-            <option value="Surgery">Surgery</option>
-        </select>
-
-        <select id="sortHospitals">
-            <option value="">Sort By</option>
-            <option value="name-asc">Name (A-Z)</option>
-            <option value="name-desc">Name (Z-A)</option>
-        </select>
-    </div>
     <section class="hospital-directory" *ngIf="hospitalData">
+        <mat-expansion-panel class="filter-wrapper">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <span class="material-icons">filter_alt</span>
+                    <div class="filter">Filter</div>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <form class="filter-sort-bar" [formGroup]="filterForm">
+                <mat-form-field appearance="fill">
+                    <mat-select id="filterSpecialty" formControlName="speciality">
+                        <mat-option value="">All Specialties</mat-option>
+                        <mat-option value="Cardiology">Cardiology</mat-option>
+                        <mat-option value="Neurology">Neurology</mat-option>
+                        <mat-option value="Pediatrics">Pediatrics</mat-option>
+                        <mat-option value="Diagnostics">Diagnostics</mat-option>
+                        <mat-option value="Surgery">Surgery</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-select id="sortHospitals">
+                        <mat-option value="">Sort By</mat-option>
+                        <mat-option value="name-asc">Name (A-Z)</mat-option>
+                        <mat-option value="name-desc">Name (Z-A)</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+
+        </mat-expansion-panel>
         <div class="header">
             <h2>All Hospitals</h2>
             <p class="section-subtitle">Browse through our complete list of partnered hospitals</p>
