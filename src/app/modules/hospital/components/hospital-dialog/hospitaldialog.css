@@ -1,0 +1,197 @@
+.container {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 40vw;
+
+    .general-information-wrapper {
+        position: relative;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+        justify-content: flex-end;
+        min-height: 45%;
+        background: linear-gradient(rgba(0, 0, 0, 0.7),
+                rgba(0, 0, 0, 0.7)), url('https://i.pinimg.com/736x/6c/37/78/6c37789996911b63291ba857a6f16b42.jpg');
+        background-size: cover;
+        background-position: center;
+
+        .general-rating-wrapper {
+
+            display: flex;
+            align-items: center;
+            column-gap: 8px;
+
+            .general-star {
+                font-size: 22px;
+                color: gold;
+            }
+
+            .general-rating {
+                font-size: 15px;
+                font-weight: bold;
+            }
+
+            .general-info {
+                font-size: 12px;
+                background-color: #9a9a9a;
+                border: 1px solid #b8b8b8;
+                border-radius: 7px;
+                padding: 1px 8px;
+                background-color: rgba(255, 255, 255, 0.2);
+                /* bg-white/20 */
+                color: #ffffff;
+                /* text-white */
+                border-color: rgba(255, 255, 255, 0.3);
+                /* border-white/30 */
+            }
+        }
+
+        .general-name-wrapper {
+            align-self: center;
+
+            .general-name {
+                font-size: 28px;
+            }
+        }
+
+        .general-location-wrapper {
+            display: flex;
+            margin: 1rem 0 0 0;
+            align-items: center;
+            column-gap: 5px;
+            color: #f2f2f2;
+
+            .material-icons {
+                font-size: 18px;
+                color: #f2f2f2;
+            }
+
+            .general-location {
+                font-size: 16px;
+            }
+        }
+
+        >.material-icons {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 20px;
+            font-size: 18px;
+            border: none;
+            background: transparent;
+            color: #fff;
+            cursor: pointer;
+            padding: 5px;
+            transition: all 0.3s;
+            border-radius: 5px;
+
+            &:hover {
+                background-color: #9a9a9a;
+                color: #000;
+            }
+        }
+    }
+
+    .body-wrapper {
+        color: #737373;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+
+        .body-description {
+            width: 95%;
+            text-align: center;
+            margin: 0 auto;
+            font-size: 16px;
+            line-height: 1.7rem;
+        }
+
+        .card-wrapper {
+            display: flex;
+            margin: 2rem 0;
+            column-gap: 20px;
+
+            .card {
+                width: calc(33% - 10px);
+                background-color: #fafafa;
+                padding: 15px 10px;
+                display: flex;
+                align-items: center;
+                column-gap: 10px;
+                border-radius: 10px;
+
+                .material-icons {
+                    font-size: 20px;
+                    color: #000;
+                }
+
+                >div {
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 5px;
+
+
+                    .info-data {
+                        color: #000;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+
+        .specialities-wrapper {
+            display: flex;
+            flex-direction: column;
+            color: #000;
+            row-gap: 1rem;
+
+            >.header {
+                align-self: center;
+                font-size: 16px;
+
+            }
+
+            .specialities-container {
+                display: flex;
+                column-gap: 10px;
+
+                .speciality {
+                    padding: 2px 10px;
+                    border: 1px solid #e5e5e5;
+                    font-size: 12px;
+                    border-radius: 10px;
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .button-container {
+            display: flex;
+            margin-top: 2rem;
+            column-gap: 10px;
+
+            button {
+                width: calc(100% - 10px);
+                padding: 10px;
+                border-radius: 10px;
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            .appoint-btn {
+                background: linear-gradient(170deg, #14a4d4, #171717);
+                color: #fff;
+                border: none;
+            }
+
+            .view-btn {
+                background-color: #fff;
+                color: #000;
+                border: 1px solid #e5e5e5;
+            }
+        }
+    }
+}

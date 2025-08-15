@@ -28,7 +28,7 @@
         </div>
     </div>
     }
-    <div class="filter-sort-bar">
+    <div class="filter-sort-bar" *ngIf="hospitalData">
         <input type="text" id="searchHospital" placeholder="Search hospitals..." />
 
         <select id="filterSpecialty">
@@ -46,7 +46,7 @@
             <option value="name-desc">Name (Z-A)</option>
         </select>
     </div>
-    <section class="hospital-directory">
+    <section class="hospital-directory" *ngIf="hospitalData">
         <div class="header">
             <h2>All Hospitals</h2>
             <p class="section-subtitle">Browse through our complete list of partnered hospitals</p>
@@ -61,7 +61,7 @@
                     <div class="tags">
                         <span *ngFor="let data of item.departments">{{data.name}}</span>
                     </div>
-                    <a (click)="viewDetails()" class="details-btn">View Details</a>
+                    <a (click)="viewDetails(item)" class="details-btn">View Details</a>
                 </div>
             </div>
         </div>

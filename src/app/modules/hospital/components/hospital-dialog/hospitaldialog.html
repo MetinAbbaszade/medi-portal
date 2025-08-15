@@ -1,1 +1,51 @@
-<div>salam</div>
+<div class="container">
+    <div class="general-information-wrapper">
+        <div class="general-rating-wrapper">
+            <span class="material-icons general-star">
+                star
+            </span>
+            <span class="general-rating">4.8</span>
+            <span class="general-info">General Hospital</span>
+        </div>
+        <div class="general-name-wrapper">
+            <h3 class="general-name">Bona Dea Hospital</h3>
+        </div>
+        <div class="general-location-wrapper">
+            <span class="material-icons">
+                location_on
+            </span>
+            <p class="general-location">Rome, Italy</p>
+        </div>
+        <button class="material-icons" (click)="closeDialog()">
+            close
+        </button>
+    </div>
+    <div class="body-wrapper">
+        <p class="body-description">A leading healthcare institution providing comprehensive medical services with
+            state-of-the-art facilities
+            and expert medical professionals.
+        </p>
+        <div class="card-wrapper">
+            <div class="card" *ngFor="let item of hospitalInfo">
+                <span class="material-icons">{{item.icon}}</span>
+                <div>
+                    <span class="info-name">{{item.name}}</span>
+                    <span class="info-data">{{item.value}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="specialities-wrapper">
+            <h2 class="header">Medical Specialties</h2>
+            <div class="specialities-container">
+                <div class="speciality">Cardiology</div>
+                <div class="speciality">Cardiology</div>
+                <div class="speciality">Cardiology</div>
+                <div class="speciality">Cardiology</div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="appoint-btn">Book Appointment</button>
+            <button class="view-btn">View More Info</button>
+        </div>
+    </div>
+</div>

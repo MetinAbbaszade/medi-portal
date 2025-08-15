@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ComponentType } from '@angular/cdk/portal';
 import { Hospitaldialog } from '../../components/hospital-dialog/hospitaldialog';
+import { IHospital } from '../../modules/data';
 
 @Component({
   selector: 'app-hospital',
@@ -30,15 +31,15 @@ export class Hospital {
       })
   }
 
-  viewDetails() {
-    this.openDialog(Hospitaldialog)
+  viewDetails(item: IHospital) {
+    this.openDialog(Hospitaldialog, item)
   }
-  
-  openDialog(dialog: ComponentType<any>) {
+
+  openDialog(dialog: ComponentType<any>, data = {}) {
     this.dialog.open(dialog, {
-      minWidth: '70%',
-      height: '70%',
-      data: { message: 'Hello World' }
+      minWidth: '40%',
+      height: '68%',
+      data
     })
   }
 }
