@@ -61,7 +61,7 @@
     right: 0;
     max-height: 250px;
     overflow-y: auto;
-    z-index: 1000;
+    z-index: 1;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     color: #000;
     display: flex;
@@ -591,6 +591,8 @@ footer {
     padding: 20px;
     font-size: 0.9rem;
 }
+
+
 
 
 

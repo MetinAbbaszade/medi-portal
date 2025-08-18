@@ -8,6 +8,7 @@ export interface IHospital {
     contact: Contact;
     capacity: Capacity;
     departments: Department[];
+    specialties: string[];
 }
 
 export interface Address {

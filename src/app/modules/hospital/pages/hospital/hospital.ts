@@ -14,32 +14,23 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
+import { combineLatest, debounceTime, distinctUntilChanged, filter, Observable, startWith, Subscription, switchMap } from 'rxjs';
 
 
 @Component({
   selector: 'app-hospital',
-  imports: [
-    CommonModule,
-    RouterLink,
-    ReactiveFormsModule,
-    MatIconModule,
-    MatFormFieldModule,
-    FormsModule,
-    MatInputModule,
-    MatDividerModule,
-    MatButtonModule,
-    MatExpansionModule,
-    MatSelectModule
-  ],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, MatIconModule, MatFormFieldModule,
+    FormsModule, MatInputModule, MatDividerModule, MatButtonModule, MatExpansionModule, MatSelectModule],
   templateUrl: './hospital.html',
-  styleUrl: './hospital.css'
+  styleUrl: './hospital.css',
+  standalone: true
 })
 export class Hospital {
-  form!: FormGroup;
-  hospitalData: any;
+  featuredHospitals: IHospital[] | null = null;
   searchResult: any;
   filterForm!: FormGroup;
-  click: number = 0;
+  filteredHospitals$!: Observable<IHospital[]>;
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private HospitalService: HospitalService,
@@ -49,30 +40,64 @@ export class Hospital {
 
   ngOnInit() {
     this.searchResult = [];
-    this.fetchData()
-    this.form = this.fb.group({
-      searchData: ''
-    })
+    this.fetchData();
 
     this.filterForm = this.fb.group({
-      speciality: ''
+      searchData: [''],
+      speciality: [''],
+      filter: ['']
     })
+
+    this.filteredHospitals$ = combineLatest([
+      this.filterForm.valueChanges.pipe(
+        startWith(this.filterForm.value),
+        debounceTime(300),
+        distinctUntilChanged()
+      ),
+      this.HospitalService.fetchHospitalData()
+    ]).pipe(
+      switchMap(([filters, allHospitals]) => {
+        let filtered = [...allHospitals];
+
+        if (filters.searchData) {
+          filtered = filtered.filter(hospital =>
+            hospital.name.toLowerCase().includes(filters.searchData.toLowerCase())
+          );
+        }
+
+        if (filters.speciality) {
+          filtered = filtered.filter(hospital =>
+            hospital.specialties.includes(filters.speciality)
+          );
+        }
+
+        if (filters.filter) {
+          filtered.sort((a, b) => {
+            if (filters.filter === 'name-asc') {
+              return a.name.localeCompare(b.name);
+            } else {
+              return b.name.localeCompare(a.name);
+            }
+          });
+        }
+        return [filtered];
+      })
+    );
+
+    this.subscriptions.add(
+      this.filteredHospitals$.subscribe(hospitals => {
+        const searchTerm = this.filterForm.get('searchData')?.value;
+        this.searchResult = searchTerm ? hospitals : [];
+      })
+    );
   }
 
   fetchData() {
-    this.HospitalService.fetchHospitalData()
-      .subscribe((res) => {
-        console.log(res)
-        this.hospitalData = res;
+    this.subscriptions.add(
+      this.HospitalService.fetchHospitalData().subscribe(res => {
+        this.featuredHospitals = res.slice(0, 3);
       })
-  }
-
-  filterDatas(filterValue: any) {
-    this.HospitalService.filterData(filterValue.searchData)
-      .subscribe((res) => {
-        console.log(res);
-        this.searchResult = res;
-      })
+    );
   }
 
   viewDetails(item: IHospital) {
@@ -87,13 +112,8 @@ export class Hospital {
     })
   }
 
-  handleSubmit() {
-    this.click += 1
-    if (!this.form.value.searchData) {
-      this.fetchData()
-      return;
-    }
-    this.filterDatas(this.form.value)
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }
 

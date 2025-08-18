@@ -3,7 +3,7 @@
         <div class="hero-content">
             <h1>Find The Best Hospitals Near You</h1>
             <p>Your health matters. Book appointments easily with trusted hospitals.</p>
-            <form class="hero-search" [formGroup]="form" (ngSubmit)="handleSubmit()">
+            <form class="hero-search" [formGroup]="filterForm">
                 <div class="filter-wrapper">
                     <mat-form-field>
                         <input matInput type="text" placeholder="Search hospitals which you want..."
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                     </div>
-                    @if (click && !searchResult.length)
+                    @if (filterForm.touched &&!searchResult.length)
                     {
                     <div class="search-results">
                         <div>Not found</div>
@@ -43,7 +43,7 @@
 
         </div>
     </div>
-    @if(hospitalData){
+    @if(featuredHospitals){
     <div class="hospital-overview">
         <div class="header">
             <h2>Featured Hospitals</h2>
@@ -51,7 +51,7 @@
         </div>
 
         <div class="hospital-cards">
-            <div class="hospital-item" *ngFor="let item of hospitalData.slice(0,3)">
+            <div class="hospital-item" *ngFor="let item of featuredHospitals">
                 <img [src]="item.image" [alt]="item.name">
                 <div class="hospital-info">
                     <h3>{{item.name}}</h3>
@@ -62,7 +62,7 @@
     </div>
     }
 
-    <section class="hospital-directory" *ngIf="hospitalData">
+    <section class="hospital-directory" *ngIf="filteredHospitals$">
         <mat-expansion-panel class="filter-wrapper">
             <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -72,18 +72,36 @@
             </mat-expansion-panel-header>
             <form class="filter-sort-bar" [formGroup]="filterForm">
                 <mat-form-field appearance="fill">
+                    <mat-label>All Specialities</mat-label>
                     <mat-select id="filterSpecialty" formControlName="speciality">
-                        <mat-option value="">All Specialties</mat-option>
-                        <mat-option value="Cardiology">Cardiology</mat-option>
+                        <mat-option value=""></mat-option>
+                        <mat-option value="Cardiac Care">Cardiac Care</mat-option>
+                        <mat-option value="Cardiac Surgery & Care">Cardiac Surgery & Care</mat-option>
                         <mat-option value="Neurology">Neurology</mat-option>
-                        <mat-option value="Pediatrics">Pediatrics</mat-option>
-                        <mat-option value="Diagnostics">Diagnostics</mat-option>
-                        <mat-option value="Surgery">Surgery</mat-option>
+                        <mat-option value="Orthopedic Surgery">Orthopedic Surgery</mat-option>
+                        <mat-option value="Pediatric Medicine">Pediatric Medicine</mat-option>
+                        <mat-option value="Emergency & Trauma Services">Emergency & Trauma Services</mat-option>
+                        <mat-option value="Emergency Medicine">Emergency Medicine</mat-option>
+                        <mat-option value="General Medicine">General Medicine</mat-option>
+                        <mat-option value="Family Medicine">Family Medicine</mat-option>
+                        <mat-option value="Maternity & Obstetrics">Maternity & Obstetrics</mat-option>
+                        <mat-option value="Dermatology">Dermatology</mat-option>
+                        <mat-option value="General Surgery">General Surgery</mat-option>
+                        <mat-option value="Ear, Nose & Throat (ENT)">Ear, Nose & Throat (ENT)</mat-option>
+                        <mat-option value="Neurorehabilitation">Neurorehabilitation</mat-option>
+                        <mat-option value="Radiology & Imaging">Radiology & Imaging</mat-option>
+                        <mat-option value="Internal Medicine">Internal Medicine</mat-option>
+                        <mat-option value="Oncology & Cancer Care">Oncology & Cancer Care</mat-option>
+                        <mat-option value="Medical Education & Training">Medical Education & Training</mat-option>
+                        <mat-option value="Critical Care">Critical Care</mat-option>
                     </mat-select>
                 </mat-form-field>
+            </form>
+            <form [formGroup]="filterForm">
                 <mat-form-field>
-                    <mat-select id="sortHospitals">
-                        <mat-option value="">Sort By</mat-option>
+                    <mat-label>Sort By</mat-label>
+                    <mat-select id="sortHospitals" formControlName="filter">
+                        <mat-option value=""></mat-option>
                         <mat-option value="name-asc">Name (A-Z)</mat-option>
                         <mat-option value="name-desc">Name (Z-A)</mat-option>
                     </mat-select>
@@ -97,7 +115,7 @@
         </div>
 
         <div class="hospital-list">
-            <div class="hospital-card" *ngFor="let item of hospitalData">
+            <div class="hospital-card" *ngFor="let item of filteredHospitals$ | async">
                 <img [src]="item.image" [alt]="item.name">
                 <div class="card-content">
                     <h3>{{item.name}}</h3>

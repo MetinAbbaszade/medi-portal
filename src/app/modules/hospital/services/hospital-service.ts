@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { url } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { filter, finalize, map } from 'rxjs';
+import { Observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
+import { url } from '../../../../environments/environment';
 import { IHospital } from '../modules/data';
 
 @Injectable({
@@ -9,24 +10,16 @@ import { IHospital } from '../modules/data';
 })
 export class HospitalService {
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  private baseUrl = url.baseUrl + "hospitals";
+  private allHospitals$: Observable<IHospital[]>;
 
-  baseUrl = url.baseUrl + "hospitals"
-
-  fetchHospitalData() {
-    return this.http.get(this.baseUrl)
+  constructor(private http: HttpClient) {
+    this.allHospitals$ = this.http.get<IHospital[]>(this.baseUrl).pipe(
+      shareReplay(1)
+    );
   }
-
-  filterData(filterData: any) {
-    const data = this.http.get<IHospital[]>(this.baseUrl)
-      .pipe(
-        map(
-          (res: IHospital[]) => res.filter((data: IHospital) => !data.name.toLowerCase().indexOf(filterData))
-        )
-      )
-    console.log(data);
-    return data;
+  
+  fetchHospitalData(): Observable<IHospital[]> {
+    return this.allHospitals$;
   }
 }
