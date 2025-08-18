@@ -4,14 +4,16 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule, MatToolbarRow } from "@angular/material/toolbar";
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedTranslateModule } from '../../modules/shared-translate.module';
 import { ILanguage } from './modules/interface';
 import { CommonModule } from '@angular/common';
 import { PatientUser } from '../../../modules/auth/models';
+import { filter } from 'rxjs';
 
 @Component({
+  standalone: true,
   selector: 'app-main-navbar',
   imports: [
     MatSidenavModule,
@@ -21,18 +23,29 @@ import { PatientUser } from '../../../modules/auth/models';
     SharedTranslateModule,
     MatToolbarModule,
     MatMenuModule,
-    CommonModule,
+    CommonModule
   ],
   templateUrl: './main-navbar.html',
   styleUrl: './main-navbar.css'
 })
 export class MainNavbar {
+  activeUrl: string = '';
+  constructor(
+    private router: Router
+  ) { }
+
+  ngOnInit() {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.activeUrl = event.urlAfterRedirects
+      });
+  }
   @Input() changeLang!: (lang: string) => void;
   token: PatientUser = JSON.parse(localStorage.getItem('token') || '{}') as PatientUser;
 
   // Uses the 'inject' function to get an instance of the TranslateService.
   public translate = inject(TranslateService);
-
   routes: IRoutes[] = [
     {
       icon: 'local_hospital',

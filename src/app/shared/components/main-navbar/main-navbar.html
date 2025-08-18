@@ -8,7 +8,7 @@
     <mat-toolbar-row class="navbar-m">
         @for (item of routes; track $index) {
         <button>
-            <a [routerLink]='item.href'>
+            <a [routerLink]='item.href' [ngClass]="{'active': activeUrl.includes(item.href)}">
                 <span class="material-icons">{{item.icon}}</span>
                 <span>{{'Navigation.'+ item.href | translate}}</span>
             </a>
