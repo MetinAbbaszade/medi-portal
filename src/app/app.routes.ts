@@ -50,7 +50,7 @@ export const routes: Routes = [
                 component: Hospitaldetails
             },
             {
-                path: 'book-appoinment',
+                path: 'book-appointment',
                 component: BookAppointment
             },
             {
