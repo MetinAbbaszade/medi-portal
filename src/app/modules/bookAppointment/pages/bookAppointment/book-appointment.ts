@@ -1,14 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AppointmentService } from '../../services/appointment.service';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
+import { MatInputModule } from "@angular/material/input";
 
 @Component({
   selector: 'app-book-appointment',
   imports: [
     CommonModule,
-    MatButton
+    MatButton,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
   templateUrl: './book-appointment.html',
   styleUrl: './book-appointment.css'
@@ -16,6 +19,8 @@ import { MatButton } from '@angular/material/button';
 export class BookAppointment {
 
   form!: FormGroup;
+
+  currentStep: number = 1;
   steps = [
     {
       number: 1,
@@ -53,10 +58,17 @@ export class BookAppointment {
     { id: "oncology", name: "Oncology", icon: "🎗️" },
   ]
 
+  goNext() {
+    this.currentStep < this.steps.length ? this.currentStep++ : ''
+    console.log(this.currentStep)
+  }
+
+  goBack() {
+    this.currentStep > 1 ? this.currentStep-- : ''
+  }
 
   constructor(
-    private fb: FormBuilder,
-    private appointmentService: AppointmentService
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -68,17 +80,11 @@ export class BookAppointment {
       time: ['', Validators.required],
       concern: ['', Validators.required],
     });
+
+    this.form.valueChanges.subscribe((res) => console.log(res));
   }
 
-  updateField(field: string, value: any) {
-    this.form.get(field)?.setValue(value);
-    this.appointmentService.updateAppointment({ [field]: value });
+  confirmAppointment() {
+    console.log("Salam")
   }
-
-  submit() {
-    if (this.form.valid) {
-      console.log('Appointment confirmed', this.form.value);
-    }
-  }
-
 }

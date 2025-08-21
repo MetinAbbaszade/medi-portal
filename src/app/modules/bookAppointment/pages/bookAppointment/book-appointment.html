@@ -8,32 +8,42 @@
     </div>
     <div class="main-section">
         <div class="step-wrapper">
-            <div class="step" *ngFor="let step of steps; let last = last">
+            <div class="step" *ngFor="let step of steps; let i = index; let last = last"
+                [class.active]="currentStep === step.number" [class.done]="currentStep > step.number">
                 <div class="icon">
-                    <span class="material-symbols-outlined">{{ step.icon }}</span>
+                    <span class="material-symbols-outlined">
+                        {{currentStep > step.number ? 'task_alt': step.icon }}
+                    </span>
                 </div>
                 <div class="info">
                     <p>Step {{ step.number }}</p>
                     <p>{{ step.title }}</p>
                 </div>
-                <div class="divider" *ngIf="!last"></div>
+                <div class="divider" *ngIf="!last" [class.done]="currentStep > step.number"></div>
             </div>
         </div>
         <div class="form-container">
             <div class="data-container">
-                <div class="data-header">
-                    <h2 class="header-text">Department</h2>
-                    <p class="header-subtitle">Choose the medical department you need</p>
-                </div>
-                <div class="data-selection">
-                    <div class="data-selection-wrapper" *ngFor="let department of departments">
-                        <div>{{department.icon}}</div>
-                        <div>{{department.name}}</div>
-                    </div>
-                </div>
+                <ng-container *ngIf="currentStep === 1">
+                    <form [formGroup]="form">
+                        <div class="data-header">
+                            <h2 class="header-text">Department</h2>
+                            <p class="header-subtitle">Choose the medical department you need</p>
+                        </div>
+                        <div class="data-selection">
+                            <button class="data-selection-wrapper" *ngFor="let department of departments"
+                                (click)="form.get('department')?.setValue(department)">
+                                <div>{{ department.icon }}</div>
+                                <div>{{ department.name }}</div>
+                            </button>
+                        </div>
+                    </form>
+                </ng-container>
                 <div class="button-wrapper">
-                    <button matButton="outlined">Back</button>
-                    <button class="next-btn">Next Step</button>
+                    <button mat-button (click)="goBack()" [disabled]="currentStep === 1">Back</button>
+                    <button class="next-btn" *ngIf="currentStep < steps.length" (click)="goNext()">
+                        Next Step
+                    </button>
                 </div>
             </div>
             <div class="summary-container">
@@ -41,11 +51,11 @@
                     <h3>Appointment Summary</h3>
                 </div>
                 <div class="summary-body">
-                        <div class="material-symbols-outlined">stethoscope</div>
-                        <div>
-                            <p>Department</p>
-                            <p>Neurology</p>
-                        </div>
+                    <div class="material-symbols-outlined">stethoscope</div>
+                    <div>
+                        <p>Department</p>
+                        <p>Neurology</p>
+                    </div>
                 </div>
             </div>
         </div>
