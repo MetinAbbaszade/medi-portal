@@ -2,11 +2,12 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Capacity, IHospital } from '../../modules/data';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hospitaldialog',
   imports: [
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './hospitaldialog.html',
   styleUrl: './hospitaldialog.css'
@@ -32,7 +33,8 @@ export class Hospitaldialog {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IHospital,
-    private dialogRef: MatDialogRef<Hospitaldialog>
+    private dialogRef: MatDialogRef<Hospitaldialog>,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -41,5 +43,10 @@ export class Hospitaldialog {
 
   closeDialog() {
     this.dialogRef.close();
+  }
+
+  redirectTo(url: any[]) {
+    this.router!.navigate(url)
+    this.closeDialog()
   }
 }

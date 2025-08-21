@@ -178,6 +178,11 @@
                 background: linear-gradient(170deg, #14a4d4, #171717);
                 color: #fff;
                 border: none;
+
+                a {
+                    color: #fff;
+                    text-decoration: none;
+                }
             }
 
             .view-btn {

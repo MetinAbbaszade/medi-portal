@@ -8,67 +8,46 @@
     </div>
     <div class="main-section">
         <div class="step-wrapper">
-            <div class="step">
+            <div class="step" *ngFor="let step of steps; let last = last">
                 <div class="icon">
-                    <span class="material-symbols-outlined">
-                        stethoscope
-                    </span>
+                    <span class="material-symbols-outlined">{{ step.icon }}</span>
                 </div>
                 <div class="info">
-                    <p>Step 1</p>
-                    <p>Department</p>
+                    <p>Step {{ step.number }}</p>
+                    <p>{{ step.title }}</p>
                 </div>
-                <div class="divider"></div>
-            </div>
-            <div class="step">
-                <div class="icon">
-                    <span class="material-symbols-outlined">
-                        apartment
-                    </span>
-                </div>
-                <div class="info">
-                    <p>Step 2</p>
-                    <p>Hospital</p>
-                </div>
-                <div class="divider"></div>
-            </div>
-            <div class="step">
-                <div class="icon">
-                    <span class="material-symbols-outlined">
-                        contacts_product
-                    </span>
-                </div>
-                <div class="info">
-                    <p>Step 3</p>
-                    <p>Doctor</p>
-                </div>
-                <div class="divider"></div>
-            </div>
-            <div class="step">
-                <div class="icon">
-                    <span class="material-symbols-outlined">
-                        calendar_add_on
-                    </span>
-                </div>
-                <div class="info">
-                    <p>Step 4</p>
-                    <p>Date & Time</p>
-                </div>
-                <div class="divider"></div>
-            </div>
-            <div class="step">
-                <div class="icon">
-                    <span class="material-symbols-outlined">
-                        file_export
-                    </span>
-                </div>
-                <div class="info">
-                    <p>Step 5</p>
-                    <p>Details</p>
-                </div>
-                <div class="divider"></div>
+                <div class="divider" *ngIf="!last"></div>
             </div>
         </div>
-
+        <div class="form-container">
+            <div class="data-container">
+                <div class="data-header">
+                    <h2 class="header-text">Department</h2>
+                    <p class="header-subtitle">Choose the medical department you need</p>
+                </div>
+                <div class="data-selection">
+                    <div class="data-selection-wrapper" *ngFor="let department of departments">
+                        <div>{{department.icon}}</div>
+                        <div>{{department.name}}</div>
+                    </div>
+                </div>
+                <div class="button-wrapper">
+                    <button matButton="outlined">Back</button>
+                    <button class="next-btn">Next Step</button>
+                </div>
+            </div>
+            <div class="summary-container">
+                <div class="summary-header">
+                    <h3>Appointment Summary</h3>
+                </div>
+                <div class="summary-body">
+                        <div class="material-symbols-outlined">stethoscope</div>
+                        <div>
+                            <p>Department</p>
+                            <p>Neurology</p>
+                        </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
