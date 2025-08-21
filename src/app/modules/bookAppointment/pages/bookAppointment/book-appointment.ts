@@ -58,9 +58,23 @@ export class BookAppointment {
     { id: "oncology", name: "Oncology", icon: "🎗️" },
   ]
 
+  hospitals = [
+    { id: "general", name: "City General Hospital", location: "Downtown" },
+    { id: "mercy", name: "Mercy Medical Center", location: "Westside" },
+    { id: "regional", name: "Regional Health Center", location: "Northside" },
+    { id: "university", name: "University Hospital", location: "Campus" },
+  ]
+
+  doctors = [
+    { id: "smith", name: "Dr. Sarah Smith", specialty: "Cardiology" },
+    { id: "johnson", name: "Dr. Michael Johnson", specialty: "Dermatology" },
+    { id: "williams", name: "Dr. Emily Williams", specialty: "Pediatrics" },
+    { id: "brown", name: "Dr. David Brown", specialty: "Orthopedics" },
+  ]
+
+
   goNext() {
     this.currentStep < this.steps.length ? this.currentStep++ : ''
-    console.log(this.currentStep)
   }
 
   goBack() {

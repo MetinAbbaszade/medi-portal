@@ -151,25 +151,77 @@
                     .data-selection-wrapper {
                         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
                         border: 2px solid #d1d5db;
-                        width: calc(50% - 20px);
+                        width: 100%;
                         height: 200px;
                         border-radius: 15px;
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        justify-content: center;
-                        row-gap: 2rem;
                         background-color: #fff;
+                        transition: border-color 0.25s ease-in;
+                        display: flex;
+                        align-items: center;
+                        padding: 2rem;
+                        column-gap: 10px;
 
-                        >div:first-of-type {
-                            font-size: 2rem;
+
+                        &.department-wrapper {
+                            display: flex;
+                            row-gap: 0.5rem;
+                            width: calc(50% - 20px);
+                            align-items: center;
+                            row-gap: 2rem;
+                            justify-content: center;
+                            flex-direction: column;
+
+                            >div:first-of-type {
+                                font-size: 2rem;
+                            }
+
+                            >div:last-of-type {
+                                font-size: 1.3rem;
+                                font-weight: bold;
+                                color: #374151;
+                            }
                         }
 
-                        >div:last-of-type {
-                            font-size: 1.3rem;
-                            font-weight: bold;
-                            color: #374151;
+                        >.material-symbols-outlined {
+                            font-size: 3rem;
+                            color: #8acfef;
                         }
+
+                        >.data {
+                            >div:first-of-type {
+                                font-size: 17px;
+                                font-weight: bold;
+                                color: #374151;
+                            }
+
+                            >div:last-of-type {
+                                display: flex;
+                                align-items: center;
+                                column-gap: 2px;
+
+                                >.material-symbols-outlined{
+                                    margin: 0;
+                                }
+                                >div {
+                                    font-size: 16px;
+                                    color: #374151;
+                                }
+                            }
+
+                            * {
+                                text-align: start;
+                                margin: 5px;
+                            }
+                        }
+
+                        &:hover {
+                            border-color: #c6e7f8;
+                        }
+                    }
+
+                    .data-selection-wrapper.selected {
+                        border-color: #8acfef;
+                        background-color: #f5f9fb;
                     }
                 }
 
