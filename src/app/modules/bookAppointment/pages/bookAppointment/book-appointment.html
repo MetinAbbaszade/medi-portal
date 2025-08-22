@@ -25,7 +25,7 @@
         <div class="form-container">
             <div class="data-container">
                 <ng-container *ngIf="currentStep === 1">
-                    <form [formGroup]="form">
+                    <form [formGroup]="form" class="department-form">
                         <div class="data-header">
                             <h2 class="header-text">Department</h2>
                             <p class="header-subtitle">Choose the medical department you need</p>
@@ -42,7 +42,7 @@
                     </form>
                 </ng-container>
                 <ng-container *ngIf="currentStep === 2">
-                    <form [formGroup]="form">
+                    <form [formGroup]="form" class="hospital-form">
                         <div class="data-header">
                             <h2 class="header-text">Hospital</h2>
                             <p class="header-subtitle">Choose the medical hospital you need</p>
@@ -69,7 +69,7 @@
                     </form>
                 </ng-container>
                 <ng-container *ngIf="currentStep===3">
-                    <form [formGroup]="form">
+                    <form [formGroup]="form" class="doctor-form">
                         <div class="data-header">
                             <h2 class="header-text">Doctors</h2>
                             <p class="header-subtitle">Choose the doctor you need</p>
@@ -119,6 +119,7 @@
                         [disabled]="!ifSelected(currentStep)">
                         Next Step
                     </button>
+                    <button *ngIf="currentStep===steps.length" (click)="submitAppointment()">Submit</button>
                 </div>
             </div>
             <div class="summary-container">

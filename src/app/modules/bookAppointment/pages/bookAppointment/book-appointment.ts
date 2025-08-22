@@ -198,4 +198,8 @@ export class BookAppointment {
     const step = this.steps.find((step) => step.number === id);
     return step ? this.form.get(step.code)?.value : null;
   }
+
+  submitAppointment() {
+    console.log(this.form.value)
+  }
 }

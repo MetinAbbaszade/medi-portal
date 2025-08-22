@@ -204,6 +204,12 @@
                     }
                 }
 
+                >form.doctor-form {
+                    .data-selection .data-selection-wrapper {
+                        height: 100px;
+                    }
+                }
+
                 .data-header {
                     margin: 10px 0;
                     display: flex;
