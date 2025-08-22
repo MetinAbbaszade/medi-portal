@@ -63,7 +63,7 @@
                         </div>
                     </form>
                 </ng-container>
-                <ng-container *ngIf=" currentStep===3">
+                <ng-container *ngIf="currentStep===3">
                     <form [formGroup]="form">
                         <div class="data-header">
                             <h2 class="header-text">Doctors</h2>
@@ -73,15 +73,44 @@
                             <button class="data-selection-wrapper" *ngFor="let doctor of doctors"
                                 [class.selected]="form.get('doctor')!.value.id === doctor.id"
                                 (click)="form.get('doctor')?.setValue(doctor)">
-                                <div>{{ doctor.name }}</div>
-                                <div>{{ doctor.specialty }}</div>
+                                <div class="icon-wrapper">
+                                    <div class="material-symbols-outlined">person</div>
+                                </div>
+                                <div class="data">
+                                    <div>{{ doctor.name }}</div>
+                                    <div>{{ doctor.specialty }}</div>
+                                </div>
                             </button>
                         </div>
                     </form>
                 </ng-container>
+                <ng-container *ngIf="currentStep===4">
+                    <form [formGroup]="form" class="date-form">
+                        <div class="data-header">
+                            <h2 class="header-text">Date & Time</h2>
+                            <p class="header-subtitle">Choose your appointment date and time</p>
+                        </div>
+                        <div class="data-selection">
+                            <div>
+                                <label for="">Select Date</label>
+                                <input type="date" matInput formControlName="date">
+                            </div>
+                            <div>
+                                <div>Available Time Slots</div>
+                                <div>
+                                    <button *ngFor="let item of timeSlots" (click)="form.get('time')?.setValue(item)"
+                                        [class.selected]="this.form.get('time')!.value === item">
+                                        <span class="material-symbols-outlined">alarm_on</span>
+                                        <span>{{item}}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </ng-container>
                 <div class="button-wrapper">
-                    <button mat-button (click)="goBack()" [disabled]="currentStep === 1">Back</button>
-                    <button class="next-btn" *ngIf="currentStep < steps.length" (click)="goNext()">
+                    <button mat-button (click)="goBack()" [disabled]="currentStep === 1" class="back-btn">Back</button>
+                    <button class="next-btn" *ngIf="currentStep < steps.length" (click)="goNext()" [disabled]="!ifSelected(currentStep)">
                         Next Step
                     </button>
                 </div>
@@ -91,10 +120,13 @@
                     <h3>Appointment Summary</h3>
                 </div>
                 <div class="summary-body">
-                    <div class="material-symbols-outlined">stethoscope</div>
-                    <div>
-                        <p>Department</p>
-                        <p>Neurology</p>
+                    <div class="summary-wrapper" *ngFor="let item of summaryDataWithValue">
+                        <div class="material-symbols-outlined">{{item.icon}}
+                        </div>
+                        <div>
+                            <p>{{item.label}}</p>
+                            <p>{{item.value}}</p>
+                        </div>
                     </div>
                 </div>
             </div>
