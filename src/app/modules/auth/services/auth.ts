@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { url } from '../../../../environments/environment';
-import { finalize, map } from 'rxjs';
+import { map } from 'rxjs';
 import { PatientUser } from '../models';
 
-interface IArray {
+export interface IArray {
   email: string, password: string
 }
 

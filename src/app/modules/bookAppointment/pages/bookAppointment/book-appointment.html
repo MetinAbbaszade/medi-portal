@@ -35,7 +35,7 @@
                                 *ngFor="let department of departments"
                                 [class.selected]="form.get('department')!.value.id === department.id"
                                 (click)="form.get('department')?.setValue(department)">
-                                <div>{{ department.icon }}</div>
+                                <div class="material-symbols-outlined">{{ department.icon }}</div>
                                 <div>{{ department.name }}</div>
                             </button>
                         </div>
@@ -50,9 +50,14 @@
                         <div class="data-selection">
                             <button class="data-selection-wrapper" *ngFor="let hospital of hospitals"
                                 [class.selected]="form.get('hospital')!.value.id === hospital.id"
-                                (click)="form.get('hospital')?.setValue(hospital)">
+                                (click)="form.get('hospital')?.setValue(hospital)" [ngStyle]="{
+                                'background-image': 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + hospital.image + ')',
+       'background-size': 'cover',
+       'background-position': 'center',
+       'background-repeat': 'no-repeat'
+                            }">
                                 <div class="material-symbols-outlined">apartment</div>
-                                <div class="data">
+                                <div class="data hospital-data">
                                     <div>{{ hospital.name }}</div>
                                     <div>
                                         <span class="material-symbols-outlined">location_on</span>
@@ -110,7 +115,8 @@
                 </ng-container>
                 <div class="button-wrapper">
                     <button mat-button (click)="goBack()" [disabled]="currentStep === 1" class="back-btn">Back</button>
-                    <button class="next-btn" *ngIf="currentStep < steps.length" (click)="goNext()" [disabled]="!ifSelected(currentStep)">
+                    <button class="next-btn" *ngIf="currentStep < steps.length" (click)="goNext()"
+                        [disabled]="!ifSelected(currentStep)">
                         Next Step
                     </button>
                 </div>

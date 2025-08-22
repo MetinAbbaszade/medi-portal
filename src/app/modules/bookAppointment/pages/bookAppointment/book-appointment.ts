@@ -3,10 +3,12 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatInputModule } from "@angular/material/input";
+import { AppointmentService, IDoctor } from '../../services/appointment.service';
+import { IHospital } from '../../../hospital/modules/data';
 
-interface Department { id: number; name: string; icon?: string; }
-interface Hospital { id: number; name: string; location: string; }
-interface Doctor { id: number; name: string; specialty: string; }
+interface Department { id: string; name: string; icon?: string; }
+interface Hospital { id: string; name: string; location: string; image: string; }
+interface Doctor { id: string; name: string; specialty: string; }
 
 type AppointmentFormValue = {
   department: Department | null;
@@ -66,28 +68,10 @@ export class BookAppointment {
     }
   ];
 
-  departments = [
-    { id: "cardiology", name: "Cardiology", icon: "❤️" },
-    { id: "dermatology", name: "Dermatology", icon: "🧴" },
-    { id: "pediatrics", name: "Pediatrics", icon: "👶" },
-    { id: "orthopedics", name: "Orthopedics", icon: "🦴" },
-    { id: "neurology", name: "Neurology", icon: "🧠" },
-    { id: "oncology", name: "Oncology", icon: "🎗️" },
-  ]
+  departments: Department[] = [];
 
-  hospitals = [
-    { id: "general", name: "City General Hospital", location: "Downtown" },
-    { id: "mercy", name: "Mercy Medical Center", location: "Westside" },
-    { id: "regional", name: "Regional Health Center", location: "Northside" },
-    { id: "university", name: "University Hospital", location: "Campus" },
-  ]
-
-  doctors = [
-    { id: "smith", name: "Dr. Sarah Smith", specialty: "Cardiology" },
-    { id: "johnson", name: "Dr. Michael Johnson", specialty: "Dermatology" },
-    { id: "williams", name: "Dr. Emily Williams", specialty: "Pediatrics" },
-    { id: "brown", name: "Dr. David Brown", specialty: "Orthopedics" },
-  ]
+  hospitals: Hospital[] = [];
+  doctors: Doctor[] = [];
 
   timeSlots = [
     "9:00 AM",
@@ -107,7 +91,8 @@ export class BookAppointment {
   summaryData: { key: string; label: string; value: string; icon: string }[] = [];
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private appointmentService: AppointmentService
   ) { }
 
   ngOnInit() {
@@ -119,13 +104,46 @@ export class BookAppointment {
       time: ['', Validators.required]
     });
 
-    this.form.valueChanges.subscribe((event) => this.updateSummary())
+    this.form.valueChanges.subscribe(() => this.updateSummary())
+    this.appointmentService.fetchDepartmentsData()
+      .subscribe((res) => this.departments = res as { id: string; name: string; icon: string }[])
+
+    Object.keys(this.form.controls).forEach(key => {
+      this.form.get(key)?.valueChanges.subscribe(value => {
+        switch (key) {
+          case 'doctor':
+            break;
+
+          case 'hospital':
+            this.appointmentService.fetchDoctorsByHospitalsAndDepartment(value.id, this.form.get('department')?.value.id)
+              .subscribe((res) => {
+                this.doctors = res.map((doctor: IDoctor) => (
+                  {
+                    id: doctor.id,
+                    name: doctor.surname + ' ' + doctor.name,
+                    specialty: doctor.specialization
+                  }
+                ))
+              })
+            break;
+
+          case 'department':
+            this.appointmentService.fetchHospitalsByDepartment(value.id)
+              .subscribe((res) => {
+                this.hospitals = res.map<Hospital>(({ id, name, address, image }: IHospital) => ({
+                  id, name, location: address.city, image
+                }))
+              })
+            break;
+        }
+
+      });
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   updateSummary() {
-
     const raw = this.form.value as AppointmentFormValue;
-
     this.summaryData = Object.entries(raw).map(([key, value]) => {
       let displayName = '';
       let icon = '';
@@ -150,7 +168,6 @@ export class BookAppointment {
         default:
           break;
       }
-
       return { key, label: key[0].toUpperCase() + key.slice(1), value: displayName, icon };
     })
   }
@@ -160,10 +177,12 @@ export class BookAppointment {
   }
   goNext() {
     this.currentStep < this.steps.length ? this.currentStep++ : ''
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   goBack() {
     this.currentStep > 1 ? this.currentStep-- : ''
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   findIcon(name: string) {

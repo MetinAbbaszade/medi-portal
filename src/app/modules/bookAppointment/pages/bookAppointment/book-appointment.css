@@ -233,7 +233,7 @@
                         height: 200px;
                         border-radius: 15px;
                         background-color: #fff;
-                        transition: border-color 0.25s ease-in;
+                        transition: all 0.25s ease-in;
                         display: flex;
                         align-items: center;
                         padding: 2rem;
@@ -279,11 +279,16 @@
                             }
                         }
 
+                        >.data.hospital-data {
+                            color: #fff;
+                        }
+
                         >.data {
+                            color: #374151;
+
                             >div:first-of-type {
                                 font-size: 17px;
                                 font-weight: bold;
-                                color: #374151;
                             }
 
                             >div:last-of-type {
@@ -297,7 +302,6 @@
 
                                 >div {
                                     font-size: 16px;
-                                    color: #374151;
                                 }
                             }
 
@@ -308,13 +312,20 @@
                         }
 
                         &:hover {
-                            border-color: #c6e7f8;
+                            transform: translateY(-10px);
+                            border-color: #8acfef;
+                            outline: 3px solid #cfe8d0;
                         }
                     }
 
                     .data-selection-wrapper.selected {
                         border-color: #8acfef;
                         background-color: #f5f9fb;
+                        outline: 3px solid #cfe8d0;
+
+                        &:hover {
+                            transform: none;
+                        }
                     }
                 }
 
