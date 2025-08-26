@@ -1,5 +1,8 @@
 <div class="navbar-wrapper">
-    <mat-toolbar-row>
+    <mat-toolbar-row class="icon-wrapper">
+        <button mat-icon-button (click)="toggleSidenav()">
+            <mat-icon>menu</mat-icon>
+        </button>
         <a routerLink="/" class="navbar-l">
             <span class="material-icons">local_hospital</span>
             <h1>MediPortal</h1>

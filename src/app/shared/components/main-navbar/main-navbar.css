@@ -12,18 +12,24 @@
     z-index: 1000;
     background-color: #fff;
 
-    .navbar-l {
+    .icon-wrapper {
         display: flex;
         align-items: center;
-        column-gap: 5px;
-        color: #14a4d4;
-        text-transform: uppercase;
-        text-decoration: none;
-        margin-left: 2rem;
 
-        >.material-icons {
-            font-size: 36px;
+        .navbar-l {
+            display: flex;
+            align-items: center;
+            column-gap: 5px;
+            color: #14a4d4;
+            text-transform: uppercase;
+            text-decoration: none;
+            margin-left: 2rem;
+
+            >.material-icons {
+                font-size: 36px;
+            }
         }
+
     }
 
     .navbar-m {

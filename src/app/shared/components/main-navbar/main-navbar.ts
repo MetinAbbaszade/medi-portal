@@ -1,6 +1,6 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, ViewChild } from '@angular/core';
 import { IRoutes } from '../../../app.interface';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule, MatToolbarRow } from "@angular/material/toolbar";
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -11,6 +11,8 @@ import { ILanguage } from './modules/interface';
 import { CommonModule } from '@angular/common';
 import { PatientUser } from '../../../modules/auth/models';
 import { filter } from 'rxjs';
+import { MatButtonModule } from "@angular/material/button";
+import { SideNavService } from '../../../sidenav.service';
 
 @Component({
   standalone: true,
@@ -23,7 +25,8 @@ import { filter } from 'rxjs';
     SharedTranslateModule,
     MatToolbarModule,
     MatMenuModule,
-    CommonModule
+    CommonModule,
+    MatButtonModule
   ],
   templateUrl: './main-navbar.html',
   styleUrl: './main-navbar.css'
@@ -31,17 +34,20 @@ import { filter } from 'rxjs';
 export class MainNavbar {
   activeUrl: string = '';
   constructor(
-    private router: Router
+    private router: Router,
+    public sideNavService: SideNavService
   ) { }
-
+  
+  @ViewChild('sidenav') sidenav!: MatSidenav;
   ngOnInit() {
     this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        this.activeUrl = event.urlAfterRedirects
-      });
+    .pipe(filter(event => event instanceof NavigationEnd))
+    .subscribe((event: NavigationEnd) => {
+      this.activeUrl = event.urlAfterRedirects
+    });
   }
   @Input() changeLang!: (lang: string) => void;
+  @Input() toggleSidenav!: () => void;
   token: PatientUser = JSON.parse(localStorage.getItem('token') || '{}') as PatientUser;
 
   // Uses the 'inject' function to get an instance of the TranslateService.
@@ -64,6 +70,5 @@ export class MainNavbar {
     'az': "Azərbaycanca",
     'en': "English"
   }
-
 
 }
