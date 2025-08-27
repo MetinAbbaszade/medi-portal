@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="header-wrapper">
+        <div class="header-text-wrapper">
+            <p class="header">HealthCare Portal</p>
+            <p class="description">Role-based Navigation</p>
+        </div>
+        <button class="close-btn-wrapper" (click)="closeBtnEvent()">
+            <span class="material-symbols-outlined">
+                close
+            </span>
+        </button>
+    </div>
+    <div class="body">
+        <div class="container" *ngIf="links">
+            <ng-container *ngTemplateOutlet="recursiveListTmpl; context: {items: links, depth: 0}"></ng-container>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="photo-wrapper">
+            <span class="material-symbols-outlined">
+                person
+            </span>
+        </div>
+        <div class="general-info-wrapper">
+            <p class="user-name">John Doe</p>
+            <p class="user-role">Administrator</p>
+        </div>
+    </div>
+</div>
+
+<ng-template #recursiveListTmpl let-items="items" let-depth="depth">
+    <div *ngFor="let link of items">
+        <ng-container *ngIf="link.children">
+            <ng-container *ngTemplateOutlet="singleParent; context: {link: link, depth: depth}"></ng-container>
+        </ng-container>
+        <ng-container *ngIf="!link.children">
+            <ng-container *ngTemplateOutlet="singleItem; context: {link: link, depth: depth}"></ng-container>
+        </ng-container>
+    </div>
+</ng-template>
+
+
+<ng-template #singleItem let-link="link" let-depth="depth">
+    <div>
+        <a mat-button class="menu-link" routerLink="{{link.link}}" routerLinkActive="active">
+            <ng-container *ngIf="link.icon" [ngSwitch]="link.icon.package">
+                <mat-icon *ngSwitchCase="'material'">{{link.icon.name}}</mat-icon>
+                <i *ngSwitchCase="'bootstrap'" [class]="'bi '+ link.icon.name"></i>
+            </ng-container>
+            <span class="module-name" [ngStyle]="{'padding-left': (depth * 15) + 'px'}">
+                {{link.displayName}}
+            </span>
+        </a>
+    </div>
+</ng-template>
+
+<ng-template #singleParent let-link="link" let-depth="depth">
+    <div>
+        <mat-accordion class="accordion">
+            <mat-expansion-panel class="expansion-panel">
+                <mat-expansion-panel-header class="expansion-header">
+                    <mat-panel-title>
+                        <ng-container *ngIf="link.icon" [ngSwitch]="link.icon.package">
+                            <mat-icon *ngSwitchCase="'material'">{{link.icon.name}}</mat-icon>
+                            <i *ngSwitchCase="'bootstrap'" [class]="'bi '+ link.icon.name"></i>
+                        </ng-container>
+                        <span class="module-name" [ngStyle]="{'padding-left': (depth * 15) + 'px'}">
+                            {{link.displayName}}
+                        </span>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-container *ngTemplateOutlet="recursiveListTmpl; context: {items: link.children, depth: depth + 1}">
+                </ng-container>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</ng-template>

@@ -1,27 +1,17 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { PatientUser } from './modules/auth/models';
-
-interface Session {
-    exp: number;
-    user: PatientUser
-}
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
     private tokenSubject$: BehaviorSubject<string | null>;
-    private session!: Session;
+    private session!: PatientUser;
     private sessionStatusSubject: BehaviorSubject<string>;
     private userModules: BehaviorSubject<Array<string>>;
 
-    constructor(
-        private http: HttpClient,
-        private router: Router
-    ) {
+    constructor() {
         const token = this.getToken()
         this.tokenSubject$ = new BehaviorSubject(token)
 
@@ -40,13 +30,18 @@ export class AuthService {
         return localStorage.getItem('token')
     }
 
-    private setSession(session: Session) {
-        this.session = session
+    private setSession(user: PatientUser) {
+        this.session = user;
     }
 
     private getUserModules(): string[] {
-        return this.session?.user?.role?.modules
-            ? this.session.user.role.modules.map((module) => module.name)
+        return this.session?.role?.modules
+            ? this.session.role.modules.map((module) => module.name)
             : [];
+    }
+
+    getUserPermissions(moduleName: string) {
+        return this.session.role?.modules ?
+            this.session.role?.modules.find(m => m.name === moduleName) : []
     }
 }

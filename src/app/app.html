@@ -1,11 +1,10 @@
 <mat-sidenav-container>
-    <mat-sidenav mode="over" opened #sidenav>
-        Salam
+    <mat-sidenav mode="over" #sidenav>
+        <app-menu [closeBtnEvent]="closeBtnEvent.bind(this)"></app-menu>
     </mat-sidenav>
     <mat-sidenav-content class="wrapper">
-        @if(!getHideNavbar){
-        <app-main-navbar [changeLang]="change" [toggleSidenav]="toggleSideNav.bind(this)"></app-main-navbar>
-        }
+        <app-main-navbar *ngIf="!getHideNavbar" [changeLang]="change"
+            [toggleSidenav]="toggleSideNav.bind(this)"></app-main-navbar>
         <div>
             <router-outlet></router-outlet>
         </div>

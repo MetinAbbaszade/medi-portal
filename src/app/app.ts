@@ -6,6 +6,8 @@ import { MainNavbar } from "./shared/components/main-navbar/main-navbar";
 import { TranslateService } from '@ngx-translate/core';
 import { Translation } from './translation';
 import { SideNavService } from './sidenav.service';
+import { Menu } from './menu/menu';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
@@ -15,7 +17,9 @@ import { SideNavService } from './sidenav.service';
     RouterOutlet,
     MatSidenavModule,
     MatIconModule,
-    MainNavbar
+    MainNavbar,
+    Menu,
+    CommonModule
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
@@ -50,7 +54,7 @@ export class App {
     })
   }
 
-  toggleSideNav(){
+  toggleSideNav() {
     this.sidenav.toggle()
   }
 
@@ -63,5 +67,9 @@ export class App {
     const hiddenRoutes = ['/login', '/signup', '/auth/login', '/auth/signup', '/page-not-found', '/profile'];
     const url = this.router.url.split('?')[0]
     return hiddenRoutes.includes(url)
+  }
+
+  closeBtnEvent() {
+    this.sidenav.close()
   }
 }

@@ -13,6 +13,7 @@ import { PatientUser } from '../../../modules/auth/models';
 import { filter } from 'rxjs';
 import { MatButtonModule } from "@angular/material/button";
 import { SideNavService } from '../../../sidenav.service';
+import { PermittedIfDirective } from "../../../directives/permitted-if.directive";
 
 @Component({
   standalone: true,
@@ -26,8 +27,9 @@ import { SideNavService } from '../../../sidenav.service';
     MatToolbarModule,
     MatMenuModule,
     CommonModule,
-    MatButtonModule
-  ],
+    MatButtonModule,
+    PermittedIfDirective
+],
   templateUrl: './main-navbar.html',
   styleUrl: './main-navbar.css'
 })
