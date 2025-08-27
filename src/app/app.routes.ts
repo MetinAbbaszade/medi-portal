@@ -13,7 +13,7 @@ export const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'hospital',
+        redirectTo: 'home',
         data: { breadcrumb: 'mediPortal' }
     },
     {

@@ -1,42 +1,28 @@
-<div>
+<div class="container">
     <div class="asistant-header">
         <mat-icon>adb</mat-icon>
         <span>
             {{"Main.assistantHeader" | translate}}
         </span>
     </div>
-    <div class="chat-section">
-        <div class="chat-icon-wrapper">
-            <mat-icon>android</mat-icon>
+    <div class="chat-section" #messageContainer>
+        <div class="message-container">
+            <div class="dialog-wrapper" *ngFor="let message of messages"
+                [ngClass]="message.sender === 'bot' ? 'response' : 'request'">
+                <div class="chat-icon-wrapper">
+                    <mat-icon>{{message.sender === 'bot' ? 'android' : 'person'}}</mat-icon>
+                </div>
+                <mat-card class="chat-content-wrapper mat-elevation-z2">
+                    <span>{{message.text}}</span>
+                </mat-card>
+            </div>
         </div>
-        <mat-card class="chat-content-wrapper mat-elevation-z2">
-            <span>{{"Main.assistantGreeting" | translate}}</span>
-        </mat-card>
     </div>
     <div class="recommendations-wrapper">
-        <div class="recommendation-card">
-            <mat-icon>psychology_alt</mat-icon>
-            <span>{{"Main.recommendations" | translate}}</span>
-        </div>
-        <div class="recommendation-card">
-            <mat-icon>psychology_alt</mat-icon>
-            <span>{{"Main.recommendations" | translate}}</span>
-        </div>
-        <div class="recommendation-card">
-            <mat-icon>psychology_alt</mat-icon>
-            <span>{{"Main.recommendations" | translate}}</span>
-        </div>
-        <div class="recommendation-card">
-            <mat-icon>psychology_alt</mat-icon>
-            <span>{{"Main.recommendations" | translate}}</span>
-        </div>
-        <div class="recommendation-card">
-            <mat-icon>psychology_alt</mat-icon>
-            <span>{{"Main.recommendations" | translate}}</span>
-        </div>
-        <div class="recommendation-card">
-            <mat-icon>psychology_alt</mat-icon>
-            <span>{{"Main.recommendations" | translate}}</span>
-        </div>
+        <button class="recommendation-card" *ngFor="let recommendation of recommendations"
+            (click)="onSendMessage(recommendation.label)">
+            <mat-icon>{{recommendation.icon}}</mat-icon>
+            <span>{{recommendation.label}}</span>
+        </button>
     </div>
 </div>

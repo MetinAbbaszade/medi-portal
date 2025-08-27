@@ -46,6 +46,16 @@
         flex: 1;
         overflow-y: auto;
 
+
+        ::ng-deep .mat-expansion-panel-header:hover {
+            background-color: #2463eb !important;
+            /* override Material's hover background */
+        }
+
+        ::ng-deep .mat-expansion-panel-header:hover .mat-expansion-panel-header-title {
+            color: #fff !important;
+        }
+
         >.container {
             display: flex;
             flex-direction: column;
@@ -67,7 +77,7 @@
                 background-color: #2463eb;
             }
 
-            &:hover {
+            &:not(.active):hover {
                 background-color: #3c82f6;
                 color: #fff;
             }
@@ -128,9 +138,4 @@
             }
         }
     }
-}
-
-::ng-deep .mat-expansion-panel-header:hover {
-    background-color: #3c82f6 !important;
-    color: #fff !important;
 }

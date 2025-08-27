@@ -1,6 +1,6 @@
 export default {
     Hospital: {
-        displayName: 'Hospital',
+        displayName: 'Home',
         children: [
             {
                 link: '/',
@@ -24,9 +24,5 @@ export default {
                 displayName: 'sdf'
             },
         ]
-    },
-    Hospi: {
-        link: 'hospita',
-        displayName: 'Hospital',
     }
 }

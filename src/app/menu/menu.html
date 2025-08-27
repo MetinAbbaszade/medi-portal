@@ -58,8 +58,8 @@
     <div>
         <mat-accordion class="accordion">
             <mat-expansion-panel class="expansion-panel">
-                <mat-expansion-panel-header class="expansion-header">
-                    <mat-panel-title>
+                <mat-expansion-panel-header class="expansion-header" style="color: white;">
+                    <mat-panel-title class="mat-expansion-panel-header-title">
                         <ng-container *ngIf="link.icon" [ngSwitch]="link.icon.package">
                             <mat-icon *ngSwitchCase="'material'">{{link.icon.name}}</mat-icon>
                             <i *ngSwitchCase="'bootstrap'" [class]="'bi '+ link.icon.name"></i>
