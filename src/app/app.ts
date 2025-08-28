@@ -64,7 +64,7 @@ export class App {
   }
 
   get getHideNavbar() {
-    const hiddenRoutes = ['/login', '/signup', '/auth/login', '/auth/signup', '/page-not-found', '/profile'];
+    const hiddenRoutes = ['/login', '/signup', '/auth/login', '/auth/signup', '/page-not-found'];
     const url = this.router.url.split('?')[0]
     return hiddenRoutes.includes(url)
   }

@@ -1,45 +1,206 @@
-<div class="wrapper">
-    <div class="profile-container">
-        <!-- Profile Card -->
-        <div>
-            <div class="profile-card">
-                <img src="https://via.placeholder.com/120" alt="User Photo">
-                <h2>John Doe</h2>
-                <p>Email: john@example.com</p>
-                <p>Phone: +994 50 123 4567</p>
-                <button class="edit-btn">Edit Profile</button>
-            </div>
+<div class="container">
+    <div class="section-wrapper navigation-wrapper ">
+        <div class="navigation-context">
+            <h4 class="header">Navigation</h4>
+        </div>
+    </div>
+    <div class="information-wrapper">
+        <div class="section-wrapper user-details-container">
+            <div class="details-wrapper">
+                <div class="user-details">
+                    <div class="user-photo-wrapper"></div>
+                    <div class="user-detail-wrapper">
+                        <div class="user-header">
+                            <h3 class="user-name">Dr. Metin Abbaszade</h3>
+                            <p class="user-role">Doctor</p>
+                        </div>
 
-            <!-- Edit Form -->
-            <form class="edit-form">
-                <label>Name</label>
-                <input type="text" value="John Doe">
-                <label>Email</label>
-                <input type="email" value="john@example.com">
-                <label>Phone</label>
-                <input type="text" value="+994 50 123 4567">
-                <button type="submit" class="save-btn">Save Changes</button>
-            </form>
+                        <p class="user-department">Cardiology</p>
+                        <p class="user-specialization">Cardiovascular Medicine</p>
+
+                        <div class="user-contact">
+                            <div class="contact-item">
+                                <span class="material-symbols-outlined">
+                                    mail
+                                </span>
+                                <p class="contact-text">sarah.johnson@hospital.com</p>
+                            </div>
+                            <div class="contact-item">
+                                <span class="material-symbols-outlined">
+                                    call
+                                </span>
+                                <p class="contact-text">+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="edit-btn">
+                    <button>
+                        <span class="material-symbols-outlined">
+                            edit_document
+                        </span>
+                        <p>Edit Profile</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="section-wrapper switcher-container">
+            <div class="wrapper">
+                <p class="header">Switch Role View</p>
+                <p class="subtitle">View the portal from different user perspectives</p>
+                <div class="btn-container">
+                    <button class="selected">Patient</button>
+                    <button>Doctor</button>
+                    <button>Admin</button>
+                </div>
+            </div>
+        </div>
+        <div class="general-container">
+            <div class="section-wrapper appointment-wrapper">
+                <div class="header">
+                    <span class="material-symbols-outlined">
+                        calendar_today
+                    </span>
+                    <p>Upcoming Appointments</p>
+                </div>
+                <div class="body">
+                    <div class="card appointment-card">
+                        <div class="information-section">
+                            <p class="header">John Smith</p>
+                            <div class="time-wrapper">
+                                <div>
+                                    <span class="material-symbols-outlined">
+                                        calendar_today
+                                    </span>
+                                    <p>2024-01-15</p>
+                                </div>
+                                <div>
+                                    <span class="material-symbols-outlined">
+                                        timer
+                                    </span>
+                                    <p>09:00 AM</p>
+                                </div>
+                            </div>
+                            <p class="type">Consultation</p>
+                        </div>
+                        <div class="status">
+                            <div>confirmed</div>
+                        </div>
+                    </div>
+                    <div class="card appointment-card">
+                        <div class="information-section">
+                            <p class="header">John Smith</p>
+                            <div class="time-wrapper">
+                                <div>
+                                    <span class="material-symbols-outlined">
+                                        calendar_today
+                                    </span>
+                                    <p>2024-01-15</p>
+                                </div>
+                                <div>
+                                    <span class="material-symbols-outlined">
+                                        timer
+                                    </span>
+                                    <p>09:00 AM</p>
+                                </div>
+                            </div>
+                            <p class="type">Consultation</p>
+                        </div>
+                        <div class="status">
+                            <div>confirmed</div>
+                        </div>
+                    </div>
+                    <div class="card appointment-card">
+                        <div class="information-section">
+                            <p class="header">John Smith</p>
+                            <div class="time-wrapper">
+                                <div>
+                                    <span class="material-symbols-outlined">
+                                        calendar_today
+                                    </span>
+                                    <p>2024-01-15</p>
+                                </div>
+                                <div>
+                                    <span class="material-symbols-outlined">
+                                        timer
+                                    </span>
+                                    <p>09:00 AM</p>
+                                </div>
+                            </div>
+                            <p class="type">Consultation</p>
+                        </div>
+                        <div class="status">
+                            <div>confirmed</div>
+                        </div>
+                    </div>
+                    <div class="card appointment-card">
+                        <div class="information-section">
+                            <p class="header">John Smith</p>
+                            <div class="time-wrapper">
+                                <div>
+                                    <span class="material-symbols-outlined">
+                                        calendar_today
+                                    </span>
+                                    <p>2024-01-15</p>
+                                </div>
+                                <div>
+                                    <span class="material-symbols-outlined">
+                                        timer
+                                    </span>
+                                    <p>09:00 AM</p>
+                                </div>
+                            </div>
+                            <p class="type">Consultation</p>
+                        </div>
+                        <div class="status">
+                            <div>confirmed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-wrapper notification-wrapper">
+                <div class="header">
+                    <span class="material-symbols-outlined">
+                        notifications
+                    </span>
+                    <p>Notifications</p>
+                </div>
+                <div class="body">
+                    <div class="card notification">
+                        <p>Patient Jogn Smith has a follow up appointment tomorrow</p>
+                        <p>2 hours ago</p>
+                    </div>
+                    <div class="card notification">
+                        <p>Patient Jogn Smith has a follow up appointment tomorrow</p>
+                        <p>2 hours ago</p>
+                    </div>
+                    <div class="card notification">
+                        <p>Patient Jogn Smith has a follow up appointment tomorrow</p>
+                        <p>2 hours ago</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Appointments -->
-        <div class="appointments">
-            <h3>My Appointments</h3>
-            <div class="appointment-card">
-                <div>
-                    <strong>City Hospital</strong><br>
-                    Date: 2025-08-15<br>
-                    Doctor: Dr. Aliyev
-                </div>
-                <span style="color: green; font-weight: bold;">Upcoming</span>
+        <div class="section-wrapper general-information">
+            <div class="header">
+                <span class="material-symbols-outlined">person</span>
+                <p>Personal Information</p>
             </div>
-            <div class="appointment-card">
+            <div class="information">
                 <div>
-                    <strong>Medical Center Baku</strong><br>
-                    Date: 2025-07-20<br>
-                    Doctor: Dr. Mammadova
+                    <div class="title">Full Name</div>
+                    <div class="value">Dr. Sarah Johnson</div>
                 </div>
-                <span style="color: gray;">Completed</span>
+                <div>
+                    <div class="title">Phone</div>
+                    <div class="value">+994 55 281 18 08</div>
+                </div>
+                <div>
+                    <div class="title">Email</div>
+                    <div class="value">sarah.johnson@hospital.com</div>
+                </div>
             </div>
         </div>
     </div>

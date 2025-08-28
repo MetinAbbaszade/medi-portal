@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-profilecomponent',
-  imports: [],
+  imports: [MatButton],
   templateUrl: './profilecomponent.html',
   styleUrl: './profilecomponent.css'
 })
