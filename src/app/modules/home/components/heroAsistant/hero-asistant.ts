@@ -1,4 +1,12 @@
-import { ChangeDetectorRef, Component, ElementRef, inject, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  AfterViewChecked,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  ViewChild,
+  inject
+} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCard } from "@angular/material/card";
 import { SharedTranslateModule } from '../../../../shared/modules/shared-translate.module';
@@ -7,68 +15,61 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-hero-asistant',
-  imports: [
-    MatIconModule,
-    MatCard,
-    SharedTranslateModule,
-    CommonModule
-  ],
+  standalone: true,
+  imports: [MatIconModule, MatCard, SharedTranslateModule, CommonModule],
   templateUrl: './hero-asistant.html',
-  styleUrl: './hero-asistant.css'
+  styleUrls: ['./hero-asistant.css']
 })
-export class HeroAsistant {
+export class HeroAsistant implements AfterViewInit {
   constructor(private cdRef: ChangeDetectorRef) { }
-  // @ViewChild('messageContainer') private messageContainer!: ElementRef;
   public translate = inject(TranslateService);
+  loading: boolean = false;
+
+  @ViewChild('messageContainer') private messageContainer!: ElementRef<HTMLDivElement>;
+  @ViewChild('bottom') private bottom!: ElementRef<HTMLDivElement>;
 
   recommendations = [
-    {
-      icon: "psychology_alt",
-      label: "recommendations"
-    },
-    {
-      icon: "favorite",
-      label: "favorites"
-    },
-    {
-      icon: "star",
-      label: "topRated"
-    },
-    {
-      icon: "history",
-      label: "recent"
-    }
+    { icon: "psychology_alt", label: "recommendations" },
+    { icon: "favorite", label: "favorites" },
+    { icon: "star", label: "topRated" },
+    { icon: "history", label: "recent" }
   ];
-
 
   messages: { text: string; sender: 'user' | 'bot' }[] = [
-    {
-      text: 'Hello! I am the MediPortal assistant. How can I help you?',
-      sender: 'bot'
-    }
+    { text: 'Hello! I am the MediPortal assistant. How can I help you?', sender: 'bot' }
   ];
 
-  onSendMessage(message: string) {
-    console.log("hello")
-    this.messages.push({
-      text: `Can you give me information about ${message}`,
-      sender: 'user'
-    })
-    this.cdRef.detectChanges()
-    // this.scrollToBottom();
-    setTimeout(() => {
-      this.messages.push({
-        text: 'Hello',
-        sender: 'bot'
-      })
-      this.cdRef.detectChanges()
-      // this.scrollToBottom();
-    }, 200);
+
+  ngAfterViewInit() {
+    this.scrollToBottom(false);
   }
 
-  // private scrollToBottom(): void {
-  //   try {
-  //     this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;
-  //   } catch (err) { }
-  // }
+
+  onSendMessage(message: string) {
+    this.messages.push({ text: `Can you give me information about ${message}`, sender: 'user' });
+    this.loading = true;
+    this.handleChange();
+
+    setTimeout(() => {
+      this.messages.push({ text: 'Here is some info about ' + message, sender: 'bot' });
+      this.handleChange();
+      this.loading = false;
+    }, 3000);
+  }
+
+  trackByIndex(i: number) { return i; }
+
+  private scrollToBottom(smooth = true) {
+    try {
+      this.bottom?.nativeElement.scrollIntoView({
+        behavior: smooth ? 'smooth' : 'auto',
+        block: 'end'
+      });
+    } catch { }
+  }
+
+  handleChange() {
+    this.cdRef.detectChanges();
+    this.scrollToBottom();
+  }
 }
