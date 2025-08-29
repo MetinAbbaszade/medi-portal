@@ -25,7 +25,7 @@
                 }
             }
 
-            .footer-description{
+            .footer-description {
                 font-size: 15px;
                 letter-spacing: 1px;
             }
@@ -59,12 +59,26 @@
                         align-items: center;
                         font-size: 16px;
 
-                        mat-icon {
-                            color: #14a4d4;
-                        }
+                        a {
+                            text-decoration: none;
+                            display: flex;
+                            align-items: center;
 
-                        span {
-                            color: #c1c1c1;
+                            &:hover {
+                                cursor: pointer;
+
+                                span {
+                                    color: #fff;
+                                }
+                            }
+
+                            mat-icon {
+                                color: #14a4d4;
+                            }
+
+                            span {
+                                color: #c1c1c1;
+                            }
                         }
                     }
                 }

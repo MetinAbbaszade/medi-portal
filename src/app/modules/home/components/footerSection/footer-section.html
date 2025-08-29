@@ -32,10 +32,12 @@
                 <ul>
                     @for(item of quickLinks; track $index){
                     <li>
-                        <mat-icon>keyboard_arrow_right</mat-icon>
-                        <span>
-                            {{'Main.'+item.data | translate}}
-                        </span>
+                        <a [routerLink]="item.href">
+                            <mat-icon>keyboard_arrow_right</mat-icon>
+                            <span>
+                                {{'Main.'+item.label | translate}}
+                            </span>
+                        </a>
                     </li>
                     }
                 </ul>
@@ -52,10 +54,12 @@
                 <ul>
                     @for(items of services; track $index){
                     <li>
-                        <mat-icon>keyboard_arrow_right</mat-icon>
-                        <span>
-                            {{'Main.'+items.label | translate}}
-                        </span>
+                        <a [routerLink]="items.href">
+                            <mat-icon>keyboard_arrow_right</mat-icon>
+                            <span>
+                                {{'Main.'+items.label | translate}}
+                            </span>
+                        </a>
                     </li>
                     }
                 </ul>
