@@ -68,10 +68,10 @@ export class AuthComponent implements OnInit {
   }
 
   login() {
-    this.AuthService.fetchDatas(this.loginForm.value)
+    this.AuthService.login(this.loginForm.value)
       .subscribe(
         (res) => {
-          if (res.length === 0) {
+          if (!res) {
             Swal.fire({
               icon: 'error',
               title: 'Error!',
@@ -80,15 +80,13 @@ export class AuthComponent implements OnInit {
             });
             this.loginForm.reset()
           } else {
-            localStorage.setItem('token', JSON.stringify(res[0]))
+            localStorage.setItem('token', JSON.stringify(res))
             Swal.fire({
               icon: 'success',
               title: 'Success!',
               text: 'Welcome back!',
               confirmButtonText: 'OK'
             })
-
-
             this.router.navigate([this.redirectTo]);
           }
         }

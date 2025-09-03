@@ -12,10 +12,14 @@ export interface IArray {
   providedIn: 'root'
 })
 export class AuthService {
-  baseUrl = url.baseUrl + "users"
+  baseUrl = url.baseUrl + "api/auth"
   constructor(
     private http: HttpClient
   ) { }
+
+  login(credentials: any) {
+    return this.http.post(this.baseUrl + '/login', credentials)
+  }
 
   fetchDatas(credentials: IArray) {
     return this.http.get<IArray[]>(this.baseUrl).pipe(

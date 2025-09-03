@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { PatientUser } from './modules/auth/models';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    private tokenSubject$: BehaviorSubject<string | null>;
+    private tokenSubject$: BehaviorSubject<PatientUser | null>;
     private session!: PatientUser;
     private sessionStatusSubject: BehaviorSubject<string>;
     private userModules: BehaviorSubject<Array<string>>;
 
     constructor() {
-        const token = this.getToken()
-        this.tokenSubject$ = new BehaviorSubject(token)
+        const token = this.getToken();
+        this.tokenSubject$ = new BehaviorSubject(token);
 
         if (token) {
-            this.setSession(JSON.parse(token))
+            this.setSession(token);
             this.sessionStatusSubject = new BehaviorSubject('active');
             this.userModules = new BehaviorSubject(this.getUserModules());
         } else {
@@ -25,9 +26,16 @@ export class AuthService {
         }
     }
 
-
-    private getToken() {
-        return localStorage.getItem('token')
+    private getToken(): PatientUser | null {
+        const codedToken = localStorage.getItem('token');
+        if (codedToken) {
+            try {
+                return jwtDecode(codedToken) as PatientUser;
+            } catch (error) {
+                console.log('Invalid token:', error);
+            }
+        }
+        return null;
     }
 
     private setSession(user: PatientUser) {
@@ -41,7 +49,7 @@ export class AuthService {
     }
 
     getUserPermissions(moduleName: string) {
-        return this.session.role?.modules ?
-            this.session.role?.modules.find(m => m.name === moduleName) : []
+        const module = this.session?.role?.modules?.find(m => m.name === moduleName);
+        return module?.permissions ?? [];
     }
 }
