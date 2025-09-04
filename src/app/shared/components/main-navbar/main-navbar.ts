@@ -14,6 +14,7 @@ import { filter } from 'rxjs';
 import { MatButtonModule } from "@angular/material/button";
 import { SideNavService } from '../../../sidenav.service';
 import { PermittedIfDirective } from "../../../directives/permitted-if.directive";
+import { AuthService } from '../../../auth.service';
 
 @Component({
   standalone: true,
@@ -35,9 +36,11 @@ import { PermittedIfDirective } from "../../../directives/permitted-if.directive
 })
 export class MainNavbar {
   activeUrl: string = '';
+  token!: PatientUser | null;
   constructor(
     private router: Router,
-    public sideNavService: SideNavService
+    public sideNavService: SideNavService,
+    public AuthService: AuthService
   ) { }
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
@@ -47,10 +50,13 @@ export class MainNavbar {
       .subscribe((event: NavigationEnd) => {
         this.activeUrl = event.urlAfterRedirects
       });
+
+    this.token = this.AuthService.getToken()
+
+
   }
   @Input() changeLang!: (lang: string) => void;
   @Input() toggleSidenav!: () => void;
-  token: PatientUser = JSON.parse(localStorage.getItem('token') || '{}') as PatientUser;
 
   // Uses the 'inject' function to get an instance of the TranslateService.
   public translate = inject(TranslateService);

@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { url } from '../../../../environments/environment';
-import { map } from 'rxjs';
+import { map, Observable, reduce } from 'rxjs';
 import { PatientUser } from '../models';
+import { IResponse } from '../pages/login/auth';
 
 export interface IArray {
   email: string, password: string
@@ -17,8 +18,12 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
-  login(credentials: any) {
-    return this.http.post(this.baseUrl + '/login', credentials)
+  login(credentials: any): Observable<IResponse> {
+    return this.http.post<IResponse>(this.baseUrl + '/login', credentials)
+  }
+
+  register(credentials: any): Observable<IResponse> {
+    return this.http.post<IResponse>(this.baseUrl + '/register', credentials);
   }
 
   fetchDatas(credentials: IArray) {

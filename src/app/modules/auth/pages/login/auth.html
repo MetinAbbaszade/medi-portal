@@ -7,16 +7,16 @@
                     <div class="input-group">
                         <div class="input-field">
                             <i class="fas fa-user"></i>
-                            <input type="text" id="sign-up-fname" formControlName="firstName" />
+                            <input type="text" id="sign-up-fname" formControlName="name" />
                             <label for="sign-up-fname">Ad</label>
-                            <app-form-control-errors [control]="signupForm.get('firstName')"></app-form-control-errors>
+                            <app-form-control-errors [control]="signupForm.get('name')"></app-form-control-errors>
                         </div>
 
                         <div class="input-field">
                             <i class="fas fa-user"></i>
-                            <input type="text" id="sign-up-lname" formControlName="lastName" />
+                            <input type="text" id="sign-up-lname" formControlName="surname" />
                             <label for="sign-up-lname">Soyad</label>
-                            <app-form-control-errors [control]="signupForm.get('lastName')"></app-form-control-errors>
+                            <app-form-control-errors [control]="signupForm.get('surname')"></app-form-control-errors>
                         </div>
                         <div class="input-field">
                             <i class="fas fa-envelope"></i>

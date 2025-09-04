@@ -10,7 +10,10 @@ import { Translation } from '../../../../translation';
 import { AuthService } from '../../services/auth';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
-import { createNewPatientUser, PatientUser } from '../../models';
+
+export interface IResponse {
+  token: string
+}
 
 @Component({
   selector: 'app-auth',
@@ -51,8 +54,8 @@ export class AuthComponent implements OnInit {
     })
 
     this.signupForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
@@ -70,7 +73,7 @@ export class AuthComponent implements OnInit {
   login() {
     this.AuthService.login(this.loginForm.value)
       .subscribe(
-        (res) => {
+        (res: IResponse) => {
           if (!res) {
             Swal.fire({
               icon: 'error',
@@ -80,7 +83,7 @@ export class AuthComponent implements OnInit {
             });
             this.loginForm.reset()
           } else {
-            localStorage.setItem('token', JSON.stringify(res))
+            localStorage.setItem('token', res.token)
             Swal.fire({
               icon: 'success',
               title: 'Success!',
@@ -94,10 +97,9 @@ export class AuthComponent implements OnInit {
   }
 
   signUp() {
-    let newUser = createNewPatientUser(this.signupForm.value)
-    this.AuthService.postData(newUser)
+    this.AuthService.register(this.signupForm.value)
       .subscribe(
-        (res) => {
+        (res: IResponse) => {
           if (!res) {
             Swal.fire({
               icon: 'error',
@@ -106,7 +108,7 @@ export class AuthComponent implements OnInit {
               confirmButtonText: 'OK'
             })
           } else {
-            localStorage.setItem('token', JSON.stringify(res))
+            localStorage.setItem('token', res.token)
             Swal.fire({
               icon: 'success',
               title: 'Success!',

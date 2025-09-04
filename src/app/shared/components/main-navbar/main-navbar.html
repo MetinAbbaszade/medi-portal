@@ -22,8 +22,8 @@
         <a class="profile-section" [routerLink]="'profile'" *ngIf="!getHideNavbar">
             <div class="profile-photo"></div>
             <div class="profile-info">
-                <span class="profile-name">{{token.name}} {{token.surname}}</span>
-                <span class="user-role">{{token.role?.name}}</span>
+                <span class="profile-name">{{token!.name}} {{token!.surname}}</span>
+                <span class="user-role">{{token!.role?.name}}</span>
             </div>
         </a>
         <button *ngIf="getHideNavbar" class="logout-btn" (click)="logoutfunction()">

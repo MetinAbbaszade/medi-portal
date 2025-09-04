@@ -26,7 +26,7 @@ export class AuthService {
         }
     }
 
-    private getToken(): PatientUser | null {
+    public getToken() {
         const codedToken = localStorage.getItem('token');
         if (codedToken) {
             try {
