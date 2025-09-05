@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, filter, Observable, take } from 'rxjs';
 import { PatientUser } from './modules/auth/models';
 import { jwtDecode } from 'jwt-decode';
 
@@ -9,12 +9,17 @@ import { jwtDecode } from 'jwt-decode';
 export class AuthService {
     private tokenSubject$: BehaviorSubject<PatientUser | null>;
     private session!: PatientUser;
+    public token$!: Observable<any>;
     private sessionStatusSubject: BehaviorSubject<string>;
     private userModules: BehaviorSubject<Array<string>>;
 
     constructor() {
         const token = this.getToken();
         this.tokenSubject$ = new BehaviorSubject(token);
+        this.token$ = this.tokenSubject$.pipe(
+            filter((token) => token !== null),
+            take(1)
+        )
 
         if (token) {
             this.setSession(token);

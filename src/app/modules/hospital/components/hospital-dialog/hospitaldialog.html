@@ -19,7 +19,7 @@
             <span class="material-icons">
                 location_on
             </span>
-            <p class="general-location">{{data.address.city}}, {{data.address.country}}</p>
+            <p class="general-location">{{data.adresses[0].city}}, {{data.adresses[0].county}}</p>
         </div>
         <button class="material-icons" (click)="closeDialog()">
             close
@@ -33,7 +33,7 @@
                 <span class="material-icons">{{item.icon}}</span>
                 <div>
                     <span class="info-name">{{item.name}}</span>
-                    <span class="info-data">{{data.capacity[item.value]}}</span>
+                    <span class="info-data">{{data.capacities[0][item.value]}}</span>
                 </div>
             </div>
         </div>

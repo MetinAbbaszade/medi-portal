@@ -235,6 +235,7 @@
 }
 
 .hospital-card {
+    position: relative;
     background-color: #f8f9fa;
     border-radius: 12px;
     overflow: hidden;
@@ -253,7 +254,7 @@
     }
 
     &:hover .card-content {
-        transform: translateY(-213px);
+        transform: translateY(0);
     }
 
     .card-content {
@@ -263,8 +264,11 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-
+        position: absolute;
+        bottom: 0;
+        left: 0;
         transition: transform 0.5s;
+        transform: translateY(100%);
 
         h3 {
             color: #14617b;

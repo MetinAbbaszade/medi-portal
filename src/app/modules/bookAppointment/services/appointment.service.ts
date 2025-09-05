@@ -24,23 +24,23 @@ export interface IDoctor {
     providedIn: 'root'
 })
 export class AppointmentService {
-    private hospitalUrl = url.baseUrl + 'hospitals';
-    private doctorsUrl = url.baseUrl + 'doctors';
-    private departmentsUrl = url.baseUrl + 'departments'
+    private hospitalUrl = url.url + 'hospitals';
+    private doctorsUrl = url.url + 'doctors';
+    private departmentsUrl = url.url + 'departments'
 
 
     constructor(
         private http: HttpClient
     ) { }
 
-    fetchHospitalsByDepartment(department_id: string) {
-        return this.http.get<IHospital[]>(this.hospitalUrl)
-            .pipe(
-                map((res: IHospital[]) =>
-                    res.filter((data: IHospital) => data.departments.find((department) => department.id === department_id))
-                )
-            )
-    }
+    // fetchHospitalsByDepartment(department_id: string) {
+    //     return this.http.get<IHospital[]>(this.hospitalUrl)
+    //         .pipe(
+    //             map((res: IHospital[]) =>
+    //                 res.filter((data: IHospital) => data.departments.find((department) => department.id === department_id))
+    //             )
+    //         )
+    // }
 
     fetchDoctorsByHospitalsAndDepartment(hospital_id: string, department_id: string) {
         return this.http.get<IDoctor[]>(this.doctorsUrl)

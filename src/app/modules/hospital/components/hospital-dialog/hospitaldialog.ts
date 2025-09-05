@@ -17,7 +17,7 @@ export class Hospitaldialog {
     {
       icon: "emergency",
       name: "EmergencyCapacity",
-      value: 'emergencyCapacity' as keyof Capacity
+      value: 'emergency_capacity' as keyof Capacity
     },
     {
       icon: "bed",
@@ -27,7 +27,7 @@ export class Hospitaldialog {
     {
       icon: "single_bed",
       name: "IcuBeds",
-      value: "icuBeds" as keyof Capacity
+      value: "icu_beds" as keyof Capacity
     }
   ];
 
@@ -36,10 +36,6 @@ export class Hospitaldialog {
     private dialogRef: MatDialogRef<Hospitaldialog>,
     private router: Router
   ) { }
-
-  ngOnInit() {
-    console.log(this.data)
-  }
 
   closeDialog() {
     this.dialogRef.close();

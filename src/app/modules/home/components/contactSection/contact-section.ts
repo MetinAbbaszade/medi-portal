@@ -5,6 +5,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedTranslateModule } from '../../../../shared/modules/shared-translate.module';
+import { Home, IContactPayload } from '../../services/home';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contact-section',
@@ -41,7 +43,8 @@ export class ContactSection {
   ]
 
   constructor(
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private homeService: Home
   ) { }
 
   ngOnInit() {
@@ -55,7 +58,24 @@ export class ContactSection {
   }
 
   submitForm() {
-    console.log(this.form.value)
+    this.homeService.contactUs(this.form.value)
+      .subscribe((res) => {
+        if (!res) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'Signup failed',
+            confirmButtonText: 'OK'
+          })
+        } else {
+          Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: 'Welcome back!',
+            confirmButtonText: 'OK'
+          })
+        }
+      })
   }
 
   get name() {

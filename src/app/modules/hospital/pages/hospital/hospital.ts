@@ -57,7 +57,7 @@ export class Hospital {
       this.HospitalService.fetchHospitalData()
     ]).pipe(
       switchMap(([filters, allHospitals]) => {
-        let filtered = [...allHospitals];
+        let filtered = [...allHospitals.hospitals];
 
         if (filters.searchData) {
           filtered = filtered.filter(hospital =>
@@ -95,7 +95,7 @@ export class Hospital {
   fetchData() {
     this.subscriptions.add(
       this.HospitalService.fetchHospitalData().subscribe(res => {
-        this.featuredHospitals = res.slice(0, 3);
+        this.featuredHospitals = res.hospitals;
       })
     );
   }

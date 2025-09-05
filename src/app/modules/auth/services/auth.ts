@@ -25,20 +25,4 @@ export class AuthService {
   register(credentials: any): Observable<IResponse> {
     return this.http.post<IResponse>(this.baseUrl + '/register', credentials);
   }
-
-  fetchDatas(credentials: IArray) {
-    return this.http.get<IArray[]>(this.baseUrl).pipe(
-      map((res: IArray[]) =>
-        res.filter((data: IArray) => data.email === credentials.email && data.password === credentials.password)
-      )
-    );
-  }
-
-  fetchAllDatas() {
-    return this.http.get<IArray[]>(this.baseUrl)
-  }
-
-  postData(data: PatientUser) {
-    return this.http.post<IArray[]>(this.baseUrl, data)
-  }
 }

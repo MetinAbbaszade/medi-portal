@@ -127,14 +127,14 @@ export class BookAppointment {
               })
             break;
 
-          case 'department':
-            this.appointmentService.fetchHospitalsByDepartment(value.id)
-              .subscribe((res) => {
-                this.hospitals = res.map<Hospital>(({ id, name, address, image }: IHospital) => ({
-                  id, name, location: address.city, image
-                }))
-              })
-            break;
+          // case 'department':
+          //   this.appointmentService.fetchHospitalsByDepartment(value.id)
+          //     .subscribe((res) => {
+          //       this.hospitals = res.map<Hospital>(({ id, name, address, image }: IHospital) => ({
+          //         id, name, location: address.city, image
+          //       }))
+          //     })
+          //   break;
         }
 
       });

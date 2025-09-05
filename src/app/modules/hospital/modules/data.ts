@@ -1,12 +1,16 @@
+export interface IRes {
+    hospitals: IHospital[]
+}
+
 export interface IHospital {
     id: string;
     name: string;
     type: string;
     image: string;
     description: string;
-    address: Address;
-    contact: Contact;
-    capacity: Capacity;
+    adresses: Address[];
+    contacts: Contact;
+    capacities: Capacity[];
     departments: Department[];
     specialties: string[];
 }
@@ -16,7 +20,7 @@ export interface Address {
     city: string;
     state: string;
     zip: string;
-    country: string;
+    county: string;
 }
 
 export interface Contact {
@@ -27,12 +31,12 @@ export interface Contact {
 
 export interface Capacity {
     beds: number;
-    icuBeds: number;
-    emergencyCapacity: number;
+    icu_beds: number;
+    emergency_capacity: number;
 }
 
 export interface Department {
-    id: string;
+    icon: string
     name: string;
     head: string;
 }
