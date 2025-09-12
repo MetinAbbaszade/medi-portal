@@ -14,7 +14,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
-import { combineLatest, debounceTime, distinctUntilChanged, filter, Observable, startWith, Subscription, switchMap } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 
 @Component({
@@ -43,58 +43,23 @@ export class Hospital {
     this.fetchData();
 
     this.filterForm = this.fb.group({
-      searchData: [''],
-      speciality: [''],
+      name: [''],
+      specialityId: [''],
       filter: ['']
     })
 
-    this.filteredHospitals$ = combineLatest([
-      this.filterForm.valueChanges.pipe(
-        startWith(this.filterForm.value),
-        debounceTime(300),
-        distinctUntilChanged()
-      ),
-      this.HospitalService.fetchHospitalData()
-    ]).pipe(
-      switchMap(([filters, allHospitals]) => {
-        let filtered = [...allHospitals.hospitals];
+    this.filterForm.valueChanges.subscribe(
+      value => {
+        console.log(value);
+        this.fetchData(value)
+      }
+    )
 
-        if (filters.searchData) {
-          filtered = filtered.filter(hospital =>
-            hospital.name.toLowerCase().includes(filters.searchData.toLowerCase())
-          );
-        }
-
-        if (filters.speciality) {
-          filtered = filtered.filter(hospital =>
-            hospital.specialties.includes(filters.speciality)
-          );
-        }
-
-        if (filters.filter) {
-          filtered.sort((a, b) => {
-            if (filters.filter === 'name-asc') {
-              return a.name.localeCompare(b.name);
-            } else {
-              return b.name.localeCompare(a.name);
-            }
-          });
-        }
-        return [filtered];
-      })
-    );
-
-    this.subscriptions.add(
-      this.filteredHospitals$.subscribe(hospitals => {
-        const searchTerm = this.filterForm.get('searchData')?.value;
-        this.searchResult = searchTerm ? hospitals : [];
-      })
-    );
   }
 
-  fetchData() {
+  fetchData(params = {}) {
     this.subscriptions.add(
-      this.HospitalService.fetchHospitalData().subscribe(res => {
+      this.HospitalService.fetchHospitalData(params).subscribe(res => {
         this.featuredHospitals = res.hospitals;
       })
     );

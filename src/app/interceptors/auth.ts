@@ -11,9 +11,10 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     if (req.headers.get('authorization-method') === 'true') {
         return next(req);
     }
-
     return auth.token$.pipe(
-        map(token => req.clone({ setHeaders: { Authorization: `Bearer ${token}` } })),
+        map(token => {
+            return req.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
+        }),
         concatMap(authReq => next(authReq)),
         catchError((error: any) => {
             console.error('failed with error:', error);

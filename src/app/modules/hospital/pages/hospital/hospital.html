@@ -7,7 +7,7 @@
                 <div class="filter-wrapper">
                     <mat-form-field>
                         <input matInput type="text" placeholder="Search hospitals which you want..."
-                            aria-label="Search hospitals" formControlName="searchData" />
+                            aria-label="Search hospitals" formControlName="name" />
                     </mat-form-field>
 
                     <div *ngIf="searchResult.length" class="search-results">
@@ -31,12 +31,6 @@
                             </div>
                         </div>
                     </div>
-                    @if (filterForm.touched &&!searchResult.length)
-                    {
-                    <div class="search-results">
-                        <div>Not found</div>
-                    </div>
-                    }
                 </div>
                 <button mat-raised-button color="primary" type="submit">Search</button>
             </form>
@@ -62,7 +56,7 @@
     </div>
     }
 
-    <section class="hospital-directory" *ngIf="filteredHospitals$">
+    <section class="hospital-directory">
         <mat-expansion-panel class="filter-wrapper">
             <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -73,7 +67,7 @@
             <form class="filter-sort-bar" [formGroup]="filterForm">
                 <mat-form-field appearance="fill">
                     <mat-label>All Specialities</mat-label>
-                    <mat-select id="filterSpecialty" formControlName="speciality">
+                    <mat-select id="filterSpecialty" formControlName="specialityId">
                         <mat-option value=""></mat-option>
                         <mat-option value="Cardiac Care">Cardiac Care</mat-option>
                         <mat-option value="Cardiac Surgery & Care">Cardiac Surgery & Care</mat-option>
@@ -115,7 +109,7 @@
         </div>
 
         <div class="hospital-list">
-            <div class="hospital-card" *ngFor="let item of filteredHospitals$ | async">
+            <div class="hospital-card" *ngFor="let item of featuredHospitals">
                 <img [src]="item.image" [alt]="item.name">
                 <div class="card-content">
                     <h3>{{item.name}}</h3>
