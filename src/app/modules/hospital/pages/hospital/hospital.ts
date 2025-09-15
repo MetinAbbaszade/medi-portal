@@ -22,7 +22,7 @@ import { Observable, Subscription } from 'rxjs';
   imports: [CommonModule, RouterLink, ReactiveFormsModule, MatIconModule, MatFormFieldModule,
     FormsModule, MatInputModule, MatDividerModule, MatButtonModule, MatExpansionModule, MatSelectModule],
   templateUrl: './hospital.html',
-  styleUrl: './hospital.css',
+  styleUrls: ['./hospital.css'],
   standalone: true
 })
 export class Hospital {
@@ -43,14 +43,13 @@ export class Hospital {
     this.fetchData();
 
     this.filterForm = this.fb.group({
-      name: [''],
-      specialityId: [''],
-      filter: ['']
+      Name: [''],
+      SpecialtyId: [''],
+      Filter: ['']
     })
 
     this.filterForm.valueChanges.subscribe(
       value => {
-        console.log(value);
         this.fetchData(value)
       }
     )
@@ -60,7 +59,7 @@ export class Hospital {
   fetchData(params = {}) {
     this.subscriptions.add(
       this.HospitalService.fetchHospitalData(params).subscribe(res => {
-        this.featuredHospitals = res.hospitals;
+        this.featuredHospitals = res.filteredHospitals;
       })
     );
   }

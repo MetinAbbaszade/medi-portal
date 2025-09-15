@@ -1,5 +1,5 @@
 export interface IRes {
-    hospitals: IHospital[]
+    filteredHospitals: IHospital[]
 }
 
 export interface IHospital {

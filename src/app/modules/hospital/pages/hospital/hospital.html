@@ -7,10 +7,10 @@
                 <div class="filter-wrapper">
                     <mat-form-field>
                         <input matInput type="text" placeholder="Search hospitals which you want..."
-                            aria-label="Search hospitals" formControlName="name" />
+                            aria-label="Search hospitals" formControlName="Name" />
                     </mat-form-field>
 
-                    <div *ngIf="searchResult.length" class="search-results">
+                    <!-- <div *ngIf="searchResult.length" class="search-results">
                         <div *ngFor="let item of searchResult" class="search-result-wrapper"
                             (click)="viewDetails(item)">
                             <div [ngStyle]="{
@@ -30,15 +30,15 @@
                                 </span>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <button mat-raised-button color="primary" type="submit">Search</button>
             </form>
 
         </div>
     </div>
-    @if(featuredHospitals){
-    <div class="hospital-overview">
+
+    <div class="hospital-overview" *ngIf="featuredHospitals">
         <div class="header">
             <h2>Featured Hospitals</h2>
             <p class="section-subtitle">Trusted healthcare providers with top-rated services</p>
@@ -54,7 +54,6 @@
             </div>
         </div>
     </div>
-    }
 
     <section class="hospital-directory">
         <mat-expansion-panel class="filter-wrapper">
@@ -67,34 +66,21 @@
             <form class="filter-sort-bar" [formGroup]="filterForm">
                 <mat-form-field appearance="fill">
                     <mat-label>All Specialities</mat-label>
-                    <mat-select id="filterSpecialty" formControlName="specialityId">
+                    <mat-select id="filterSpecialty" formControlName="SpecialtyId">
                         <mat-option value=""></mat-option>
                         <mat-option value="Cardiac Care">Cardiac Care</mat-option>
-                        <mat-option value="Cardiac Surgery & Care">Cardiac Surgery & Care</mat-option>
+                        <mat-option value="Emergency & Trauma Services">Emergency & Trauma Services</mat-option>
+                        <mat-option value="General Medicine">General Medicine</mat-option>
                         <mat-option value="Neurology">Neurology</mat-option>
                         <mat-option value="Orthopedic Surgery">Orthopedic Surgery</mat-option>
                         <mat-option value="Pediatric Medicine">Pediatric Medicine</mat-option>
-                        <mat-option value="Emergency & Trauma Services">Emergency & Trauma Services</mat-option>
-                        <mat-option value="Emergency Medicine">Emergency Medicine</mat-option>
-                        <mat-option value="General Medicine">General Medicine</mat-option>
-                        <mat-option value="Family Medicine">Family Medicine</mat-option>
-                        <mat-option value="Maternity & Obstetrics">Maternity & Obstetrics</mat-option>
-                        <mat-option value="Dermatology">Dermatology</mat-option>
-                        <mat-option value="General Surgery">General Surgery</mat-option>
-                        <mat-option value="Ear, Nose & Throat (ENT)">Ear, Nose & Throat (ENT)</mat-option>
-                        <mat-option value="Neurorehabilitation">Neurorehabilitation</mat-option>
-                        <mat-option value="Radiology & Imaging">Radiology & Imaging</mat-option>
-                        <mat-option value="Internal Medicine">Internal Medicine</mat-option>
-                        <mat-option value="Oncology & Cancer Care">Oncology & Cancer Care</mat-option>
-                        <mat-option value="Medical Education & Training">Medical Education & Training</mat-option>
-                        <mat-option value="Critical Care">Critical Care</mat-option>
                     </mat-select>
                 </mat-form-field>
             </form>
             <form [formGroup]="filterForm">
                 <mat-form-field>
                     <mat-label>Sort By</mat-label>
-                    <mat-select id="sortHospitals" formControlName="filter">
+                    <mat-select id="sortHospitals" formControlName="Filter">
                         <mat-option value=""></mat-option>
                         <mat-option value="name-asc">Name (A-Z)</mat-option>
                         <mat-option value="name-desc">Name (Z-A)</mat-option>
