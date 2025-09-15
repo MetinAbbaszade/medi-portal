@@ -10,7 +10,7 @@
                             aria-label="Search hospitals" formControlName="Name" />
                     </mat-form-field>
 
-                    <!-- <div *ngIf="searchResult.length" class="search-results">
+                    <div *ngIf="searchResult.length" class="search-results">
                         <div *ngFor="let item of searchResult" class="search-result-wrapper"
                             (click)="viewDetails(item)">
                             <div [ngStyle]="{
@@ -25,12 +25,12 @@
                                 <span class="search-adress">
                                     <span class="material-icons">location_on</span>
                                     <span>
-                                        {{ item.address.country }}
+                                        {{ item.adresses[0].county }}
                                     </span>
                                 </span>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
                 <button mat-raised-button color="primary" type="submit">Search</button>
             </form>
@@ -95,7 +95,7 @@
         </div>
 
         <div class="hospital-list">
-            <div class="hospital-card" *ngFor="let item of featuredHospitals">
+            <div class="hospital-card" *ngFor="let item of hospitals">
                 <img [src]="item.image" [alt]="item.name">
                 <div class="card-content">
                     <h3>{{item.name}}</h3>

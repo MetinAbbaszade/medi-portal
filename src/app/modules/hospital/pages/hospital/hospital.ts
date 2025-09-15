@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HospitalService } from '../../services/hospital-service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -19,65 +19,80 @@ import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-hospital',
-  imports: [CommonModule, RouterLink, ReactiveFormsModule, MatIconModule, MatFormFieldModule,
-    FormsModule, MatInputModule, MatDividerModule, MatButtonModule, MatExpansionModule, MatSelectModule],
+  imports: [
+    CommonModule,
+    RouterLink,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatExpansionModule,
+    MatSelectModule],
   templateUrl: './hospital.html',
   styleUrls: ['./hospital.css'],
   standalone: true
 })
-export class Hospital {
-  featuredHospitals: IHospital[] | null = null;
-  searchResult: any;
+export class Hospital implements OnInit, OnDestroy {
+  hospitals: IHospital[] = [];
+
+  featuredHospitals: IHospital[] = [];
+
+  searchResult: IHospital[] = [];
   filterForm!: FormGroup;
-  filteredHospitals$!: Observable<IHospital[]>;
-  private subscriptions: Subscription = new Subscription();
+  private subscriptions = new Subscription();
 
   constructor(
-    private HospitalService: HospitalService,
+    private hospitalService: HospitalService,
     private dialog: MatDialog,
     private fb: FormBuilder
   ) { }
 
   ngOnInit() {
-    this.searchResult = [];
-    this.fetchData();
-
     this.filterForm = this.fb.group({
       Name: [''],
       SpecialtyId: [''],
       Filter: ['']
-    })
+    });
 
-    this.filterForm.valueChanges.subscribe(
-      value => {
-        this.fetchData(value)
-      }
-    )
-
+    
+    this.fetchHospitals();
+    this.loadFeaturedHospitals();
+    
+    this.subscriptions.add(
+      this.filterForm.valueChanges.subscribe(value => this.fetchHospitals(value))
+    );
   }
 
-  fetchData(params = {}) {
+  private loadFeaturedHospitals(params = {}) {
     this.subscriptions.add(
-      this.HospitalService.fetchHospitalData(params).subscribe(res => {
-        this.featuredHospitals = res.filteredHospitals;
+      this.hospitalService.fetchHospitalData(params).subscribe(res => {
+        this.featuredHospitals = res.filteredHospitals.slice(0, 3);
+      })
+    );
+  }
+
+
+  fetchHospitals(params: any = {}) {
+    this.subscriptions.add(
+      this.hospitalService.fetchHospitalData(params).subscribe(res => {
+        this.hospitals = res.filteredHospitals;           
+        this.searchResult = params.Name ? res.filteredHospitals.slice(0, 3) : [];
       })
     );
   }
 
   viewDetails(item: IHospital) {
-    this.openDialog(Hospitaldialog, item)
-  }
-
-  openDialog(dialog: ComponentType<any>, data = {}) {
-    this.dialog.open(dialog, {
+    this.dialog.open(Hospitaldialog as ComponentType<any>, {
       minWidth: '40%',
       height: '68%',
-      data
-    })
+      data: item
+    });
   }
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }
 }
-

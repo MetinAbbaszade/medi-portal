@@ -258,6 +258,7 @@
     }
 
     .card-content {
+        width: 100%;
         background-color: #f8f9fa;
         padding: 16px;
         flex: 1;
@@ -332,11 +333,7 @@
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
-    margin-bottom: 2rem;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 20px;
+    max-width: 100%;
 }
 
 .filter-sort-bar input,
