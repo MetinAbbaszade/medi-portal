@@ -2,6 +2,10 @@ export interface IRes {
     filteredHospitals: IHospital[]
 }
 
+export interface IHospitalResponse {
+    hospitals: IHospital[]
+}
+
 export interface IHospital {
     id: string;
     name: string;

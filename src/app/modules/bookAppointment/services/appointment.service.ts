@@ -2,58 +2,38 @@
 import { Injectable } from '@angular/core';
 import { url } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
-import { IHospital } from '../../hospital/modules/data';
-
-export interface IDoctor {
-    id: string;
-    name: string;
-    surname: string;
-    email: string;
-    phone: string;
-    specialization: string;
-    experienceYears: number;
-    rating: number;
-    hospitalId: string;
-    departmentId: string;
-}
-
-
+import { IHospitalResponse } from '../../hospital/modules/data';
+import { IDepartmentResponse } from '../pages/bookAppointment/book-appointment';
+import { ApiResponse, IResponseSchedule } from '../models/doctor.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AppointmentService {
-    private hospitalUrl = url.url + 'hospitals';
-    private doctorsUrl = url.url + 'doctors';
-    private departmentsUrl = url.url + 'departments'
-
+    private baseUrl = url.baseUrl;
 
     constructor(
         private http: HttpClient
     ) { }
 
-    // fetchHospitalsByDepartment(department_id: string) {
-    //     return this.http.get<IHospital[]>(this.hospitalUrl)
-    //         .pipe(
-    //             map((res: IHospital[]) =>
-    //                 res.filter((data: IHospital) => data.departments.find((department) => department.id === department_id))
-    //             )
-    //         )
-    // }
-
-    fetchDoctorsByHospitalsAndDepartment(hospital_id: string, department_id: string) {
-        return this.http.get<IDoctor[]>(this.doctorsUrl)
-            .pipe(
-                map((res: IDoctor[]) => (
-                    res.filter((doctor: IDoctor) => (
-                        doctor.departmentId === department_id && doctor.hospitalId === hospital_id
-                    ))
-                ))
-            )
+    fetchHospitalsByDepartment(department_id: string) {
+        return this.http.get<IHospitalResponse>(this.baseUrl + 'api/hospital/' + department_id)
     }
 
-    fetchDepartmentsData(){
-        return this.http.get(this.departmentsUrl)
+    fetchDoctorsByHospitalsAndDepartment(hospital_id: string, department_id: string) {
+        return this.http.get<ApiResponse>(this.baseUrl + 'api/doctors/' + hospital_id + '/departments/' + department_id + '/doctors')
+    }
+
+    fetchDoctorScheduleByDate(
+        doctor_id: string = "0314a3ec-b146-4cd7-b6bd-31e3536a6e5c",
+        date: string = "2025-09-22"
+    ) {
+        const body = { doctor_id, date };
+        return this.http.post<IResponseSchedule>(this.baseUrl + 'api/doctors/getTimeSlots', body);
+    }
+
+
+    fetchDepartmentsData() {
+        return this.http.get<IDepartmentResponse>(this.baseUrl + 'api/departments')
     }
 }

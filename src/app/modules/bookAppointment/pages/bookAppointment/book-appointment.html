@@ -75,6 +75,7 @@
                             <p class="header-subtitle">Choose the doctor you need</p>
                         </div>
                         <div class="data-selection">
+                            @if(doctors){
                             <button class="data-selection-wrapper" *ngFor="let doctor of doctors"
                                 [class.selected]="form.get('doctor')!.value.id === doctor.id"
                                 (click)="form.get('doctor')?.setValue(doctor)">
@@ -83,9 +84,13 @@
                                 </div>
                                 <div class="data">
                                     <div>{{ doctor.name }}</div>
-                                    <div>{{ doctor.specialty }}</div>
+                                    <div>{{ doctor.specialties[0].name }}</div>
                                 </div>
                             </button>
+                            }
+                            @else {
+                            <div>Doctors not found</div>
+                            }
                         </div>
                     </form>
                 </ng-container>
@@ -98,20 +103,40 @@
                         <div class="data-selection">
                             <div>
                                 <label for="">Select Date</label>
-                                <input type="date" matInput formControlName="date">
+                                <input type="date" matInput formControlName="date" [min]="utc"
+                                    (change)="eventClick($event)" />
                             </div>
-                            <div>
+                            <div *ngIf="timeSlots.length; else notFound">
                                 <div>Available Time Slots</div>
                                 <div>
-                                    <button *ngFor="let item of timeSlots" (click)="form.get('time')?.setValue(item)"
-                                        [class.selected]="this.form.get('time')!.value === item">
+                                    <button *ngFor="let item of timeSlots"
+                                        (click)="form.get('time')?.setValue(item.time)"
+                                        [class.selected]="this.form.get('time')!.value === item"
+                                        [disabled]="!item.available">
                                         <span class="material-symbols-outlined">alarm_on</span>
-                                        <span>{{item}}</span>
+                                        <span>{{item.time}}</span>
                                     </button>
                                 </div>
                             </div>
+
+                            <ng-template #notFound>
+                                <div>There is not any available time slots</div>
+                            </ng-template>
                         </div>
                     </form>
+                </ng-container>
+                <ng-container *ngIf="currentStep===5">
+                    <div class="details-wrapper">
+                        <div class="header-wrapper">
+                            <h2 class="header">Details</h2>
+                            <p class="subtitle">Tell us about your health concern</p>
+                        </div>
+                        <form class="detailts-form" [formGroup]="form">
+                            <p>Describe your health concern</p>
+                            <textarea formControlName="note" class="note-area"
+                                placeholder="Please describe your symptoms, concerns, or reason for the appointment..."></textarea>
+                        </form>
+                    </div>
                 </ng-container>
                 <div class="button-wrapper">
                     <button mat-button (click)="goBack()" [disabled]="currentStep === 1" class="back-btn">Back</button>
@@ -119,7 +144,9 @@
                         [disabled]="!ifSelected(currentStep)">
                         Next Step
                     </button>
-                    <button *ngIf="currentStep===steps.length" (click)="submitAppointment()">Submit</button>
+                    <button *ngIf="currentStep===steps.length" (click)="submitAppointment()" class="submit-btn"
+                        [disabled]="!ifSelected(currentStep)">Confirm
+                        Appointment</button>
                 </div>
             </div>
             <div class="summary-container">

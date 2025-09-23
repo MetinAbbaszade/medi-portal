@@ -188,6 +188,14 @@
                                     &:not(.selected):hover {
                                         background-color: #a5d6a7;
                                         color: #fff;
+                                        cursor: pointer;
+                                    }
+
+                                    &:disabled {
+                                        background-color: #e5e7eb;
+                                        color: #9ca3af;
+                                        cursor: not-allowed;
+                                        pointer-events: none;
                                     }
 
                                     &.selected {
@@ -199,6 +207,7 @@
                                         font-size: 1.1rem;
                                     }
                                 }
+
                             }
                         }
                     }
@@ -344,6 +353,8 @@
                         border: 1px solid #d1d5db;
                         border-radius: 5px;
                         transition: all 0.25s ease;
+                        font-size: 1.1rem;
+                        padding: 0.8rem 1.3rem;
 
                         &:hover {
                             background-color: #a5d6a7;
@@ -407,7 +418,7 @@
                             display: flex;
                             flex-direction: column;
                             row-gap: 0.5rem;
-                            color: #374151;
+                            color: #707782;
 
                             p:first-of-type {
                                 font-size: 1rem;
@@ -415,12 +426,68 @@
 
                             p:last-of-type {
                                 font-size: 1.1rem;
-                                font-weight: bold;
+                                font-weight: 700;
                             }
                         }
                     }
                 }
             }
         }
+    }
+}
+
+.details-wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2.5rem;
+
+    p {
+        color: #394352;
+        font-weight: 400;
+        font-size: 1.1rem;
+    }
+
+    >.header-wrapper {
+        display: flex;
+        flex-direction: column;
+        padding: 10px 3px;
+
+        >.header {
+            font-size: 1.7rem;
+            color: #374051;
+            margin: 20px 0;
+        }
+
+    }
+
+    >.detailts-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        >.note-area {
+            border: none;
+            min-height: 100px;
+            padding: 10px 15px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+            max-width: 100%;
+        }
+    }
+}
+
+
+.submit-btn {
+    background-color: #a5d6a7;
+    color: #fff;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    transition: all 0.4s ease;
+
+    &:disabled {
+        background-color: #d0e9d2;
+        color: #f1f8f3;
     }
 }
