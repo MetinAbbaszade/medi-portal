@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { url } from '../../../../environments/environment';
 import { map, Observable, reduce } from 'rxjs';
@@ -19,10 +19,26 @@ export class AuthService {
   ) { }
 
   login(credentials: any): Observable<IResponse> {
-    return this.http.post<IResponse>(this.baseUrl + '/login', credentials)
+    const headers = new HttpHeaders({
+      'authorization-method': 'true'
+    });
+
+    return this.http.post<IResponse>(
+      `${this.baseUrl}/login`,
+      credentials,
+      { headers }
+    );
   }
 
   register(credentials: any): Observable<IResponse> {
-    return this.http.post<IResponse>(this.baseUrl + '/register', credentials);
+    const headers = new HttpHeaders({
+      'authorization-method': 'true'
+    });
+
+    return this.http.post<IResponse>(
+      `${this.baseUrl}/register`,
+      credentials,
+      { headers }
+    );
   }
 }

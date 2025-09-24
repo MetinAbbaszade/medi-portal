@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { IHospitalResponse } from '../../hospital/modules/data';
 import { IDepartmentResponse } from '../pages/bookAppointment/book-appointment';
 import { ApiResponse, IResponseSchedule } from '../models/doctor.model';
+import { AppointmentPayload, AppointmentRecord } from '../models/appointment.model';
 
 @Injectable({
     providedIn: 'root'
@@ -35,5 +36,9 @@ export class AppointmentService {
 
     fetchDepartmentsData() {
         return this.http.get<IDepartmentResponse>(this.baseUrl + 'api/departments')
+    }
+
+    submitAppointment(payload: AppointmentPayload) {
+        return this.http.post<AppointmentRecord>(this.baseUrl + 'api/appointments', payload)
     }
 }

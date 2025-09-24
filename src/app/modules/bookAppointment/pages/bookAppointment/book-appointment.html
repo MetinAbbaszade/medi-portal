@@ -33,8 +33,8 @@
                         <div class="data-selection">
                             <button class="data-selection-wrapper department-wrapper"
                                 *ngFor="let department of departments"
-                                [class.selected]="form.get('department')!.value.id === department.id"
-                                (click)="form.get('department')?.setValue(department)">
+                                [class.selected]="form.get('department_id')!.value.id === department.id"
+                                (click)="form.get('department_id')?.setValue(department)">
                                 <div class="material-symbols-outlined">{{ department.icon }}</div>
                                 <div>{{ department.name }}</div>
                             </button>
@@ -49,8 +49,8 @@
                         </div>
                         <div class="data-selection">
                             <button class="data-selection-wrapper" *ngFor="let hospital of hospitals"
-                                [class.selected]="form.get('hospital')!.value.id === hospital.id"
-                                (click)="form.get('hospital')?.setValue(hospital)" [ngStyle]="{
+                                [class.selected]="form.get('hospital_id')!.value.id === hospital.id"
+                                (click)="form.get('hospital_id')?.setValue(hospital)" [ngStyle]="{
                                 'background-image': 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + hospital.image + ')',
        'background-size': 'cover',
        'background-position': 'center',
@@ -77,8 +77,8 @@
                         <div class="data-selection">
                             @if(doctors){
                             <button class="data-selection-wrapper" *ngFor="let doctor of doctors"
-                                [class.selected]="form.get('doctor')!.value.id === doctor.id"
-                                (click)="form.get('doctor')?.setValue(doctor)">
+                                [class.selected]="form.get('doctor_id')!.value.id === doctor.id"
+                                (click)="form.get('doctor_id')?.setValue(doctor)">
                                 <div class="icon-wrapper">
                                     <div class="material-symbols-outlined">person</div>
                                 </div>

@@ -51,14 +51,12 @@ export class MainNavbar {
         this.activeUrl = event.urlAfterRedirects
       });
 
-    this.token = this.AuthService.getToken()
-
+    this.token = this.AuthService.decodeToken()
 
   }
   @Input() changeLang!: (lang: string) => void;
   @Input() toggleSidenav!: () => void;
 
-  // Uses the 'inject' function to get an instance of the TranslateService.
   public translate = inject(TranslateService);
   routes: IRoutes[] = [
     {

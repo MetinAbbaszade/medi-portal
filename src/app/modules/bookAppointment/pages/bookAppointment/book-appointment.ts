@@ -8,6 +8,8 @@ import { IHospital } from '../../../hospital/modules/data';
 import { ApiResponse, Slots, Specialty } from '../../models/doctor.model';
 import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay';
 import { MatExpansionModule } from "@angular/material/expansion";
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 interface Department { id: string; name: string; icon?: string; }
 interface Hospital { id: string; name: string; location: string; image: string; }
@@ -57,19 +59,19 @@ export class BookAppointment {
       number: 1,
       title: 'Department',
       icon: 'stethoscope',
-      code: 'department'
+      code: 'department_id'
     },
     {
       number: 2,
       title: 'Hospital',
       icon: 'apartment',
-      code: 'hospital'
+      code: 'hospital_id'
     },
     {
       number: 3,
       title: 'Doctor',
       icon: 'contacts_product',
-      code: 'doctor'
+      code: 'doctor_id'
     },
     {
       number: 4,
@@ -95,14 +97,15 @@ export class BookAppointment {
 
   constructor(
     private fb: FormBuilder,
-    private appointmentService: AppointmentService
+    private appointmentService: AppointmentService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.form = this.fb.group({
-      department: ['', Validators.required],
-      hospital: ['', Validators.required],
-      doctor: ['', Validators.required],
+      department_id: ['', Validators.required],
+      hospital_id: ['', Validators.required],
+      doctor_id: ['', Validators.required],
       date: ['', Validators.required],
       time: ['', Validators.required],
       note: ['', Validators.required],
@@ -119,11 +122,11 @@ export class BookAppointment {
     Object.keys(this.form.controls).forEach(key => {
       this.form.get(key)?.valueChanges.subscribe(value => {
         switch (key) {
-          case 'doctor':
+          case 'doctor_id':
             break;
 
-          case 'hospital':
-            this.appointmentService.fetchDoctorsByHospitalsAndDepartment(value.id, this.form.get('department')?.value.id)
+          case 'hospital_id':
+            this.appointmentService.fetchDoctorsByHospitalsAndDepartment(value.id, this.form.get('department_id')?.value.id)
               .subscribe(({ response }: ApiResponse) => {
                 this.doctors = response.map(({ id, surname, name, specialties }) => {
                   return ({
@@ -133,7 +136,7 @@ export class BookAppointment {
               })
             break;
 
-          case 'department':
+          case 'department_id':
             this.appointmentService.fetchHospitalsByDepartment(value.id)
               .subscribe((res) => {
                 this.hospitals = res.hospitals.map<Hospital>(({ id, name, adresses, image }: IHospital) => ({
@@ -143,7 +146,7 @@ export class BookAppointment {
             break;
 
           case 'date':
-            this.appointmentService.fetchDoctorScheduleByDate(this?.form?.get('doctor')?.value.id, value)
+            this.appointmentService.fetchDoctorScheduleByDate(this?.form?.get('doctor_id')?.value.id, value)
               .subscribe((res) => {
                 this.timeSlots = res.slots;
               }
@@ -166,9 +169,10 @@ export class BookAppointment {
       let icon = '';
       switch (key) {
 
-        case 'department':
-        case 'hospital':
-        case 'doctor':
+        case 'department_id':
+        case 'hospital_id':
+        case 'doctor_id':
+
           displayName = typeof value === 'object' && value !== null && 'name' in value ? value.name : '';
           icon = this.findIcon(key);
           break;
@@ -217,7 +221,34 @@ export class BookAppointment {
   }
 
   submitAppointment() {
-    console.log(this.form.value)
+    this.form.patchValue({
+      department_id: this.form.get("department_id")?.value.id,
+      hospital_id: this.form.get("hospital_id")?.value.id,
+      doctor_id: this.form.get("doctor_id")?.value.id,
+    })
+
+    this.appointmentService.submitAppointment(this.form.value)
+      .subscribe((res) => {
+        if (!res) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'Email or Password is incorrect',
+            confirmButtonText: 'OK'
+          });
+          this.form.reset();
+          this.currentStep = 1;
+        } else {
+          Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: 'Appoint Successfully booked',
+            confirmButtonText: 'OK'
+          });
+          this.form.reset();
+          this.router.navigate(['/home']);
+        }
+      });
   }
 
   validate(dateString: any) {

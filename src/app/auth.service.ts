@@ -7,11 +7,12 @@ import { jwtDecode } from 'jwt-decode';
     providedIn: 'root'
 })
 export class AuthService {
-    private tokenSubject$: BehaviorSubject<PatientUser | null>;
-    private session!: PatientUser;
+    private tokenSubject$: BehaviorSubject<string | null>;
+    private session!: string;
     public token$!: Observable<any>;
     private sessionStatusSubject: BehaviorSubject<string>;
     private userModules: BehaviorSubject<Array<string>>;
+    public decodedToken!: PatientUser | null;
 
     constructor() {
         const token = this.getToken();
@@ -25,6 +26,7 @@ export class AuthService {
             this.setSession(token);
             this.sessionStatusSubject = new BehaviorSubject('active');
             this.userModules = new BehaviorSubject(this.getUserModules());
+            this.decodedToken = this.decodeToken();
         } else {
             this.sessionStatusSubject = new BehaviorSubject('inactive');
             this.userModules = new BehaviorSubject<string[]>([]);
@@ -33,6 +35,14 @@ export class AuthService {
 
     public getToken() {
         const codedToken = localStorage.getItem('token');
+        if (codedToken) {
+            return codedToken;
+        }
+        return null;
+    }
+
+    public decodeToken() {
+        const codedToken = this.getToken();
         if (codedToken) {
             try {
                 return jwtDecode(codedToken) as PatientUser;
@@ -43,18 +53,18 @@ export class AuthService {
         return null;
     }
 
-    private setSession(user: PatientUser) {
+    private setSession(user: string) {
         this.session = user;
     }
 
     private getUserModules(): string[] {
-        return this.session?.role?.modules
-            ? this.session.role.modules.map((module) => module.name)
+        return this.decodedToken?.role?.modules
+            ? this.decodedToken.role.modules.map((module) => module.name)
             : [];
     }
 
     getUserPermissions(moduleName: string) {
-        const module = this.session?.role?.modules?.find(m => m.name === moduleName);
+        const module = this.decodedToken?.role?.modules?.find(m => m.name === moduleName);
         return module?.permissions ?? [];
     }
 }

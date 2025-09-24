@@ -19,7 +19,7 @@
         }
     </mat-toolbar-row>
     <mat-toolbar-row class="navbar-r">
-        <a class="profile-section" [routerLink]="'profile'" *ngIf="!getHideNavbar">
+        <a class="profile-section" [routerLink]="'profile'" *ngIf="!getHideNavbar && token">
             <div class="profile-photo"></div>
             <div class="profile-info">
                 <span class="profile-name">{{token!.name}} {{token!.surname}}</span>
