@@ -205,7 +205,7 @@
         left: 50px;
         top: 50px;
         width: 50px;
-        z-index: 1000;
+        z-index: 900;
     }
 
     .filter-button-wrapper {

@@ -190,6 +190,16 @@
                 color: #000;
                 border: 1px solid #e5e5e5;
             }
+
+            .appoint-btn,
+            .view-btn {
+                transition: all ease-in 0.25s;
+
+                &:hover {
+                    cursor: pointer;
+                    transform: translateY(-2px);
+                }
+            }
         }
     }
 }

@@ -31,21 +31,20 @@ export class Contact implements OnInit {
   sendMessage() {
     this.homeService.contactUs(this.form.value)
       .subscribe((res) => {
-        if (!res) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error!',
-            text: 'Signup failed',
-            confirmButtonText: 'OK'
-          })
-        } else {
-          Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: 'Welcome back!',
-            confirmButtonText: 'OK'
-          })
-        }
+        this.form.reset();
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'Applied successfully!',
+          confirmButtonText: 'OK'
+        })
+      }, (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Can not apply',
+          confirmButtonText: 'OK'
+        })
       })
   }
 }

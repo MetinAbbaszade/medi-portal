@@ -174,7 +174,7 @@
                                 grid-template-columns: 1fr 1fr 1fr 1fr;
                                 gap: 1.5rem;
 
-                                button {
+                                .wrapper {
                                     padding: 1rem;
                                     border-radius: 5px;
                                     border: 1px solid #d1d5db;
@@ -329,14 +329,14 @@
                         &:hover {
                             transform: translateY(-10px);
                             border-color: #8acfef;
-                            outline: 3px solid #cfe8d0;
+                            cursor: pointer;
+                            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
                         }
                     }
 
                     .data-selection-wrapper.selected {
                         border-color: #8acfef;
                         background-color: #f5f9fb;
-                        outline: 3px solid #cfe8d0;
 
                         &:hover {
                             transform: none;

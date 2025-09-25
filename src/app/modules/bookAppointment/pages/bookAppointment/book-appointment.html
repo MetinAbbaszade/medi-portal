@@ -109,9 +109,9 @@
                             <div *ngIf="timeSlots.length; else notFound">
                                 <div>Available Time Slots</div>
                                 <div>
-                                    <button *ngFor="let item of timeSlots"
+                                    <button *ngFor="let item of timeSlots" class="wrapper"
                                         (click)="form.get('time')?.setValue(item.time)"
-                                        [class.selected]="this.form.get('time')!.value === item"
+                                        [class.selected]="this.form.get('time')!.value === item.time"
                                         [disabled]="!item.available">
                                         <span class="material-symbols-outlined">alarm_on</span>
                                         <span>{{item.time}}</span>
