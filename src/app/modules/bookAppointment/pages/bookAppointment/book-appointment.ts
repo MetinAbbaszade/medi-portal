@@ -159,7 +159,6 @@ export class BookAppointment {
 
       });
     });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   updateSummary() {
@@ -197,14 +196,23 @@ export class BookAppointment {
     return Object.entries(this.form.value || {});
   }
   goNext() {
-    this.currentStep < this.steps.length ? this.currentStep++ : ''
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (this.currentStep < this.steps.length) {
+      this.currentStep++;
+      this.scrollTop()
+    }
   }
 
   goBack() {
-    this.currentStep > 1 ? this.currentStep-- : ''
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (this.currentStep > 1) {
+      this.currentStep--;
+      this.scrollTop()
+    }
   }
+
+  scrollTop() {
+    document.querySelector('mat-sidenav-content')?.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }
+
 
   findIcon(name: string) {
     const data = this.steps.find((step) => step.code === name)

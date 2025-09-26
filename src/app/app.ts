@@ -1,5 +1,5 @@
-import { Component, ComponentFactoryResolver, ViewChild } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Component, inject, ViewChild } from '@angular/core';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MainNavbar } from "./shared/components/main-navbar/main-navbar";
@@ -7,8 +7,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Translation } from './translation';
 import { SideNavService } from './sidenav.service';
 import { Menu } from './menu/menu';
-import { CommonModule } from '@angular/common';
-
+import { CommonModule, ViewportScroller } from '@angular/common';
+import { filter } from 'rxjs/operators';
 
 @Component({
   standalone: true,
@@ -41,6 +41,9 @@ export class App {
   }
 
   ngOnInit() {
+    this.router.events.pipe(filter(e => e instanceof NavigationEnd))
+      .subscribe(() => document.querySelector('mat-sidenav-content')?.scrollTo({ top: 0, left: 0, behavior: "smooth" }));
+
     this.sidenavService.state.subscribe(state => {
       switch (state) {
         case 'open':

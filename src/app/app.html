@@ -2,7 +2,7 @@
     <mat-sidenav mode="over" #sidenav>
         <app-menu [closeBtnEvent]="closeBtnEvent.bind(this)"></app-menu>
     </mat-sidenav>
-    <mat-sidenav-content class="wrapper">
+    <mat-sidenav-content class="wrapper" #content>
         <app-main-navbar *ngIf="!getHideNavbar" [changeLang]="change"
             [toggleSidenav]="toggleSideNav.bind(this)"></app-main-navbar>
         <div>
