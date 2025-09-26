@@ -118,47 +118,13 @@ export class BookAppointment {
         this.departments = res.departments;
       });
 
-
-    Object.keys(this.form.controls).forEach(key => {
-      this.form.get(key)?.valueChanges.subscribe(value => {
-        switch (key) {
-          case 'doctor_id':
-            break;
-
-          case 'hospital_id':
-            this.appointmentService.fetchDoctorsByHospitalsAndDepartment(value.id, this.form.get('department_id')?.value.id)
-              .subscribe(({ response }: ApiResponse) => {
-                this.doctors = response.map(({ id, surname, name, specialties }) => {
-                  return ({
-                    id, surname, name, specialties
-                  })
-                })
-              })
-            break;
-
-          case 'department_id':
-            this.appointmentService.fetchHospitalsByDepartment(value.id)
-              .subscribe((res) => {
-                this.hospitals = res.hospitals.map<Hospital>(({ id, name, adresses, image }: IHospital) => ({
-                  id, name, location: adresses[0].city, image
-                }))
-              })
-            break;
-
-          case 'date':
-            this.appointmentService.fetchDoctorScheduleByDate(this?.form?.get('doctor_id')?.value.id, value)
-              .subscribe((res) => {
-                this.timeSlots = res.slots;
-              }
-              )
-            break;
-
-          default:
-            break;
+    this.form.get("date")?.valueChanges.subscribe((value) => {
+      this.appointmentService.fetchDoctorScheduleByDate(this?.form?.get('doctor_id')?.value.id, value)
+        .subscribe((res) => {
+          this.timeSlots = res.slots;
         }
-
-      });
-    });
+        )
+    })
   }
 
   updateSummary() {
@@ -198,10 +164,55 @@ export class BookAppointment {
   goNext() {
     if (this.currentStep < this.steps.length) {
       this.currentStep++;
-      this.scrollTop()
+      this.scrollTop();
+      this.loadDataForStep(this.currentStep);
     }
   }
 
+
+
+  loadDataForStep(step: number) {
+    switch (step) {
+      case 2:
+        const department = this.form.get('department_id')?.value;
+        if (department) {
+          this.appointmentService.fetchHospitalsByDepartment(department.id)
+            .subscribe((res) => {
+              this.hospitals = res.hospitals.map<Hospital>(({ id, name, adresses, image }: IHospital) => ({
+                id, name, location: adresses[0].city, image
+              }));
+            });
+        }
+        break;
+
+      case 3:
+        const hospital = this.form.get('hospital_id')?.value;
+        const dep = this.form.get('department_id')?.value;
+        if (hospital && dep) {
+          this.appointmentService.fetchDoctorsByHospitalsAndDepartment(hospital.id, dep.id)
+            .subscribe(({ response }: ApiResponse) => {
+              this.doctors = response.map(({ id, surname, name, specialties }) => ({
+                id, surname, name, specialties
+              }));
+            });
+        }
+        break;
+
+      case 4:
+        const doctor = this.form.get('doctor_id')?.value;
+        const date = this.form.get('date')?.value;
+        if (doctor && date) {
+          this.appointmentService.fetchDoctorScheduleByDate(doctor.id, date)
+            .subscribe((res) => {
+              this.timeSlots = res.slots;
+            });
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
 
   scrollTop() {
     document.querySelector('mat-sidenav-content')?.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
