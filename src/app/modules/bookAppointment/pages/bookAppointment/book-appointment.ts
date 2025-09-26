@@ -202,12 +202,6 @@ export class BookAppointment {
     }
   }
 
-  goBack() {
-    if (this.currentStep > 1) {
-      this.currentStep--;
-      this.scrollTop()
-    }
-  }
 
   scrollTop() {
     document.querySelector('mat-sidenav-content')?.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -273,6 +267,58 @@ export class BookAppointment {
       input.value = '';
       this.form.get("date")?.setValue('');
       alert("Please select one of the workday");
+    }
+  }
+
+  goBack() {
+    if (this.currentStep > 1) {
+      this.resetValuesFromStep(this.currentStep);
+      this.currentStep--;
+      this.scrollTop();
+    }
+  }
+
+
+  resetValuesFromStep(step: number) {
+    switch (step) {
+      case 2:
+        this.form.patchValue({
+          hospital_id: '',
+          doctor_id: '',
+          date: '',
+          time: '',
+          note: '',
+        });
+        this.hospitals = [];
+        this.doctors = [];
+        this.timeSlots = [];
+        break;
+
+      case 3:
+        this.form.patchValue({
+          doctor_id: '',
+          date: '',
+          time: '',
+          note: '',
+        });
+        this.doctors = [];
+        this.timeSlots = [];
+        break;
+
+      case 4:
+        this.form.patchValue({
+          date: '',
+          time: '',
+          note: '',
+        });
+        this.timeSlots = [];
+        break;
+
+      case 5:
+        this.form.patchValue({
+          note: ''
+        });
+        break;
     }
   }
 
