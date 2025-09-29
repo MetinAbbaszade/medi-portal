@@ -30,6 +30,19 @@
             }
         }
 
+        @media (max-width: 1200px) {
+            .navbar-l {
+                margin-left: 1rem;
+
+                >.material-icons {
+                    font-size: 20px;
+                }
+
+                >h1 {
+                    font-size: 1.5rem;
+                }
+            }
+        }
     }
 
     .navbar-m {
@@ -63,12 +76,17 @@
 
             span:first-of-type {
                 margin-right: 4px;
-                font-size: 1.2rem;
                 transition: transform .15s ease-in-out;
             }
 
-            span:last-of-type {
+            span {
                 font-size: 1.2rem;
+            }
+
+            @media (max-width: 1200px) {
+                span {
+                    font-size: 1.1rem;
+                }
             }
         }
 
@@ -163,6 +181,31 @@
                 .user-role {
                     font-size: 12px;
                     font-weight: bold;
+                }
+            }
+        }
+
+        @media (max-width: 1200px) and (min-width:900px) {
+            & {
+                column-gap: 2rem;
+            }
+
+            .profile-section {
+                .profile-photo {
+                    width: 40px;
+                    height: 40px;
+                }
+
+                .profile-info {
+                    column-gap: 10px;
+
+                    .profile-name {
+                        font-size: 14px;
+                    }
+
+                    .user-role {
+                        font-size: 10px;
+                    }
                 }
             }
         }

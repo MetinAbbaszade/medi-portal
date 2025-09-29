@@ -67,4 +67,8 @@ export class AuthService {
         const module = this.decodedToken?.role?.modules?.find(m => m.name === moduleName);
         return module?.permissions ?? [];
     }
+
+    get getUserRoles() {
+        return this.decodedToken?.role
+    }
 }

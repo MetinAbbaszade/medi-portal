@@ -11,26 +11,30 @@
                     <div class="user-photo-wrapper"></div>
                     <div class="user-detail-wrapper">
                         <div class="user-header">
-                            <h3 class="user-name">Dr. Metin Abbaszade</h3>
-                            <p class="user-role">Doctor</p>
+                            <h3 class="user-name">{{token?.name}}
+                                {{token?.surname}}</h3>
+                            <p class="user-role">{{this.authService.getUserRoles?.name}}</p>
                         </div>
-
+                        @if(token?.role?.name === 'doctor'){
                         <p class="user-department">Cardiology</p>
                         <p class="user-specialization">Cardiovascular Medicine</p>
+                        }
 
                         <div class="user-contact">
                             <div class="contact-item">
                                 <span class="material-symbols-outlined">
                                     mail
                                 </span>
-                                <p class="contact-text">sarah.johnson@hospital.com</p>
+                                <p class="contact-text">{{token?.email}}</p>
                             </div>
+                            @if (token?.phone) {
                             <div class="contact-item">
                                 <span class="material-symbols-outlined">
                                     call
                                 </span>
-                                <p class="contact-text">+1 (555) 123-4567</p>
+                                <p class="contact-text">{{token?.phone}}</p>
                             </div>
+                            }
                         </div>
                     </div>
 
@@ -50,13 +54,13 @@
                 <p class="header">Switch Role View</p>
                 <p class="subtitle">View the portal from different user perspectives</p>
                 <div class="btn-container">
-                    <button class="selected">Patient</button>
-                    <button>Doctor</button>
-                    <button>Admin</button>
+                    <button class="selected">{{token?.role?.name}}</button>
                 </div>
             </div>
         </div>
         <div class="general-container">
+            @if(token?.role?.name === 'Doctor' || token?.role?.name === 'Patient'){
+
             <div class="section-wrapper appointment-wrapper">
                 <div class="header">
                     <span class="material-symbols-outlined">
@@ -159,6 +163,7 @@
                     </div>
                 </div>
             </div>
+            }
             <div class="section-wrapper notification-wrapper">
                 <div class="header">
                     <span class="material-symbols-outlined">
@@ -191,7 +196,7 @@
             <div class="information">
                 <div>
                     <div class="title">Full Name</div>
-                    <div class="value">Dr. Sarah Johnson</div>
+                    <div class="value">{{token?.name}} {{token?.surname}}</div>
                 </div>
                 <div>
                     <div class="title">Phone</div>
@@ -199,7 +204,7 @@
                 </div>
                 <div>
                     <div class="title">Email</div>
-                    <div class="value">sarah.johnson@hospital.com</div>
+                    <div class="value">{{token?.email}}</div>
                 </div>
             </div>
         </div>

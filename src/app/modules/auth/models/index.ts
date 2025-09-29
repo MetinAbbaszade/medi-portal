@@ -23,4 +23,5 @@ export interface PatientUser {
     password: string;
     iat: number;
     role?: Role;
+    phone?: string;
 }

@@ -1,23 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
-
 .wrapper {
     display: flex;
     flex-direction: column;
-}
-
-.navbar-wrapper {
-    position: fixed;
-    top: 0;
-}
-
-mat-sidenav-container {
-    height: 100vh;
-}
-
-mat-sidenav {
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
 }

@@ -6,7 +6,6 @@ import { MainNavbar } from "./shared/components/main-navbar/main-navbar";
 import { TranslateService } from '@ngx-translate/core';
 import { Translation } from './translation';
 import { SideNavService } from './sidenav.service';
-import { Menu } from './menu/menu';
 import { CommonModule, ViewportScroller } from '@angular/common';
 import { filter } from 'rxjs/operators';
 
@@ -18,7 +17,6 @@ import { filter } from 'rxjs/operators';
     MatSidenavModule,
     MatIconModule,
     MainNavbar,
-    Menu,
     CommonModule
   ],
   templateUrl: './app.html',

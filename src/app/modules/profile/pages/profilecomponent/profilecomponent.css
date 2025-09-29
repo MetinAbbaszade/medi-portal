@@ -162,11 +162,12 @@
 
         .btn-container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             margin: 20px 0;
             background-color: #eef2f5;
             padding: 3px;
             border-radius: 10px;
+            gap: 5px;
 
             button {
                 padding: 10px 0;
