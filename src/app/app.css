@@ -4,3 +4,22 @@
     display: flex;
     flex-direction: column;
 }
+
+.mobile-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+
+    .navbar-l {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+        color: #14a4d4;
+
+        h1 {
+            text-transform: uppercase;
+            font-size: 1.5rem;
+        }
+    }
+}

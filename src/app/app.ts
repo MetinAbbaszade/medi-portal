@@ -6,8 +6,11 @@ import { MainNavbar } from "./shared/components/main-navbar/main-navbar";
 import { TranslateService } from '@ngx-translate/core';
 import { Translation } from './translation';
 import { SideNavService } from './sidenav.service';
-import { CommonModule, ViewportScroller } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
+import { Sidebar } from "./shared/components/sidebar/sidebar";
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
   standalone: true,
@@ -17,12 +20,15 @@ import { filter } from 'rxjs/operators';
     MatSidenavModule,
     MatIconModule,
     MainNavbar,
-    CommonModule
-  ],
+    CommonModule,
+    Sidebar,
+    MatButtonModule
+],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
+  isMobile: boolean = false;
   open!: boolean;
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
@@ -30,7 +36,8 @@ export class App {
     private translate: TranslateService,
     private translateService: Translation,
     private router: Router,
-    public sidenavService: SideNavService
+    public sidenavService: SideNavService,
+    private breakpointObserver: BreakpointObserver
   ) {
     this.translate.addLangs(['en', 'az']);
     const browserLang = this.translate.getBrowserLang();
@@ -53,6 +60,12 @@ export class App {
       }
 
     })
+
+    this.breakpointObserver
+      .observe(['(max-width: 899px)'])
+      .subscribe(result => {
+        this.isMobile = result.matches;
+      });
   }
 
   toggleSideNav() {

@@ -1,0 +1,59 @@
+<div class="sidebar-wrapper">
+
+    <div class="icon-wrapper">
+        <a routerLink="/" class="sidebar-header">
+            <span class="material-icons">local_hospital</span>
+            <h1 class="text">MediPortal</h1>
+        </a>
+        <span class="material-symbols-outlined">
+            close
+        </span>
+    </div>
+
+
+    <div class="nav-wrapper">
+        @for (item of routes; track $index) {
+        <button>
+            <a [routerLink]='item.href' [ngClass]="{'active': activeUrl.includes(item.href)}">
+                <span class="material-icons">{{item.icon}}</span>
+                <span class="nav-label">{{item.label}}</span>
+            </a>
+        </button>
+        }
+    </div>
+
+
+
+    <div class="translation-wrapper">
+        <div class="label">
+            <span class="material-icons">public</span>
+            <span class="text">Language</span>
+        </div>
+        <button mat-button [matMenuTriggerFor]="langMenu" class="translation-selector">
+            <span>
+                <span>{{ languages[translate.currentLang] }}</span>
+                <mat-icon>arrow_drop_down</mat-icon>
+            </span>
+        </button>
+
+        <mat-menu #langMenu="matMenu" xPosition="before">
+            <button *ngFor="let item of translate.getLangs()" (click)="changeLang(item)"
+                [ngClass]="{ 'selected_lang': item === translate.currentLang }" mat-menu-item>
+                {{ languages[item] }}
+            </button>
+        </mat-menu>
+    </div>
+
+    <div class="profile-wrapper">
+        <a class="profile-section" [routerLink]="'profile'" *ngIf="!getHideNavbar && token">
+            <div class="profile-photo"></div>
+            <div class="profile-info">
+                <span class="profile-name">{{token!.name}} {{token!.surname}}</span>
+                <span class="user-role">{{token!.role?.name}}</span>
+            </div>
+        </a>
+        <button class="logout-btn" (click)="logoutfunction()">
+            <span>Logout</span>
+        </button>
+    </div>
+</div>

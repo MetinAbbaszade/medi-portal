@@ -61,15 +61,18 @@ export class MainNavbar {
   routes: IRoutes[] = [
     {
       icon: 'local_hospital',
-      href: 'hospital'
+      href: 'hospital',
+      label: 'Find your hospital'
     },
     {
       icon: 'info',
-      href: 'about'
+      href: 'about',
+      label: 'Get info about us'
     },
     {
       icon: 'mail',
-      href: 'contact'
+      href: 'contact',
+      label: 'Contact with us'
     }
   ]
   languages: ILanguage = {

@@ -1,8 +1,26 @@
 <mat-sidenav-container>
-    <mat-sidenav-content class="wrapper" #content>
-        <app-main-navbar *ngIf="!getHideNavbar" [changeLang]="change"
-            [toggleSidenav]="toggleSideNav.bind(this)"></app-main-navbar>
-        <div>
+    <mat-sidenav *ngIf="isMobile" mode="over" #sidenav>
+        <app-sidebar></app-sidebar>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="wrapper">
+
+        <div *ngIf="isMobile" class="mobile-navbar">
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <a routerLink="/" class="navbar-l">
+                <span class="material-icons">local_hospital</span>
+                <h1>MediPortal</h1>
+            </a>
+        </div>
+
+        <app-main-navbar *ngIf="!isMobile && !getHideNavbar" [changeLang]="change"
+            [toggleSidenav]="toggleSideNav.bind(this)">
+        </app-main-navbar>
+
+
+        <div [style.marginTop.px]="!isMobile ? 70 : 0">
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>
