@@ -14,7 +14,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
-import { Subscription } from 'rxjs';
+import { isObservable, Subscription } from 'rxjs';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 
 @Component({
@@ -37,17 +38,17 @@ import { Subscription } from 'rxjs';
 })
 export class Hospital implements OnInit, OnDestroy {
   hospitals: IHospital[] = [];
-
   featuredHospitals: IHospital[] = [];
-
   searchResult: IHospital[] = [];
   filterForm!: FormGroup;
+  public isMobile: boolean = false;
   private subscriptions = new Subscription();
 
   constructor(
     private hospitalService: HospitalService,
     private dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private breakpointObserver: BreakpointObserver
   ) { }
 
   ngOnInit() {
@@ -57,13 +58,19 @@ export class Hospital implements OnInit, OnDestroy {
       Filter: ['']
     });
 
-    
+
     this.fetchHospitals();
     this.loadFeaturedHospitals();
-    
+
     this.subscriptions.add(
       this.filterForm.valueChanges.subscribe(value => this.fetchHospitals(value))
     );
+
+    this.breakpointObserver
+      .observe(['(max-width: 899px)'])
+      .subscribe(result => {
+        this.isMobile = result.matches;
+      });
   }
 
   private loadFeaturedHospitals(params = {}) {
@@ -78,15 +85,21 @@ export class Hospital implements OnInit, OnDestroy {
   fetchHospitals(params: any = {}) {
     this.subscriptions.add(
       this.hospitalService.fetchHospitalData(params).subscribe(res => {
-        this.hospitals = res.filteredHospitals;           
+        this.hospitals = res.filteredHospitals;
         this.searchResult = params.Name ? res.filteredHospitals.slice(0, 3) : [];
       })
     );
   }
 
   viewDetails(item: IHospital) {
+    const obj = !this.isMobile ? {
+      minWidth: '40%'
+    } : {
+      minWidth: '98%'
+    }
+
     this.dialog.open(Hospitaldialog as ComponentType<any>, {
-      minWidth: '40%',
+      ...obj,
       height: '68%',
       data: item
     });

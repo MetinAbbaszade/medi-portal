@@ -103,12 +103,12 @@
         }
 
         .card-wrapper {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
             margin: 2rem 0;
-            column-gap: 20px;
+            gap: 20px;
 
             .card {
-                width: calc(33% - 10px);
                 background-color: #fafafa;
                 padding: 15px 10px;
                 display: flex;
@@ -201,5 +201,28 @@
                 }
             }
         }
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    .container {
+        min-width: 100%;
+    }
+
+    .general-rating-wrapper .general-info {
+        font-size: 13px !important;
+    }
+
+    .general-name-wrapper .general-name {
+        font-size: 20px !important;
+    }
+
+    .general-location {
+        font-size: 1rem !important;
+    }
+
+    .card-wrapper .info-name {
+        font-size: 13px !important;
     }
 }

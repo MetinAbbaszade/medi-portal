@@ -605,9 +605,7 @@ footer {
     .cta-content p {
         font-size: 1rem;
     }
-}
 
-@media (max-width: 600px) {
     .testimonials h2 {
         font-size: 2rem;
     }
@@ -615,9 +613,7 @@ footer {
     .testimonials .section-subtitle {
         font-size: 0.95rem;
     }
-}
 
-@media (max-width: 600px) {
     .why-choose-us h2 {
         font-size: 1.8rem;
     }
@@ -625,9 +621,7 @@ footer {
     .why-choose-us .section-subtitle {
         font-size: 0.9rem;
     }
-}
 
-@media (max-width: 600px) {
     .hospital-directory h2 {
         font-size: 1.8rem;
     }
@@ -635,11 +629,19 @@ footer {
     .hospital-directory .section-subtitle {
         font-size: 0.9rem;
     }
+
+    .hospital-overview h2 {
+        font-size: 1.8rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.9rem;
+    }
 }
 
 @media (max-width: 480px) {
     .hero h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
     .hero p {
@@ -649,7 +651,7 @@ footer {
     .hero-search {
         flex-direction: column;
         gap: 8px;
-        max-width: 320px;
+        min-width: 320px;
         margin: 0 auto;
     }
 
@@ -660,18 +662,8 @@ footer {
     }
 
     .hero-search button {
+        width: 70%;
+        align-self: center;
         padding: 12px 0;
-    }
-}
-
-
-
-@media (max-width: 600px) {
-    .hospital-overview h2 {
-        font-size: 1.8rem;
-    }
-
-    .section-subtitle {
-        font-size: 0.9rem;
     }
 }
