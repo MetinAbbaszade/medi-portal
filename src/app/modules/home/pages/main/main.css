@@ -20,10 +20,14 @@
     }
 
     .contact-container {
-        display: flex;
+        justify-self: center;
         min-height: 60vh;
-        align-items: center;
-        min-width: 100%;
-        justify-content: center;
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .contact-container {
+        display: flex;
     }
 }

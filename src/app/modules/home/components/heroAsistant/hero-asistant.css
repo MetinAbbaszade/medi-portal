@@ -1,8 +1,3 @@
-container {
-    background-color: #f3f7f8;
-}
-
-
 .asistant-header {
     background-color: #14a4d4;
     display: flex;
@@ -154,5 +149,43 @@ container {
 
     40% {
         transform: scale(1);
+    }
+}
+
+@media screen and (max-width: 1200px) {
+
+    .asistant-header {
+        span {
+            font-size: 1rem;
+        }
+    }
+
+    .chat-section {
+        padding: 10px 5px;
+        height: 150px;
+    }
+
+    .recommendations-wrapper {
+        padding: 10px;
+
+        .recommendation-card {
+            span {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .dialog-wrapper {
+        mat-card {
+            min-width: 80%;
+        }
+    }
+
+    .recommendations-wrapper {
+        .recommendation-card {
+            max-width: 50%;
+        }
     }
 }

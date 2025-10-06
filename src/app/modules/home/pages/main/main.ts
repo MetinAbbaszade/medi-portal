@@ -11,7 +11,7 @@ import { FooterSection } from "../../components/footerSection/footer-section";
     AboutSection,
     ContactSection,
     FooterSection
-],
+  ],
   templateUrl: './main.html',
   styleUrl: './main.css'
 })

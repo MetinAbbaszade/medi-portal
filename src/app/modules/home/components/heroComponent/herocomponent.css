@@ -16,16 +16,49 @@
             font-size: 3rem;
         }
 
-        .header-description{
+        .header-description {
             letter-spacing: 1px;
         }
 
-        .hero-asistant-wrapper{
+        .hero-asistant-wrapper {
             max-width: 100%;
         }
     }
 
-    >div>img{
+    >div>img {
         border-radius: 20px;
+    }
+
+    @media screen and (max-width: 1200px) {
+
+        >div>img {
+            width: 400px;
+            height: 400px;
+        }
+
+        .welcome-card {
+
+            row-gap: 2rem;
+
+            .title {
+                font-size: 2rem;
+            }
+
+            .header-description {
+                font-size: 0.9rem;
+            }
+
+        }
+    }
+}
+
+
+@media screen and (max-width: 1000px) {
+    .wrapper {
+        flex-direction: column;
+
+        >div>img {
+            display: none;
+        }
     }
 }

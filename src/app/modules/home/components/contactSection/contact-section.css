@@ -15,13 +15,17 @@
 
     .body {
         display: flex;
+        width: auto;
         margin: 10px;
+        justify-content: center;
 
         .body-info-section {
             display: flex;
             flex-direction: column;
             row-gap: 1rem;
-            width: 700px;
+            flex-basis: 400px;
+            flex-grow: 1;
+            margin-right: 20px;
 
             .info-data-section {
                 display: flex;
@@ -37,6 +41,7 @@
                     color: #fff;
                     justify-content: center;
                     border-radius: 50%;
+                    flex-shrink: 0;
                 }
 
                 .data-container {
@@ -45,6 +50,7 @@
                     flex-direction: column;
                     align-items: flex-start;
                     row-gap: 10px;
+                    flex-grow: 1;
 
                     .data-header {
                         font-size: 23px;
@@ -66,7 +72,8 @@
         }
 
         .form-wrapper {
-            width: 600px;
+            flex-basis: 500px;
+            flex-grow: 1;
 
             .input-wrapper {
                 width: 100%;
@@ -85,40 +92,86 @@
                 padding: 10px;
 
                 button {
-                    padding: 10px 15px;
+                    padding: 12px 24px;
                     font-size: 16px;
+                    font-weight: 600;
                     color: #fff;
-                    background-color: #14a4d4;
-                    border: 1px solid #14a4d4;
-                    border-radius: 10px;
-                    transition: all 0.7s ease;
+                    background: linear-gradient(135deg, #14a4d4, #0d83a8);
+                    border: none;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 4px 10px rgba(20, 164, 212, 0.3);
 
-                    &:hover {
-                        background-color: #0d83a8;
-                        transform: translateY(-5px);
-                        cursor: pointer;
+                    &:hover:not(:disabled) {
+                        background: linear-gradient(135deg, #0d83a8, #14a4d4);
+                        transform: scale(1.05);
+                        box-shadow: 0 6px 14px rgba(20, 164, 212, 0.4);
                     }
 
-                    &:disabled:hover {
-                        background-color: #37474f;
-                        transform: none;
+                    &:active:not(:disabled) {
+                        transform: scale(0.98);
+                        box-shadow: 0 2px 6px rgba(20, 164, 212, 0.3);
                     }
-
 
                     &:disabled {
-                        background-color: #37474f;
+                        background: #37474f;
                         color: #9e9e9e;
-                        transform: none;
                         cursor: not-allowed;
+                        box-shadow: none;
                     }
-
-                    &:not(:disabled) {
-                        background-color: #2196f3;
-                        color: white;
-                    }
-
                 }
+
             }
         }
+    }
+}
+
+
+@media screen and (max-width: 800px) {
+
+    .contact-wrapper {
+        row-gap: 1rem;
+    }
+
+    .contact-wrapper .body {
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .contact-wrapper .body .body-info-section,
+    .contact-wrapper .body .form-wrapper {
+        width: 100%;
+        max-width: 100%;
+        margin-right: 0;
+        flex-basis: auto;
+    }
+
+    .contact-wrapper .body .form-wrapper .button-wrapper {
+        text-align: center;
+    }
+
+    .contact-wrapper .body .body-info-section .info-data-section .data-container {
+        align-items: center;
+    }
+
+    .contact-wrapper .body .body-info-section .info-data-section {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .contact-wrapper .body .body-info-section .info-data-section .data-container .data-header {
+        font-size: 20px;
+    }
+
+    .contact-wrapper .body .body-info-section .info-data-section .data-container .data-text {
+        font-size: 15px;
+    }
+
+    .contact-wrapper .body .form-wrapper .button-wrapper button {
+        font-size: 1rem;
     }
 }
