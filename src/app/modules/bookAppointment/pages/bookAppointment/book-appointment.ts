@@ -6,10 +6,10 @@ import { MatInputModule } from "@angular/material/input";
 import { AppointmentService } from '../../services/appointment.service';
 import { IHospital } from '../../../hospital/modules/data';
 import { ApiResponse, Slots, Specialty } from '../../models/doctor.model';
-import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay';
 import { MatExpansionModule } from "@angular/material/expansion";
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { FooterSection } from "../../../home/components/footerSection/footer-section";
 
 interface Department { id: string; name: string; icon?: string; }
 interface Hospital { id: string; name: string; location: string; image: string; }
@@ -46,7 +46,7 @@ export interface IDepartmentResponse {
     ReactiveFormsModule,
     MatInputModule,
     MatExpansionModule
-  ],
+],
   templateUrl: './book-appointment.html',
   styleUrl: './book-appointment.css'
 })

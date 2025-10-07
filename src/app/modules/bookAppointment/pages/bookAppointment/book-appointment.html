@@ -23,121 +23,123 @@
             </div>
         </div>
         <div class="form-container">
-            <div class="data-container">
-                <ng-container *ngIf="currentStep === 1">
-                    <form [formGroup]="form" class="department-form">
-                        <div class="data-header">
-                            <h2 class="header-text">Department</h2>
-                            <p class="header-subtitle">Choose the medical department you need</p>
-                        </div>
-                        <div class="data-selection">
-                            <button class="data-selection-wrapper department-wrapper"
-                                *ngFor="let department of departments"
-                                [class.selected]="form.get('department_id')!.value.id === department.id"
-                                (click)="form.get('department_id')?.setValue(department)">
-                                <div class="material-symbols-outlined">{{ department.icon }}</div>
-                                <div>{{ department.name }}</div>
-                            </button>
-                        </div>
-                    </form>
-                </ng-container>
-                <ng-container *ngIf="currentStep === 2">
-                    <form [formGroup]="form" class="hospital-form">
-                        <div class="data-header">
-                            <h2 class="header-text">Hospital</h2>
-                            <p class="header-subtitle">Choose the medical hospital you need</p>
-                        </div>
-                        <div class="data-selection">
-                            <button class="data-selection-wrapper" *ngFor="let hospital of hospitals"
-                                [class.selected]="form.get('hospital_id')!.value.id === hospital.id"
-                                (click)="form.get('hospital_id')?.setValue(hospital)" [ngStyle]="{
+            <div class="data">
+                <div class="data-container">
+                    <ng-container *ngIf="currentStep === 1">
+                        <form [formGroup]="form" class="department-form">
+                            <div class="data-header">
+                                <h2 class="header-text">Department</h2>
+                                <p class="header-subtitle">Choose the medical department you need</p>
+                            </div>
+                            <div class="data-selection">
+                                <button class="data-selection-wrapper department-wrapper"
+                                    *ngFor="let department of departments"
+                                    [class.selected]="form.get('department_id')!.value.id === department.id"
+                                    (click)="form.get('department_id')?.setValue(department)">
+                                    <div class="material-symbols-outlined">{{ department.icon }}</div>
+                                    <div>{{ department.name }}</div>
+                                </button>
+                            </div>
+                        </form>
+                    </ng-container>
+                    <ng-container *ngIf="currentStep === 2">
+                        <form [formGroup]="form" class="hospital-form">
+                            <div class="data-header">
+                                <h2 class="header-text">Hospital</h2>
+                                <p class="header-subtitle">Choose the medical hospital you need</p>
+                            </div>
+                            <div class="data-selection">
+                                <button class="data-selection-wrapper" *ngFor="let hospital of hospitals"
+                                    [class.selected]="form.get('hospital_id')!.value.id === hospital.id"
+                                    (click)="form.get('hospital_id')?.setValue(hospital)" [ngStyle]="{
                                 'background-image': 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + hospital.image + ')',
        'background-size': 'cover',
        'background-position': 'center',
        'background-repeat': 'no-repeat'
                             }">
-                                <div class="material-symbols-outlined">apartment</div>
-                                <div class="data hospital-data">
-                                    <div>{{ hospital.name }}</div>
+                                    <div class="material-symbols-outlined">apartment</div>
+                                    <div class="data hospital-data">
+                                        <div>{{ hospital.name }}</div>
+                                        <div>
+                                            <span class="material-symbols-outlined">location_on</span>
+                                            <div>{{ hospital.location }}</div>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </form>
+                    </ng-container>
+                    <ng-container *ngIf="currentStep===3">
+                        <form [formGroup]="form" class="doctor-form">
+                            <div class="data-header">
+                                <h2 class="header-text">Doctors</h2>
+                                <p class="header-subtitle">Choose the doctor you need</p>
+                            </div>
+                            <div class="data-selection">
+                                @if(doctors){
+                                <button class="data-selection-wrapper" *ngFor="let doctor of doctors"
+                                    [class.selected]="form.get('doctor_id')!.value.id === doctor.id"
+                                    (click)="form.get('doctor_id')?.setValue(doctor)">
+                                    <div class="icon-wrapper">
+                                        <div class="material-symbols-outlined">person</div>
+                                    </div>
+                                    <div class="data">
+                                        <div>{{ doctor.name }}</div>
+                                        <div>{{ doctor.specialties[0].name }}</div>
+                                    </div>
+                                </button>
+                                }
+                                @else {
+                                <div>Doctors not found</div>
+                                }
+                            </div>
+                        </form>
+                    </ng-container>
+                    <ng-container *ngIf="currentStep===4">
+                        <form [formGroup]="form" class="date-form">
+                            <div class="data-header">
+                                <h2 class="header-text">Date & Time</h2>
+                                <p class="header-subtitle">Choose your appointment date and time</p>
+                            </div>
+                            <div class="data-selection">
+                                <div>
+                                    <label for="">Select Date</label>
+                                    <input type="date" matInput formControlName="date" [min]="utc"
+                                        (change)="eventClick($event)" />
+                                </div>
+                                <div *ngIf="timeSlots.length; else notFound">
+                                    <div>Available Time Slots</div>
                                     <div>
-                                        <span class="material-symbols-outlined">location_on</span>
-                                        <div>{{ hospital.location }}</div>
+                                        <button *ngFor="let item of timeSlots" class="wrapper"
+                                            (click)="form.get('time')?.setValue(item.time)"
+                                            [class.selected]="this.form.get('time')!.value === item.time"
+                                            [disabled]="!item.available">
+                                            <span class="material-symbols-outlined">alarm_on</span>
+                                            <span>{{item.time}}</span>
+                                        </button>
                                     </div>
                                 </div>
-                            </button>
-                        </div>
-                    </form>
-                </ng-container>
-                <ng-container *ngIf="currentStep===3">
-                    <form [formGroup]="form" class="doctor-form">
-                        <div class="data-header">
-                            <h2 class="header-text">Doctors</h2>
-                            <p class="header-subtitle">Choose the doctor you need</p>
-                        </div>
-                        <div class="data-selection">
-                            @if(doctors){
-                            <button class="data-selection-wrapper" *ngFor="let doctor of doctors"
-                                [class.selected]="form.get('doctor_id')!.value.id === doctor.id"
-                                (click)="form.get('doctor_id')?.setValue(doctor)">
-                                <div class="icon-wrapper">
-                                    <div class="material-symbols-outlined">person</div>
-                                </div>
-                                <div class="data">
-                                    <div>{{ doctor.name }}</div>
-                                    <div>{{ doctor.specialties[0].name }}</div>
-                                </div>
-                            </button>
-                            }
-                            @else {
-                            <div>Doctors not found</div>
-                            }
-                        </div>
-                    </form>
-                </ng-container>
-                <ng-container *ngIf="currentStep===4">
-                    <form [formGroup]="form" class="date-form">
-                        <div class="data-header">
-                            <h2 class="header-text">Date & Time</h2>
-                            <p class="header-subtitle">Choose your appointment date and time</p>
-                        </div>
-                        <div class="data-selection">
-                            <div>
-                                <label for="">Select Date</label>
-                                <input type="date" matInput formControlName="date" [min]="utc"
-                                    (change)="eventClick($event)" />
-                            </div>
-                            <div *ngIf="timeSlots.length; else notFound">
-                                <div>Available Time Slots</div>
-                                <div>
-                                    <button *ngFor="let item of timeSlots" class="wrapper"
-                                        (click)="form.get('time')?.setValue(item.time)"
-                                        [class.selected]="this.form.get('time')!.value === item.time"
-                                        [disabled]="!item.available">
-                                        <span class="material-symbols-outlined">alarm_on</span>
-                                        <span>{{item.time}}</span>
-                                    </button>
-                                </div>
-                            </div>
 
-                            <ng-template #notFound>
-                                <div>There is not any available time slots</div>
-                            </ng-template>
-                        </div>
-                    </form>
-                </ng-container>
-                <ng-container *ngIf="currentStep===5">
-                    <div class="details-wrapper">
-                        <div class="header-wrapper">
-                            <h2 class="header">Details</h2>
-                            <p class="subtitle">Tell us about your health concern</p>
-                        </div>
-                        <form class="detailts-form" [formGroup]="form">
-                            <p>Describe your health concern</p>
-                            <textarea formControlName="note" class="note-area"
-                                placeholder="Please describe your symptoms, concerns, or reason for the appointment..."></textarea>
+                                <ng-template #notFound>
+                                    <div>There is not any available time slots</div>
+                                </ng-template>
+                            </div>
                         </form>
-                    </div>
-                </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="currentStep===5">
+                        <div class="details-wrapper">
+                            <div class="header-wrapper">
+                                <h2 class="header">Details</h2>
+                                <p class="subtitle">Tell us about your health concern</p>
+                            </div>
+                            <form class="detailts-form" [formGroup]="form">
+                                <p>Describe your health concern</p>
+                                <textarea formControlName="note" class="note-area"
+                                    placeholder="Please describe your symptoms, concerns, or reason for the appointment..."></textarea>
+                            </form>
+                        </div>
+                    </ng-container>
+                </div>
                 <div class="button-wrapper">
                     <button mat-button (click)="goBack()" [disabled]="currentStep === 1" class="back-btn">Back</button>
                     <button class="next-btn" *ngIf="currentStep < steps.length" (click)="goNext()"
@@ -157,7 +159,7 @@
                     <div class="summary-wrapper" *ngFor="let item of summaryDataWithValue">
                         <div class="material-symbols-outlined">{{item.icon}}
                         </div>
-                        <div>
+                        <div class="summary-text">
                             <p>{{item.label}}</p>
                             <p>{{item.value}}</p>
                         </div>
@@ -166,4 +168,9 @@
             </div>
         </div>
     </div>
+
+
+    <footer>
+        &copy; 2025 MediPortal. All rights reserved.
+    </footer>
 </div>
