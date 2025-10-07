@@ -1,5 +1,4 @@
 .container {
-
     padding: 30px 50px;
     display: grid;
     grid-template-columns: 1fr 4fr;
@@ -326,5 +325,50 @@
                 font-size: 1.2rem;
             }
         }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .details-wrapper,
+    .user-details,
+    .user-detail-wrapper,
+    .user-header,
+    .user-contact {
+        flex-direction: column;
+    }
+
+    .user-header {
+        gap: 10px;
+    }
+
+    .section-wrapper {
+        width: 80vw;
+    }
+
+    .section-wrapper .body .card {
+        p:nth-of-type(1) {
+            font-size: 1rem !important;
+            width: 100% !important;
+        }
+
+        p:nth-of-type(2) {
+            font-size: 0.9rem !important;
+        }
+    }
+
+    .general-information .information {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .switcher-container .wrapper .header {
+        font-size: 1.2rem;
+    }
+
+    .switcher-container .wrapper .subtitle {
+        font-size: 1.1rem;
     }
 }
