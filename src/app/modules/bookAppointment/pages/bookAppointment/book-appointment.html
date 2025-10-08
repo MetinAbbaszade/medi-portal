@@ -60,7 +60,7 @@
                                     <div class="material-symbols-outlined">apartment</div>
                                     <div class="data hospital-data">
                                         <div>{{ hospital.name }}</div>
-                                        <div>
+                                        <div class="location-info">
                                             <span class="material-symbols-outlined">location_on</span>
                                             <div>{{ hospital.location }}</div>
                                         </div>
@@ -77,7 +77,7 @@
                             </div>
                             <div class="data-selection">
                                 @if(doctors){
-                                <button class="data-selection-wrapper" *ngFor="let doctor of doctors"
+                                <button class="data-selection-wrapper" id="data-selection" *ngFor="let doctor of doctors"
                                     [class.selected]="form.get('doctor_id')!.value.id === doctor.id"
                                     (click)="form.get('doctor_id')?.setValue(doctor)">
                                     <div class="icon-wrapper">
