@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatInputModule } from "@angular/material/input";
@@ -9,7 +9,7 @@ import { ApiResponse, Slots, Specialty } from '../../models/doctor.model';
 import { MatExpansionModule } from "@angular/material/expansion";
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { FooterSection } from "../../../home/components/footerSection/footer-section";
+import { TranslateModule } from '@ngx-translate/core';
 
 interface Department { id: string; name: string; icon?: string; }
 interface Hospital { id: string; name: string; location: string; image: string; }
@@ -45,13 +45,15 @@ export interface IDepartmentResponse {
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatExpansionModule
-],
+    MatExpansionModule,
+    TranslateModule
+  ],
   templateUrl: './book-appointment.html',
   styleUrl: './book-appointment.css'
 })
 export class BookAppointment {
 
+  public translate = inject(TranslateModule)
   form!: FormGroup;
   currentStep: number = 1;
   steps = [

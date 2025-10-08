@@ -1,214 +1,200 @@
 <section class="container">
     <div class="hero">
         <div class="hero-content">
-            <h1>Find The Best Hospitals Near You</h1>
-            <p>Your health matters. Book appointments easily with trusted hospitals.</p>
+            <h1>{{ 'Hospital.heroTitle' | translate }}</h1>
+            <p>{{ 'Hospital.heroDescription' | translate }}</p>
             <form class="hero-search" [formGroup]="filterForm">
                 <div class="filter-wrapper">
                     <mat-form-field>
-                        <input matInput type="text" placeholder="Search hospitals which you want..."
+                        <input matInput type="text" [placeholder]="'Hospital.heroSearchPlaceholder' | translate"
                             aria-label="Search hospitals" formControlName="Name" />
                     </mat-form-field>
-
                     <div *ngIf="searchResult.length" class="search-results">
                         <div *ngFor="let item of searchResult" class="search-result-wrapper"
                             (click)="viewDetails(item)">
-                            <div [ngStyle]="{
-                                'background-image': 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + item.image + ')',
-       'background-size': 'cover',
-       'background-position': 'center',
-       'background-repeat': 'no-repeat'
-                            }" class="search-profile">
+                            <div class="search-profile" [ngStyle]="{
+                     'background-image': 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + item.image + ')',
+                     'background-size': 'cover',
+                     'background-position': 'center',
+                     'background-repeat': 'no-repeat'
+                   }">
                             </div>
                             <div class="search-datas">
                                 <span class="search-name">{{ item.name }}</span>
                                 <span class="search-adress">
                                     <span class="material-icons">location_on</span>
-                                    <span>
-                                        {{ item.adresses[0].county }}
-                                    </span>
+                                    <span>{{ item.adresses[0].county }}</span>
                                 </span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button mat-raised-button color="primary" type="submit">Search</button>
+                <button mat-raised-button color="primary" type="submit">{{ 'Hospital.heroSearchButton' | translate
+                    }}</button>
             </form>
-
         </div>
     </div>
 
+    <!-- Featured Hospitals -->
     <div class="hospital-overview" *ngIf="featuredHospitals">
         <div class="header">
-            <h2>Featured Hospitals</h2>
-            <p class="section-subtitle">Trusted healthcare providers with top-rated services</p>
+            <h2>{{ 'Hospital.featuredTitle' | translate }}</h2>
+            <p class="section-subtitle">{{ 'Hospital.featuredSubtitle' | translate }}</p>
         </div>
-
         <div class="hospital-cards">
             <div class="hospital-item" *ngFor="let item of featuredHospitals">
                 <img [src]="item.image" [alt]="item.name">
                 <div class="hospital-info">
-                    <h3>{{item.name}}</h3>
-                    <p>{{item.description}}</p>
+                    <h3>{{ item.name }}</h3>
+                    <p>{{ item.description }}</p>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Directory -->
     <section class="hospital-directory">
         <mat-expansion-panel class="filter-wrapper">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     <span class="material-icons">filter_alt</span>
-                    <div class="filter">Filter</div>
+                    <div class="filter">{{ 'Hospital.filterTitle' | translate }}</div>
                 </mat-panel-title>
             </mat-expansion-panel-header>
+
+            <!-- Specialty -->
             <form class="filter-sort-bar" [formGroup]="filterForm">
                 <mat-form-field appearance="fill">
-                    <mat-label>All Specialities</mat-label>
+                    <mat-label>{{ 'Hospital.filterSpecialty' | translate }}</mat-label>
                     <mat-select id="filterSpecialty" formControlName="SpecialtyId">
                         <mat-option value=""></mat-option>
-                        <mat-option value="Cardiac Care">Cardiac Care</mat-option>
-                        <mat-option value="Emergency & Trauma Services">Emergency & Trauma Services</mat-option>
-                        <mat-option value="General Medicine">General Medicine</mat-option>
-                        <mat-option value="Neurology">Neurology</mat-option>
-                        <mat-option value="Orthopedic Surgery">Orthopedic Surgery</mat-option>
-                        <mat-option value="Pediatric Medicine">Pediatric Medicine</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </form>
-            <form [formGroup]="filterForm">
-                <mat-form-field>
-                    <mat-label>Sort By</mat-label>
-                    <mat-select id="sortHospitals" formControlName="Filter">
-                        <mat-option value=""></mat-option>
-                        <mat-option value="name-asc">Name (A-Z)</mat-option>
-                        <mat-option value="name-desc">Name (Z-A)</mat-option>
+                        <mat-option value="Cardiac Care">{{ 'Hospital.specialties.cardiac' | translate }}</mat-option>
+                        <mat-option value="Emergency & Trauma Services">{{ 'Hospital.specialties.emergency' | translate
+                            }}</mat-option>
+                        <mat-option value="General Medicine">{{ 'Hospital.specialties.general' | translate
+                            }}</mat-option>
+                        <mat-option value="Neurology">{{ 'Hospital.specialties.neurology' | translate }}</mat-option>
+                        <mat-option value="Orthopedic Surgery">{{ 'Hospital.specialties.orthopedic' | translate
+                            }}</mat-option>
+                        <mat-option value="Pediatric Medicine">{{ 'Hospital.specialties.pediatrics' | translate
+                            }}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </form>
 
+            <!-- Sort -->
+            <form [formGroup]="filterForm">
+                <mat-form-field>
+                    <mat-label>{{ 'Hospital.filterSort' | translate }}</mat-label>
+                    <mat-select id="sortHospitals" formControlName="Filter">
+                        <mat-option value=""></mat-option>
+                        <mat-option value="name-asc">{{ 'Hospital.sortOptions.asc' | translate }}</mat-option>
+                        <mat-option value="name-desc">{{ 'Hospital.sortOptions.desc' | translate }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
         </mat-expansion-panel>
+
         <div class="header">
-            <h2>All Hospitals</h2>
-            <p class="section-subtitle">Browse through our complete list of partnered hospitals</p>
+            <h2>{{ 'Hospital.allHospitalsTitle' | translate }}</h2>
+            <p class="section-subtitle">{{ 'Hospital.allHospitalsSubtitle' | translate }}</p>
         </div>
 
         <div class="hospital-list">
             <div class="hospital-card" *ngFor="let item of hospitals">
                 <img [src]="item.image" [alt]="item.name">
                 <div class="card-content">
-                    <h3>{{item.name}}</h3>
-                    <p>{{item.description}}</p>
+                    <h3>{{ item.name }}</h3>
+                    <p>{{ item.description }}</p>
                     <div class="tags">
-                        <span *ngFor="let data of item.departments">{{data.name}}</span>
+                        <span *ngFor="let data of item.departments">{{ data.name }}</span>
                     </div>
-                    <a (click)="viewDetails(item)" class="details-btn">View Details</a>
+                    <a (click)="viewDetails(item)" class="details-btn">{{ 'Hospital.viewDetails' | translate }}</a>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Why Choose Us -->
     <section class="why-choose-us">
         <div class="header">
-            <h2>Why Choose Us</h2>
-            <p class="section-subtitle">Your health is our priority. Here's why thousands trust us.</p>
+            <h2>{{ 'Hospital.whyChooseUsTitle' | translate }}</h2>
+            <p class="section-subtitle">{{ 'Hospital.whyChooseUsSubtitle' | translate }}</p>
         </div>
-
         <div class="benefits-grid">
             <div class="benefit-item">
                 <div class="icon">🏥</div>
-                <h3>Verified Hospitals</h3>
-                <p>All hospitals are verified for quality care and accredited services.</p>
+                <h3>{{ 'Hospital.benefits.verifiedTitle' | translate }}</h3>
+                <p>{{ 'Hospital.benefits.verifiedText' | translate }}</p>
             </div>
-
             <div class="benefit-item">
                 <div class="icon">📅</div>
-                <h3>Easy Appointments</h3>
-                <p>Book appointments in just a few clicks with instant confirmations.</p>
+                <h3>{{ 'Hospital.benefits.appointmentsTitle' | translate }}</h3>
+                <p>{{ 'Hospital.benefits.appointmentsText' | translate }}</p>
             </div>
-
             <div class="benefit-item">
                 <div class="icon">⏱</div>
-                <h3>24/7 Availability</h3>
-                <p>Access healthcare providers any time of the day, every day.</p>
+                <h3>{{ 'Hospital.benefits.availabilityTitle' | translate }}</h3>
+                <p>{{ 'Hospital.benefits.availabilityText' | translate }}</p>
             </div>
-
             <div class="benefit-item">
                 <div class="icon">⭐</div>
-                <h3>Trusted Reviews</h3>
-                <p>Read real patient reviews before choosing your hospital.</p>
+                <h3>{{ 'Hospital.benefits.reviewsTitle' | translate }}</h3>
+                <p>{{ 'Hospital.benefits.reviewsText' | translate }}</p>
             </div>
         </div>
     </section>
+
+    <!-- Testimonials -->
     <section class="testimonials">
         <div class="header">
-            <h2>What Our Patients Say</h2>
-            <p class="section-subtitle">Trusted by thousands of patients for quality care</p>
+            <h2>{{ 'Hospital.testimonialsTitle' | translate }}</h2>
+            <p class="section-subtitle">{{ 'Hospital.testimonialsSubtitle' | translate }}</p>
         </div>
-
         <div class="testimonials-grid">
             <div class="testimonial-item">
-                <div class="stars">
-                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                </div>
-                <p class="review-text">"Booking my appointment was effortless. The staff were attentive, and the doctor
-                    explained everything clearly."</p>
+                <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                <p class="review-text">{{ 'Hospital.reviews.review1' | translate }}</p>
                 <div class="reviewer">
                     <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Doe">
                     <div>
-                        <h4>John Doe</h4>
-                        <span>Patient</span>
+                        <h4>John Doe</h4><span>Patient</span>
                     </div>
                 </div>
             </div>
-
             <div class="testimonial-item">
-                <div class="stars">
-                    <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
-                </div>
-                <p class="review-text">"I found the right specialist in minutes. The platform’s interface is so
-                    user-friendly and fast."</p>
+                <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span></div>
+                <p class="review-text">{{ 'Hospital.reviews.review2' | translate }}</p>
                 <div class="reviewer">
                     <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Emily Smith">
                     <div>
-                        <h4>Emily Smith</h4>
-                        <span>Patient</span>
+                        <h4>Emily Smith</h4><span>Patient</span>
                     </div>
                 </div>
             </div>
-
             <div class="testimonial-item">
-                <div class="stars">
-                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                </div>
-                <p class="review-text">"From booking to consultation, everything was smooth and stress-free. Highly
-                    recommend this service."</p>
+                <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                <p class="review-text">{{ 'Hospital.reviews.review3' | translate }}</p>
                 <div class="reviewer">
                     <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Michael Lee">
                     <div>
-                        <h4>Michael Lee</h4>
-                        <span>Patient</span>
+                        <h4>Michael Lee</h4><span>Patient</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- CTA -->
     <section class="cta-section">
         <div class="cta-content">
             <div class="header">
-                <h2>Your Health, Our Priority</h2>
-                <p>Book your appointment today with the best hospitals and doctors in your area. It only takes a few
-                    clicks
-                    to get started.</p>
+                <h2>{{ 'Hospital.ctaTitle' | translate }}</h2>
+                <p>{{ 'Hospital.ctaText' | translate }}</p>
             </div>
-            <a routerLink="/book-appointment" class="cta-button">Book Appointment</a>
+            <a routerLink="/book-appointment" class="cta-button">{{ 'Hospital.ctaButton' | translate }}</a>
         </div>
     </section>
 
-    <footer>
-        &copy; 2025 MediPortal. All rights reserved.
-    </footer>
-
+    <footer>{{ 'Hospital.footer' | translate }}</footer>
 </section>

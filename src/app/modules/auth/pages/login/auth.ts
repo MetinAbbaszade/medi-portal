@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,6 +10,7 @@ import { Translation } from '../../../../translation';
 import { AuthService } from '../../services/auth';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 export interface IResponse {
   token: string
@@ -25,7 +26,8 @@ export interface IResponse {
     MatIconModule,
     MatButtonModule,
     ReactiveFormsModule,
-    ErrorHandling
+    ErrorHandling,
+    TranslateModule
   ],
   templateUrl: './auth.html',
   styleUrl: './auth.css'
@@ -37,6 +39,7 @@ export class AuthComponent implements OnInit {
   loginForm!: FormGroup;
   signupForm!: FormGroup;
   redirectTo: any;
+  public translate = inject(TranslateService);
 
   constructor(
     public fb: FormBuilder,

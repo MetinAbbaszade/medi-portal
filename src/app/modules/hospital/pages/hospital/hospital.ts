@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { HospitalService } from '../../services/hospital-service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -16,6 +16,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { isObservable, Subscription } from 'rxjs';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
@@ -31,7 +32,8 @@ import { BreakpointObserver } from '@angular/cdk/layout';
     MatDividerModule,
     MatButtonModule,
     MatExpansionModule,
-    MatSelectModule],
+    MatSelectModule,
+    TranslateModule],
   templateUrl: './hospital.html',
   styleUrls: ['./hospital.css'],
   standalone: true
@@ -43,6 +45,7 @@ export class Hospital implements OnInit, OnDestroy {
   filterForm!: FormGroup;
   public isMobile: boolean = false;
   private subscriptions = new Subscription();
+  public translate = inject(TranslateModule)
 
   constructor(
     private hospitalService: HospitalService,

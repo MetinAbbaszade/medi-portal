@@ -1,27 +1,30 @@
 <div class="body">
     <div class="container" [ngClass]="{ 'change': isSignupMode }">
         <div class="forms-container">
+
+            <!-- Signup -->
             <div class="form-control signup-form">
                 <form action="#" id="signup-form" [formGroup]="signupForm" (submit)="signUp()">
-                    <h2>Qeydiyyat</h2>
+                    <h2>{{ 'Auth.signupTitle' | translate }}</h2>
                     <div class="input-group">
                         <div class="input-field">
                             <i class="fas fa-user"></i>
                             <input type="text" id="sign-up-fname" formControlName="name" />
-                            <label for="sign-up-fname">Ad</label>
+                            <label for="sign-up-fname">{{ 'Auth.signupNameLabel' | translate }}</label>
                             <app-form-control-errors [control]="signupForm.get('name')"></app-form-control-errors>
                         </div>
 
                         <div class="input-field">
                             <i class="fas fa-user"></i>
                             <input type="text" id="sign-up-lname" formControlName="surname" />
-                            <label for="sign-up-lname">Soyad</label>
+                            <label for="sign-up-lname">{{ 'Auth.signupSurnameLabel' | translate }}</label>
                             <app-form-control-errors [control]="signupForm.get('surname')"></app-form-control-errors>
                         </div>
+
                         <div class="input-field">
                             <i class="fas fa-envelope"></i>
                             <input type="email" id="sign-up-email" formControlName="email" />
-                            <label for="sign-up-email">Email</label>
+                            <label for="sign-up-email">{{ 'Auth.signupEmailLabel' | translate }}</label>
                             <app-form-control-errors [control]="signupForm.get('email')"></app-form-control-errors>
                         </div>
 
@@ -29,31 +32,33 @@
                             <i class="fas fa-lock"></i>
                             <input [type]="passwordVisible ? 'text' : 'password'" id="sign-up-password"
                                 formControlName="password" />
-                            <label for="sign-up-password">Şifrə</label>
+                            <label for="sign-up-password">{{ 'Auth.signupPasswordLabel' | translate }}</label>
                             <i class="far fa-eye toggle-password"
                                 [ngClass]="passwordVisible ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePassword()"></i>
                             <app-form-control-errors [control]="signupForm.get('password')"></app-form-control-errors>
                         </div>
                     </div>
 
-                    <button type="submit" class="btn-gradient" [disabled]="signupForm.invalid">Qeydiyyatdan keç <i
-                            class="fas fa-arrow-right"></i></button>
+                    <button type="submit" class="btn-gradient" [disabled]="signupForm.invalid">
+                        {{ 'Auth.signupButton' | translate }} <i class="fas fa-arrow-right"></i>
+                    </button>
                 </form>
-                <span class="divider">və yaxud</span>
+                <span class="divider">{{ 'Auth.signupDivider' | translate }}</span>
                 <div class="socials">
                     <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
 
+            <!-- Signin -->
             <div class="form-control signin-form">
                 <form action="#" id="login-form" (submit)="login()" [formGroup]="loginForm">
-                    <h2>Daxil Ol</h2>
+                    <h2>{{ 'Auth.signinTitle' | translate }}</h2>
                     <div class="input-group">
                         <div class="input-field">
                             <i class="fas fa-envelope"></i>
                             <input type="text" id="sign-in-email" formControlName="email" />
-                            <label for="sign-in-email">Email</label>
+                            <label for="sign-in-email">{{ 'Auth.signinEmailLabel' | translate }}</label>
                             <app-form-control-errors [control]="loginForm.get('email')"></app-form-control-errors>
                         </div>
 
@@ -61,17 +66,18 @@
                             <i class="fas fa-lock"></i>
                             <input [type]="passwordVisible ? 'text' : 'password'" id="sign-in-password"
                                 formControlName="password" />
-                            <label for="sign-in-password">Şifrə</label>
+                            <label for="sign-in-password">{{ 'Auth.signinPasswordLabel' | translate }}</label>
                             <i class="far fa-eye toggle-password"
                                 [ngClass]="passwordVisible ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePassword()"></i>
                             <app-form-control-errors [control]="loginForm.get('password')"></app-form-control-errors>
                         </div>
                     </div>
 
-                    <button type="submit" class="btn-gradient" [disabled]="loginForm.invalid">Daxil ol <i
-                            class="fas fa-arrow-right"></i></button>
+                    <button type="submit" class="btn-gradient" [disabled]="loginForm.invalid">
+                        {{ 'Auth.signinButton' | translate }} <i class="fas fa-arrow-right"></i>
+                    </button>
                 </form>
-                <span class="divider">və yaxud</span>
+                <span class="divider">{{ 'Auth.signinDivider' | translate }}</span>
                 <div class="socials">
                     <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
@@ -79,34 +85,28 @@
             </div>
         </div>
 
+        <!-- Intro Containers -->
         <div class="intros-container">
             <div class="intro-control signin-intro">
                 <div class="icon">
-                    <button class="aze" (click)="changeLang('az')">Aze</button>
-                    <button class="en" (click)="changeLang('en')">En</button>
+                    <button class="aze" (click)="changeLang('az')">{{ 'Auth.langAze' | translate }}</button>
+                    <button class="en" (click)="changeLang('en')">{{ 'Auth.langEng' | translate }}</button>
                 </div>
                 <div class="intro-control__inner">
-                    <h2>Xoş gəlmisiniz!</h2>
-                    <p>
-                        Yenidən xoş gəldiniz! Sizi burada görmək bizi çox sevindirir. Ümid edirik ki, hər şey yaxşıdır
-                        və qaldığınız yerdən rahat şəkildə davam edə bilərsiniz. Hazırsınızsa, başlayaq!
-                    </p>
-                    <button id="signup-btn" class="btn-outline" (click)="toggle()">Hesabınız yoxdur? <span>Qeydiyyatdan
-                            keçin</span></button>
+                    <h2>{{ 'Auth.welcomeTitle' | translate }}</h2>
+                    <p>{{ 'Auth.welcomeText' | translate }}</p>
+                    <button id="signup-btn" class="btn-outline" (click)="toggle()"
+                        [innerHTML]="'Auth.welcomeButton' | translate"></button>
                 </div>
             </div>
             <div class="intro-control signup-intro">
                 <div class="intro-control__inner">
-                    <h2>Bizə qoşulun!</h2>
-                    <p>
-                        Sizi burada görmək bizi çox sevindirir! Əgər hələ hesab yaratmamısınızsa, indi qeydiyyatdan
-                        keçin və tibbi xidmətlərə, xüsusi təkliflərə və daha çoxuna asanlıqla giriş əldə edin!
-                    </p>
-                    <button id="signin-btn" class="btn-outline" (click)="toggle()">Artıq hesabınız var? <span>Daxil
-                            olun</span></button>
+                    <h2>{{ 'Auth.joinTitle' | translate }}</h2>
+                    <p>{{ 'Auth.joinText' | translate }}</p>
+                    <button id="signin-btn" class="btn-outline" (click)="toggle()"
+                        [innerHTML]="'Auth.joinButton' | translate"></button>
                 </div>
             </div>
         </div>
     </div>
-
 </div>

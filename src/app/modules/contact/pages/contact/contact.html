@@ -1,52 +1,50 @@
 <div class="wrapper">
     <section class="contact-hero">
-        <h1>Contact Us</h1>
-        <p>Have questions or need help? Get in touch with us and we’ll respond as quickly as possible.</p>
+        <h1>{{ 'Contact.heroTitle' | translate }}</h1>
+        <p>{{ 'Contact.heroDescription' | translate }}</p>
     </section>
-
 
     <section class="contact-section">
         <div class="contact-info">
-            <h2>Get In Touch</h2>
+            <h2>{{ 'Contact.getInTouchTitle' | translate }}</h2>
             <div>
-                <p><strong>Address:</strong> 123 Health Street, Wellness City</p>
-                <p><strong>Phone:</strong> +1 234 567 890</p>
-                <p><strong>Email:</strong> support@MediPortal.com</p>
-                <p>We are here to assist you with booking appointments, answering questions, or resolving any issues you
-                    may
-                    face.</p>
+                <p><strong>{{ 'Contact.addressLabel' | translate }}</strong> {{ 'Contact.addressValue' | translate }}
+                </p>
+                <p><strong>{{ 'Contact.phoneLabel' | translate }}</strong> {{ 'Contact.phoneValue' | translate }}</p>
+                <p><strong>{{ 'Contact.emailLabel' | translate }}</strong> {{ 'Contact.emailValue' | translate }}</p>
+                <p>{{ 'Contact.helpText' | translate }}</p>
             </div>
         </div>
 
         <div class="contact-form">
-            <h2>Send Us a Message</h2>
+            <h2>{{ 'Contact.formTitle' | translate }}</h2>
             <form action="#" [formGroup]="form">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Your name" required formControlName="name">
+                <label for="name">{{ 'Contact.nameLabel' | translate }}</label>
+                <input type="text" id="name" name="name" [placeholder]="'Contact.namePlaceholder' | translate" required
+                    formControlName="name">
 
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Your email" required formControlName="email">
+                <label for="email">{{ 'Contact.emailLabelForm' | translate }}</label>
+                <input type="email" id="email" name="email" [placeholder]="'Contact.emailPlaceholder' | translate"
+                    required formControlName="email">
 
-                <label for="message">Message</label>
-                <textarea id="message" name="message" rows="5" placeholder="Your message" required
-                    formControlName="message"></textarea>
+                <label for="message">{{ 'Contact.messageLabel' | translate }}</label>
+                <textarea id="message" name="message" rows="5" [placeholder]="'Contact.messagePlaceholder' | translate"
+                    required formControlName="message"></textarea>
 
-                <button type="submit" (click)="sendMessage()">Send Message</button>
+                <button type="submit" (click)="sendMessage()">{{ 'Contact.sendButton' | translate }}</button>
             </form>
         </div>
     </section>
 
-
     <div class="map">
-
         <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.842979626402!2d49.927991126512666!3d40.41232915590649!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x403062f080483837%3A0xff9341d95bf03355!2sBona%20Dea%20Beyn%C9%99lxalq%20Hospital%C4%B1!5e0!3m2!1str!2saz!4v1755089548565!5m2!1str!2saz"
             width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
     </div>
 
-
     <footer>
-        &copy; 2025 MediPortal. All rights reserved.
+        {{ 'Contact.footer' | translate }}
     </footer>
 </div>

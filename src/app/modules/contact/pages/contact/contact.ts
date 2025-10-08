@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Home } from '../../../home/services/home';
 import Swal from 'sweetalert2';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-contact',
   imports: [
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ],
   templateUrl: './contact.html',
   styleUrl: './contact.css'
 })
 export class Contact implements OnInit {
   form!: FormGroup
+  public translate = inject(TranslateService);
 
   constructor(
     public fb: FormBuilder,
