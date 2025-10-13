@@ -30,7 +30,7 @@ export interface IResponse {
     TranslateModule
   ],
   templateUrl: './auth.html',
-  styleUrl: './auth.css'
+  styleUrls: ['./auth.css'],
 })
 export class AuthComponent implements OnInit {
 
@@ -43,7 +43,7 @@ export class AuthComponent implements OnInit {
 
   constructor(
     public fb: FormBuilder,
-    private Translation: Translation,
+    public Translation: Translation,
     private AuthService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute

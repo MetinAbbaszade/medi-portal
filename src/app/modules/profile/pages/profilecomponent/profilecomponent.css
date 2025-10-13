@@ -16,6 +16,10 @@
 
 .navigation-wrapper {
     align-self: start;
+
+    .navigation-context {
+        padding: 10px;
+    }
 }
 
 .user-details-container {
@@ -370,5 +374,9 @@
 
     .switcher-container .wrapper .subtitle {
         font-size: 1.1rem;
+    }
+
+    .navigation-wrapper {
+        display: none;
     }
 }

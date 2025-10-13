@@ -8,6 +8,7 @@ import { Pagenotfoundcomponent } from './shared/components/pagenotfound/pagenotf
 import { Profilecomponent } from './modules/profile/pages/profilecomponent/profilecomponent';
 import { Hospitaldetails } from './modules/hospital-details/pages/hospitaldetails/hospitaldetails';
 import { BookAppointment } from './modules/bookAppointment/pages/bookAppointment/book-appointment';
+import { AuthComponent } from './modules/auth/pages/login/auth';
 
 export const routes: Routes = [
     {
@@ -15,6 +16,10 @@ export const routes: Routes = [
         pathMatch: 'full',
         redirectTo: 'home',
         data: { breadcrumb: 'mediPortal' }
+    },
+    {
+        path: 'auth/login',
+        component: AuthComponent
     },
     {
         path: '',
@@ -35,11 +40,6 @@ export const routes: Routes = [
             {
                 path: 'contact',
                 component: Contact
-            },
-            {
-                path: 'auth',
-                loadChildren: () =>
-                    import('./modules/auth/auth.routes').then(m => m.authRoutes)
             },
             {
                 path: 'profile',

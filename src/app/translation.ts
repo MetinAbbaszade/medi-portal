@@ -13,7 +13,7 @@ export enum Languages {
 export class Translation {
   constructor(
     private translate: TranslateService
-  ) { }
+  ) {}
 
   setLang(lang: string): void {
     localStorage.setItem('lang', lang)

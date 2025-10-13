@@ -102,7 +102,7 @@
 
         <div class="hospital-list">
             <div class="hospital-card" *ngFor="let item of hospitals">
-                <img [src]="item.image" [alt]="item.name">
+                <img [src]="item.image" [alt]="item.id">
                 <div class="card-content">
                     <h3>{{ item.name }}</h3>
                     <p>{{ item.description }}</p>

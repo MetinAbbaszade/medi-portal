@@ -20,7 +20,7 @@
         </app-main-navbar>
 
 
-        <div [style.marginTop.px]="!isMobile ? 70 : 0">
+        <div [style.marginTop.px]="!isMobile && !getHideNavbar ? 70 : 0">
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>
