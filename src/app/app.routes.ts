@@ -43,7 +43,7 @@ export const routes: Routes = [
             },
             {
                 path: 'profile',
-                component: Profilecomponent
+                loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule)
             },
             {
                 path: 'hospital-details',

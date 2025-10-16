@@ -57,7 +57,7 @@ export class AuthService {
         this.session = user;
     }
 
-    private getUserModules(): string[] {
+    public getUserModules(): string[] {
         return this.decodedToken?.role?.modules
             ? this.decodedToken.role.modules.map((module) => module.name)
             : [];

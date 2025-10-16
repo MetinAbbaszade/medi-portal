@@ -16,10 +16,7 @@ export class PermittedIfDirective {
     @Input() set appPermittedIf(requirements: string) {
         const [moduleName, permissions] = requirements.split('.');
         const userPermissions = this.authService.getUserPermissions(moduleName);
-        if (
-            userPermissions
-            && (userPermissions as any).find((p: any) => p.name === 'full')
-        ) {
+        if (userPermissions && (userPermissions as any).find((p: any) => p.name === 'Full')) {
             if (!this.hasView) {
                 this.viewContainer.createEmbeddedView(this.templateRef)
                 this.hasView = true;
@@ -28,7 +25,6 @@ export class PermittedIfDirective {
             userPermissions
             && 'permissions' in userPermissions
             && userPermissions.find(p => permissions.split('|').some(s => p.name.toLocaleLowerCase() === s.toLocaleLowerCase()))) {
-
             if (!this.hasView) {
                 this.viewContainer.createEmbeddedView(this.templateRef)
                 this.hasView = true;

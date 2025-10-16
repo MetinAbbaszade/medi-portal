@@ -1,133 +1,58 @@
 <div class="container">
-    <div class="section-wrapper navigation-wrapper">
+    <div class="section-wrapper navigation-wrapper" *ngIf="links.length > 0">
         <div class="navigation-header">
             <h4 class="header">{{ 'Profile.navigation' | translate }}</h4>
         </div>
         <div class="navigation-context">
-            There is no any redirection pages
+            <ng-container *ngTemplateOutlet="recursiveListTmpl; context: {items: links, depth: 0}"></ng-container>
         </div>
     </div>
 
-    <div class="information-wrapper">
-        <!-- User details -->
-        <div class="section-wrapper user-details-container">
-            <div class="details-wrapper">
-                <div class="user-details">
-                    <div class="user-photo-wrapper"></div>
-                    <div class="user-detail-wrapper">
-                        <div class="user-header">
-                            <h3 class="user-name">{{token?.name}} {{token?.surname}}</h3>
-                            <p class="user-role">{{this.authService.getUserRoles?.name}}</p>
-                        </div>
-
-                        @if(token?.role?.name === 'doctor'){
-                        <p class="user-department">{{ 'Profile.personalInfo.department' | translate }}: Cardiology</p>
-                        <p class="user-specialization">{{ 'Profile.personalInfo.specialization' | translate }}:
-                            Cardiovascular Medicine</p>
-                        }
-
-                        <div class="user-contact">
-                            <div class="contact-item">
-                                <span class="material-symbols-outlined">mail</span>
-                                <p class="contact-text">{{token?.email}}</p>
-                            </div>
-                            @if (token?.phone) {
-                            <div class="contact-item">
-                                <span class="material-symbols-outlined">call</span>
-                                <p class="contact-text">{{token?.phone}}</p>
-                            </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-
-                <div class="edit-btn">
-                    <button>
-                        <span class="material-symbols-outlined">edit_document</span>
-                        <p>{{ 'Profile.editProfile' | translate }}</p>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Role switcher -->
-        <div class="section-wrapper switcher-container">
-            <div class="wrapper">
-                <p class="header">{{ 'Profile.switchRoleTitle' | translate }}</p>
-                <p class="subtitle">{{ 'Profile.switchRoleSubtitle' | translate }}</p>
-                <div class="btn-container">
-                    <button class="selected">{{token?.role?.name}}</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="general-container">
-            <!-- Appointments -->
-            @if(token?.role?.name === 'Doctor' || token?.role?.name === 'Patient'){
-            <div class="section-wrapper appointment-wrapper">
-                <div class="header">
-                    <span class="material-symbols-outlined">calendar_today</span>
-                    <p>{{ 'Profile.appointmentsTitle' | translate }}</p>
-                </div>
-                <div class="body">
-                    <div class="card appointment-card" *ngFor="let item of appointments">
-                        <div class="information-section">
-                            <p class="header">{{ item.patientName }}</p>
-                            <div class="time-wrapper">
-                                <div>
-                                    <span class="material-symbols-outlined">calendar_today</span>
-                                    <p>{{ item.date }}</p>
-                                </div>
-                                <div>
-                                    <span class="material-symbols-outlined">timer</span>
-                                    <p>{{ item.time }}</p>
-                                </div>
-                            </div>
-                            <p class="type">{{ 'Profile.appointmentType' | translate }}</p>
-                        </div>
-                        <div class="status">
-                            <div>{{ 'Profile.appointmentStatus.' + item.status | translate }}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            }
-
-            <!-- Notifications -->
-            <div class="section-wrapper notification-wrapper">
-                <div class="header">
-                    <span class="material-symbols-outlined">notifications</span>
-                    <p>{{ 'Profile.notificationsTitle' | translate }}</p>
-                </div>
-                <div class="body">
-                    <div class="card notification" *ngFor="let notif of notifications">
-                        <p>{{ notif.message || ('Profile.sampleNotification' | translate) }}</p>
-                        <p>{{ notif.time }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Personal info -->
-        <div class="section-wrapper general-information">
-            <div class="header">
-                <span class="material-symbols-outlined">person</span>
-                <p>{{ 'Profile.personalInfoTitle' | translate }}</p>
-            </div>
-            <div class="information">
-                <div>
-                    <div class="title">{{ 'Profile.personalInfo.fullName' | translate }}</div>
-                    <div class="value">{{token?.name}} {{token?.surname}}</div>
-                </div>
-                <div>
-                    <div class="title">{{ 'Profile.personalInfo.phone' | translate }}</div>
-                    <div class="value">{{token?.phone || '+994 55 281 18 08'}}</div>
-                </div>
-                <div>
-                    <div class="title">{{ 'Profile.personalInfo.email' | translate }}</div>
-                    <div class="value">{{token?.email}}</div>
-                </div>
-            </div>
-        </div>
+    <div class="router-wrapper">
+        <router-outlet></router-outlet>
     </div>
 </div>
+
+
+<ng-template #recursiveListTmpl let-items="items" let-depth="depth">
+    <div *ngFor="let link of items">
+        <ng-container *ngIf="link.children">
+            <ng-container *ngTemplateOutlet="singleParent; context: {link: link, depth: depth}">
+            </ng-container>
+        </ng-container>
+        <ng-container *ngIf="!link.children">
+            <ng-container *ngTemplateOutlet="singleItem; context: {link: link, depth: depth}">
+            </ng-container>
+        </ng-container>
+    </div>
+</ng-template>
+
+<ng-template #singleItem let-link="link" let-depth="depth">
+    <a class="navigator" [ngStyle]="{'padding-left': (depth * 15) + 'px'}"
+        [ngClass]="ActiveRoute === link.link ? 'active' : ''" [routerLink]="link.link" routerLinkActive="active">
+        <ng-container *ngIf="link.icon">
+            <span class="material-symbols-outlined">{{ link.icon }}</span>
+        </ng-container>
+        <div class="label">{{ link.label }}</div>
+    </a>
+</ng-template>
+
+
+<ng-template #singleParent let-link="link" let-depth="depth">
+    <div *appPermittedIf="link.appPermittedIf">
+        <mat-accordion class="accordion">
+            <mat-expansion-panel style="background-color: #f5f9fb; color: #11324d;" [expanded]="isActiveParent(link)">
+                <mat-expansion-panel-header>
+                    <mat-panel-title style="display: flex; align-items: center; gap: 5px;">
+                        <ng-container *ngIf="link.icon">
+                            <span class="material-symbols-outlined">{{link.icon}}</span>
+                        </ng-container>
+                        <span class="label">{{link.label}}</span>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{items: link.children, depth: depth + 1}">
+                </ng-container>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</ng-template>

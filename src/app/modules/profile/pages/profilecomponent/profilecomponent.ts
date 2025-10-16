@@ -1,9 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../../../auth.service';
-import { PatientUser } from '../../../auth/models';
-import { authInterceptor } from '../../../../interceptors/auth'
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
+import menuLinks from '../../modules/menu-links';
+import { PermittedIfDirective } from "../../../../directives/permitted-if.directive";
+import { MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle } from "@angular/material/expansion";
+import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs';
+
+type MenuLinkKey = keyof typeof menuLinks;
 
 interface Appointment {
   patientName: string;
@@ -22,7 +27,14 @@ interface Notification {
   selector: 'app-profilecomponent',
   imports: [
     TranslateModule,
-    CommonModule
+    CommonModule,
+    PermittedIfDirective,
+    MatAccordion,
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle,
+    RouterOutlet,
+    RouterLink
   ],
   templateUrl: './profilecomponent.html',
   styleUrl: './profilecomponent.css',
@@ -31,55 +43,43 @@ export class Profilecomponent implements OnInit {
   token: any;
   appointments: Appointment[] = [];
   notifications: Notification[] = [];
-
+  links!: Array<any>;
+  ActiveRoute: string | undefined = '';
   public translate = inject(TranslateModule)
 
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.token = this.authService.decodedToken;
 
-    // Example static appointments (replace with API calls)
-    this.appointments = [
-      {
-        patientName: 'John Smith',
-        date: '2024-01-15',
-        time: '09:00 AM',
-        type: 'Consultation',
-        status: 'confirmed'
-      },
-      {
-        patientName: 'Emily Johnson',
-        date: '2024-01-16',
-        time: '11:30 AM',
-        type: 'Consultation',
-        status: 'pending'
-      },
-      {
-        patientName: 'Michael Lee',
-        date: '2024-01-18',
-        time: '02:00 PM',
-        type: 'Consultation',
-        status: 'cancelled'
-      }
-    ];
+    this.links = this.authService.getUserModules()
+      .map(module => {
+        return menuLinks[module as MenuLinkKey]
+      })
+      .filter(m => m)
+      .sort((a, b) => b.label.localeCompare(a.label))
 
-    // Example static notifications (replace with API calls)
-    this.notifications = [
-      {
-        message: 'Patient John Smith has a follow-up appointment tomorrow',
-        time: '2 hours ago'
-      },
-      {
-        message: 'New lab results available for Emily Johnson',
-        time: '5 hours ago'
-      },
-      {
-        message: 'Appointment with Michael Lee has been cancelled',
-        time: '1 day ago'
+    this.ActiveRoute = this.router.url.slice(9);
+  }
+
+  isActiveParent(link: any): boolean {
+    if (!link?.children) return false;
+    // check if any child link (or nested child) matches the current route
+    return this.hasActiveChild(link.children);
+  }
+
+  private hasActiveChild(children: any[]): boolean {
+    for (const child of children) {
+      if (child.link && this.ActiveRoute!.includes(child.link)) {
+        return true;
       }
-    ];
+      if (child.children && this.hasActiveChild(child.children)) {
+        return true;
+      }
+    }
+    return false;
   }
 }

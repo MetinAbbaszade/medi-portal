@@ -1,0 +1,64 @@
+<div class="information-wrapper">
+    <!-- User details -->
+    <div class="section-wrapper user-details-container">
+        <div class="details-wrapper">
+            <div class="user-details">
+                <div class="user-photo-wrapper"></div>
+                <div class="user-detail-wrapper">
+                    <div class="user-header">
+                        <h3 class="user-name">{{token?.name}} {{token?.surname}}</h3>
+                        <p class="user-role">{{this.authService.getUserRoles?.name}}</p>
+                    </div>
+
+                    @if(token?.role?.name === 'doctor'){
+                    <p class="user-department">{{ 'Profile.personalInfo.department' | translate }}: Cardiology</p>
+                    <p class="user-specialization">{{ 'Profile.personalInfo.specialization' | translate }}:
+                        Cardiovascular Medicine</p>
+                    }
+
+                    <div class="user-contact">
+                        <div class="contact-item">
+                            <span class="material-symbols-outlined">mail</span>
+                            <p class="contact-text">{{token?.email}}</p>
+                        </div>
+                        @if (token?.phone) {
+                        <div class="contact-item">
+                            <span class="material-symbols-outlined">call</span>
+                            <p class="contact-text">{{token?.phone}}</p>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="edit-btn">
+                <button>
+                    <span class="material-symbols-outlined">edit_document</span>
+                    <p>{{ 'Profile.editProfile' | translate }}</p>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Personal info -->
+    <div class="section-wrapper general-information">
+        <div class="header">
+            <span class="material-symbols-outlined">person</span>
+            <p>{{ 'Profile.personalInfoTitle' | translate }}</p>
+        </div>
+        <div class="information">
+            <div>
+                <div class="title">{{ 'Profile.personalInfo.fullName' | translate }}</div>
+                <div class="value">{{token?.name}} {{token?.surname}}</div>
+            </div>
+            <div>
+                <div class="title">{{ 'Profile.personalInfo.phone' | translate }}</div>
+                <div class="value">{{token?.phone || '+994 55 281 18 08'}}</div>
+            </div>
+            <div>
+                <div class="title">{{ 'Profile.personalInfo.email' | translate }}</div>
+                <div class="value">{{token?.email}}</div>
+            </div>
+        </div>
+    </div>
+</div>
