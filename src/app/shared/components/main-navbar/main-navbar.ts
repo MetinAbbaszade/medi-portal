@@ -29,7 +29,6 @@ import { AuthService } from '../../../auth.service';
     MatMenuModule,
     CommonModule,
     MatButtonModule,
-    PermittedIfDirective
   ],
   templateUrl: './main-navbar.html',
   styleUrl: './main-navbar.css'
