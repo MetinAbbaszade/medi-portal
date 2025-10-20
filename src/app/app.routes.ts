@@ -9,6 +9,7 @@ import { Profilecomponent } from './modules/profile/pages/profilecomponent/profi
 import { Hospitaldetails } from './modules/hospital-details/pages/hospitaldetails/hospitaldetails';
 import { BookAppointment } from './modules/bookAppointment/pages/bookAppointment/book-appointment';
 import { AuthComponent } from './modules/auth/pages/login/auth';
+import { Admin } from './modules/admin/pages/admin/admin';
 
 export const routes: Routes = [
     {
@@ -58,6 +59,10 @@ export const routes: Routes = [
                 component: Pagenotfoundcomponent
             }
         ]
+    },
+    {
+        path: 'admin',
+        loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminPageModule)
     },
     {
         path: '**',

@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="sidebar">
+        <div class="head-sidebar">
+            <div class="title">
+                <span class="material-symbols-outlined">
+                    stethoscope
+                </span>
+                <h2>Admin Panel</h2>
+            </div>
+            <div class="close-btn">
+                <span class="material-symbols-outlined">
+                    chevron_backward
+                </span>
+            </div>
+        </div>
+        <div class="sidebar-navigations">
+            <a *ngFor="let item of navigation_links" class="navigation-links" [routerLink]="item.link"
+                [ngClass]="CurrentRoute === item.link ? 'active' : ''">
+                <span class="material-symbols-outlined">{{item.icon}}</span>
+                <p class="label">{{item.label}}</p>
+            </a>
+        </div>
+    </div>
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+</div>

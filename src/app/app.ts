@@ -23,7 +23,7 @@ import { MatButtonModule } from "@angular/material/button";
     CommonModule,
     Sidebar,
     MatButtonModule
-],
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -58,7 +58,6 @@ export class App {
           this.sidenav.close();
           break;
       }
-
     })
 
     this.breakpointObserver
@@ -78,9 +77,10 @@ export class App {
   }
 
   get getHideNavbar() {
-    const hiddenRoutes = ['/login', '/signup', '/auth/login', '/auth/signup', '/page-not-found'];
+    const hiddenRoutes = ['/login', '/signup', '/auth', '/auth', '/page-not-found', '/admin'];
     const url = this.router.url.split('?')[0]
-    return hiddenRoutes.includes(url)
+    const route = url.slice(0, url.lastIndexOf('/'))
+    return hiddenRoutes.includes(route)
   }
 
   closeBtnEvent() {

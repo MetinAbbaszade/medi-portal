@@ -6,7 +6,8 @@ export default {
         children: [
             {
                 icon: 'Person',
-                label: 'Dashboard'
+                label: 'Dashboard',
+                link: '/admin'
             }
         ]
     },

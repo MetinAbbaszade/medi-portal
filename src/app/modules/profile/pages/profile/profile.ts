@@ -17,9 +17,7 @@ export class Profile implements OnInit {
 
   constructor(
     public authService: AuthService,
-  ) {
-    console.log("Salam")
-  }
+  ) { }
 
   ngOnInit() {
     this.token = this.authService.decodedToken
