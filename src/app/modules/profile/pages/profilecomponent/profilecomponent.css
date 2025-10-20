@@ -125,3 +125,8 @@ body {
         display: none;
     }
 }
+
+.expansion-panel {
+    background-color: #f5f9fb;
+    color: #11324d;
+}

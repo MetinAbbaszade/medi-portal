@@ -83,7 +83,7 @@ export class MainNavbar {
   get getHideNavbar() {
     const hiddenRoutes = ['/profile'];
     const url = this.router.url.includes('?') ? this.router.url.split('?')[0] : this.router.url
-    return hiddenRoutes.includes(url)
+    return hiddenRoutes.includes(url.slice(0, url.lastIndexOf('/')))
   }
 
   logoutfunction() {

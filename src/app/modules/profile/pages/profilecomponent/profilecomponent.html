@@ -41,7 +41,7 @@
 <ng-template #singleParent let-link="link" let-depth="depth">
     <div *appPermittedIf="link.appPermittedIf">
         <mat-accordion class="accordion">
-            <mat-expansion-panel style="background-color: #f5f9fb; color: #11324d;" [expanded]="isActiveParent(link)">
+            <mat-expansion-panel class="expansion-panel" [expanded]="isActiveParent(link)">
                 <mat-expansion-panel-header>
                     <mat-panel-title style="display: flex; align-items: center; gap: 5px;">
                         <ng-container *ngIf="link.icon">
