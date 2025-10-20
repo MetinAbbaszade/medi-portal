@@ -5,11 +5,10 @@ import { About } from './modules/about/pages/about/about';
 import { Contact } from './modules/contact/pages/contact/contact';
 import { AuthGuard } from './auth.guard';
 import { Pagenotfoundcomponent } from './shared/components/pagenotfound/pagenotfoundcomponent';
-import { Profilecomponent } from './modules/profile/pages/profilecomponent/profilecomponent';
 import { Hospitaldetails } from './modules/hospital-details/pages/hospitaldetails/hospitaldetails';
 import { BookAppointment } from './modules/bookAppointment/pages/bookAppointment/book-appointment';
 import { AuthComponent } from './modules/auth/pages/login/auth';
-import { Admin } from './modules/admin/pages/admin/admin';
+import { AdminGuard } from './admin-guard';
 
 export const routes: Routes = [
     {
@@ -62,6 +61,7 @@ export const routes: Routes = [
     },
     {
         path: 'admin',
+        canActivate: [AdminGuard],
         loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminPageModule)
     },
     {
