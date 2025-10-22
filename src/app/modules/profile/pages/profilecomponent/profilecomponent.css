@@ -23,6 +23,7 @@ body {
 }
 
 .navigation-wrapper {
+    width: 25%;
     padding: 20px;
     display: flex;
     flex-direction: column;

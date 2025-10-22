@@ -5,8 +5,7 @@ import { CommonModule } from '@angular/common';
 import menuLinks from '../../modules/menu-links';
 import { PermittedIfDirective } from "../../../../directives/permitted-if.directive";
 import { MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle } from "@angular/material/expansion";
-import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
-import { filter } from 'rxjs';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 type MenuLinkKey = keyof typeof menuLinks;
 
@@ -67,7 +66,6 @@ export class Profilecomponent implements OnInit {
 
   isActiveParent(link: any): boolean {
     if (!link?.children) return false;
-    // check if any child link (or nested child) matches the current route
     return this.hasActiveChild(link.children);
   }
 

@@ -112,7 +112,7 @@ export default {
                 label: 'Analytics / Reports'
             },
             {
-                icon: 'discount',
+                icon: 'percent_discount',
                 label: 'Coupons / Discounts'
             },
             {
