@@ -21,7 +21,24 @@
             </a>
         </div>
     </div>
-    <div>
+    <div class="main-wrapper">
+        <div class="navbar">
+            <div class="custom-input" (click)="focusInput()">
+                <span class="material-symbols-outlined">
+                    find_replace
+                </span>
+                <input type="text" placeholder="Search patients, doctors, appointments..." #searchInput>
+            </div>
+            <div class="user-info-wrapper">
+                <div class="user-img">
+                    <div class="img"></div>
+                </div>
+                <div class="user-info">
+                    <span>{{token.name}} {{token.surname}}</span>
+                    <span>{{token.role.name}}</span>
+                </div>
+            </div>
+        </div>
         <router-outlet></router-outlet>
     </div>
 </div>

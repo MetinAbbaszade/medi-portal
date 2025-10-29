@@ -1,1 +1,50 @@
-<p>admin-dashboard works!</p>
+<div class="container">
+    <h1 class="dashboard-header">Dashboard Overview</h1>
+    <p class="subtitle">Welcome back! Here's what's happening today.</p>
+    <div class="general-information-wrapper">
+        @for(card of information_cards; track $index){
+        <div class="information-cards">
+            <div class="total-information">
+                <div>
+                    <span class="material-symbols-outlined">
+                        {{card.icon}}
+                    </span>
+                </div>
+                <span class="label">{{card.label}}</span>
+                <span class="count">{{card.count}}</span>
+            </div>
+            <div class="percentage">+{{card.percentage}}%</div>
+        </div>
+        }
+    </div>
+    <div class="body-wrapper">
+        <div class="doctor-management">
+            <div class="header">
+                <div class="header-label">Doctor Management</div>
+                <div class="information">Overview of active medical staff</div>
+            </div>
+            <div class="doctor-card-wrapper">
+                @for(item of doctor_cards; track $index){
+                <div class="doctor-card">
+                    <div class="left-side">
+                        <div class="image-wrapper"></div>
+                        <div class="info-wrapper">
+                            <span class="name">Dr. {{item.name}}</span>
+                            <span class="specialty">{{item.specialty}}</span>
+                        </div>
+                    </div>
+                    <div class="right-side">
+                        <span>{{item.patient_count}} Patients</span>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+        <div class="appointment-calendar">
+            <div class="header">
+                <div class="header-label">Appointment Calendar</div>
+                <div class="information">Schedule and manage appointments</div>
+            </div>
+        </div>
+    </div>
+</div>
