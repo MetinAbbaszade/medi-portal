@@ -1,12 +1,24 @@
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { CalendarModule, CalendarView } from 'angular-calendar';
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [],
+  imports: [
+    CalendarModule,
+    CommonModule
+  ],
   templateUrl: './admin-dashboard.html',
-  styleUrl: './admin-dashboard.css'
+  styleUrl: './admin-dashboard.css',
+  providers: [DatePipe]
 })
 export class AdminDashboard {
+
+  formattedDate: string | null = null;
+  view: CalendarView = CalendarView.Month;
+  viewDate: Date = new Date();
+  selectedDate: Date | null = null;
+
 
   information_cards: Array<any> = [
     {
@@ -51,10 +63,43 @@ export class AdminDashboard {
       specialty: 'Cardiology',
       patient_count: '45'
     },
-      {
-        name: 'Emily Chen',
-        specialty: 'Cardiology',
-        patient_count: '45'
-      },
+    {
+      name: 'Emily Chen',
+      specialty: 'Cardiology',
+      patient_count: '45'
+    },
   ]
+
+
+  constructor(
+    private datePipe: DatePipe
+  ) { }
+
+  prevMonth() {
+    this.viewDate = new Date(this.viewDate.setMonth(this.viewDate.getMonth() - 1));
+  }
+
+  nextMonth() {
+    this.viewDate = new Date(this.viewDate.setMonth(this.viewDate.getMonth() + 1));
+  }
+
+  handleDayClick(day: any): void {
+    if (day && day.date) {
+      this.selectedDate = day.date;
+    }
+    else if (day && day.day && day.day.date) {
+      this.selectedDate = day.day.date;
+    }
+
+    this.formattedDate = this.datePipe.transform(this.selectedDate, 'dd.MM.yyyy');
+
+    console.log('Formatted Date:', this.formattedDate);
+  }
+
+  isDaySelected(day: any): boolean {
+    if (!this.selectedDate) {
+      return false;
+    }
+    return day.date.toDateString() === this.selectedDate.toDateString();
+  }
 }

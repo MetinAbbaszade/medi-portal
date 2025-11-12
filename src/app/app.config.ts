@@ -8,6 +8,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { authInterceptor } from './interceptors/auth';
 import { HttpClient } from '@angular/common/http';
 import { catchError, from, map, Observable } from 'rxjs';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 export class CustomTranslateLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<any> {
@@ -27,6 +29,10 @@ export function createTranslateLoader(http: HttpClient) {
   return new CustomTranslateLoader();
 }
 
+export function calendarAdapterFactory() {
+  return adapterFactory();
+}
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
@@ -40,6 +46,12 @@ export const appConfig: ApplicationConfig = {
           useFactory: createTranslateLoader,
           deps: [HttpClient]
         }
+      })
+    ),
+    importProvidersFrom(
+      CalendarModule.forRoot({
+        provide: DateAdapter,
+        useFactory: calendarAdapterFactory,
       })
     )
   ]

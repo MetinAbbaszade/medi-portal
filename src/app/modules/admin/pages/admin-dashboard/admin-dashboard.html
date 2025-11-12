@@ -45,6 +45,30 @@
                 <div class="header-label">Appointment Calendar</div>
                 <div class="information">Schedule and manage appointments</div>
             </div>
+            <div class="custom-calendar-container">
+                <div class="calendar-header">
+                    <button (click)="prevMonth()" class="prevMonthBtn">
+                        < </button>
+                            <h3 class="month-title">
+                                {{ viewDate | calendarDate: 'monthViewTitle': 'en' }}
+                            </h3>
+                            <button (click)="nextMonth()" class="nextMonthBtn"> > </button>
+                </div>
+
+                <mwl-calendar-month-view [viewDate]="viewDate" [events]="[]" [weekStartsOn]="1"
+                    [cellTemplate]="customDayCell" (dayClicked)="handleDayClick($event)">
+                </mwl-calendar-month-view>
+
+                <ng-template #customDayCell let-day="day" let-events="events" let-isOpen="isOpen">
+                    <div class="cal-day-cell" [class.cal-in-month]="day.inMonth" [class.cal-today]="day.isToday"
+                        [ngClass]="{'is-selected': isDaySelected(day)}" (click)="handleDayClick(day)">
+                        <div class="cal-cell-top">
+                            <span class="cal-day-number">{{ day.date | date:'d' }}</span>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
         </div>
     </div>
+
 </div>

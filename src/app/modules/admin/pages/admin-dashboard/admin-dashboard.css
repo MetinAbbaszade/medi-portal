@@ -149,3 +149,132 @@
         }
     }
 }
+
+
+
+.custom-calendar-container {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    overflow: hidden;
+    margin: 20px;
+}
+
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #001f3f;
+    color: white;
+}
+
+.month-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.nav-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+
+:host ::ng-deep .cal-month-view .cal-header {
+    border-bottom: 100px;
+
+}
+
+:host ::ng-deep .cal-month-view .cal-header .cal-cell {
+    padding: 8px 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: #555;
+    text-transform: capitalize;
+
+}
+
+
+:host ::ng-deep .cal-month-view .cal-day-cell {
+    height: 20px;
+    padding: 0;
+}
+
+
+:host ::ng-deep .cal-month-view .cal-day-cell .cal-day-number {
+
+    max-height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px auto;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    padding: 10px;
+}
+
+
+:host ::ng-deep .cal-month-view .cal-day-cell:not(.cal-in-month) .cal-day-number {
+    color: #bbb;
+
+}
+
+
+
+:host ::ng-deep .cal-month-view .cal-day-cell.cal-in-month.cal-clicked .cal-day-number {
+    background-color: #007bff;
+    color: white;
+    font-weight: 600;
+}
+
+
+:host ::ng-deep .cal-month-view .cal-day-cell {
+
+    min-height: 60px !important;
+
+
+    padding: 0;
+}
+
+.prevMonthBtn,
+.nextMonthBtn {
+    color: white;
+    font-size: 1.1rem;
+    background: transparent;
+    border: none;
+    transition: all 0.1s ease-in;
+
+    &:hover {
+        transform: translateY(-1px);
+        font-size: 1.3rem;
+        cursor: pointer;
+    }
+}
+
+
+:host ::ng-deep .cal-month-view .cal-day-cell.is-selected .cal-day-number {
+    background-color: #007bff;
+    color: white;
+    font-weight: 600;
+}
+
+
+:host ::ng-deep .cal-month-view .cal-day-cell {
+    position: relative;
+}
+
+
+:host ::ng-deep .cal-month-view .cal-day-cell .cal-day-number {
+    transition: background-color 0.1s, color 0.1s;
+}
