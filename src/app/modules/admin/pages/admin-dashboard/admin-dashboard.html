@@ -54,7 +54,6 @@
                             </h3>
                             <button (click)="nextMonth()" class="nextMonthBtn"> > </button>
                 </div>
-
                 <mwl-calendar-month-view [viewDate]="viewDate" [events]="[]" [weekStartsOn]="1"
                     [cellTemplate]="customDayCell" (dayClicked)="handleDayClick($event)">
                 </mwl-calendar-month-view>
@@ -67,6 +66,21 @@
                         </div>
                     </div>
                 </ng-template>
+            </div>
+
+            <div class="confirmed-app-container">
+                <div class="label">
+                    <p class="headline">Today's Appointments</p>
+                    <p class="count">12 scheduled</p>
+                </div>
+                <div class="version-container active">Active</div>
+            </div>
+            <div class="pending-app-container">
+                <div class="label">
+                    <p class="headline">Pending Confirmations</p>
+                    <p class="count">8 waiting</p>
+                </div>
+                <div class="version">Pending</div>
             </div>
         </div>
     </div>

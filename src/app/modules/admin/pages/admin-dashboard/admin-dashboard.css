@@ -278,3 +278,46 @@
 :host ::ng-deep .cal-month-view .cal-day-cell .cal-day-number {
     transition: background-color 0.1s, color 0.1s;
 }
+
+.confirmed-app-container,
+.pending-app-container {
+    margin-bottom: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 15px;
+    background-color: #edf2f8;
+    border-radius: 10px;
+
+    .label {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        .headline {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .count {
+            font-size: 0.9rem;
+            color: #979ca2;
+        }
+    }
+
+    .version-container {
+        padding: 5px 10px;
+        border-radius: 5px;
+
+        &.active {
+            background-color: #0073d4;
+            color: #fff;
+        }
+    }
+}
+
+
+.doctor-management {
+    align-self: start;
+    height: auto;
+}
