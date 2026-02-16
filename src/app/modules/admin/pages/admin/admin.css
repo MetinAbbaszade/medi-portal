@@ -3,14 +3,17 @@
 
 
 .container {
-    display: grid;
-    grid-template-columns: 1.2fr 7fr;
+    /* display: grid;
+    grid-template-columns: 1.2fr 7fr; */
     font-family: 'Inter', sans-serif !important;
 }
 
 .sidebar {
     border-right: 1px solid #dfe5eb;
     height: 100vh;
+    width: 260px;
+    /* define a fixed width */
+    position: fixed;
 }
 
 .head-sidebar {
@@ -92,6 +95,7 @@
 .main-wrapper {
     display: flex;
     flex-direction: column;
+    margin-left: 260px;
 }
 
 .navbar {

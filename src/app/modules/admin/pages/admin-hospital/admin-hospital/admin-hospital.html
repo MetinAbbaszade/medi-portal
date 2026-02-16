@@ -1,1 +1,41 @@
-<p>admin-hospital works!</p>
+<div class="container">
+    <div class="header">
+        <h4>Hospital Overview</h4>
+        <p>Discover all of the Hospitals in platform</p>
+    </div>
+    <div class="gridview-container">
+        <div class="btn-wrapper">
+            <button mat-raised-button>Clear Filtiration</button>
+            <button mat-raised-button color="primary">Add New Hospital</button>
+        </div>
+        <div class="filter-wrapper">
+            <form [formGroup]="form">
+                <mat-form-field appearance="outline" class="name-search">
+                    <input matInput formControlName="name" type="text" placeholder="Search hospitals by name..." />
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="specialty-search">
+                    <mat-label>Search by Specialty</mat-label>
+                    <mat-select formControlName="specialtyId">
+                        <mat-option value=""></mat-option>
+                        <mat-option [value]="specialty.id"
+                            *ngFor="let specialty of specialties">{{specialty.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="department-search">
+                    <mat-label>Search by Deparment</mat-label>
+                    <mat-select formControlName="departmentId">
+                        <mat-option value=""></mat-option>
+                        <mat-option [value]="department.id"
+                            *ngFor="let department of departments">{{department.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+        </div>
+
+        <div class="table-wrapper">
+            <app-gridview [dataSource]="dataSource" [fieldToColumnNames]="fieldToColumnNames"
+                [displayedColumns]="displayedColumns" [loading]="loading"
+                [resultsLength]="resultsLength"></app-gridview>
+        </div>
+    </div>
+</div>

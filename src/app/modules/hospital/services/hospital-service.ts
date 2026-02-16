@@ -19,7 +19,7 @@ export class HospitalService {
 
   constructor(private http: HttpClient) { }
 
-  fetchHospitalData(params: IParams | {}): Observable<IRes> {
+  fetchHospitalData(params: IParams | {} = {}): Observable<IRes> {
     let httpParams = new HttpParams();
 
     Object.keys(params).forEach((key: string) => {
