@@ -13,6 +13,7 @@ import {
   transition,
   animate
 } from '@angular/animations';
+import { DetailComponent } from "../../../../modules/admin/components/detail-component/detail-component";
 
 
 
@@ -25,8 +26,9 @@ import {
     MatSortModule,
     MatIconModule,
     MatButtonModule,
-    MatProgressSpinnerModule
-  ],
+    MatProgressSpinnerModule,
+    DetailComponent
+],
   templateUrl: './gridview.html',
   styleUrl: './gridview.css',
   animations: [

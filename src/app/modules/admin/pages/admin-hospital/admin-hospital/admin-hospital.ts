@@ -11,6 +11,7 @@ import { Gridview } from "../../../../../shared/components/gridview/gridview/gri
 import { MatTableDataSource } from '@angular/material/table';
 import { HospitalService } from '../../../../hospital/services/hospital-service';
 import { finalize, merge, startWith, switchMap } from 'rxjs';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-admin-hospital',
@@ -23,7 +24,8 @@ import { finalize, merge, startWith, switchMap } from 'rxjs';
     ReactiveFormsModule,
     MatSelectModule,
     CommonModule,
-    Gridview
+    Gridview,
+    TranslateModule,
   ],
   templateUrl: './admin-hospital.html',
   styleUrl: './admin-hospital.css'
@@ -48,20 +50,19 @@ export class AdminHospital {
     private fb: FormBuilder,
     private adminService: AdminServices,
     private hospitalService: HospitalService,
+    public translate: TranslateService
   ) { }
 
   form!: FormGroup;
 
   ngOnInit() {
     this.form = this.fb.group({
-      departmentId: null,
-      specialtyId: null,
-      name: null,
-      type: null
+      Name: null,
+      SpecialtyId: null,
+      Filter: null
     })
 
     this.fetchAllSpecialties();
-    this.fetchAllDepartments();
     this.fetchData();
   }
 
@@ -70,18 +71,6 @@ export class AdminHospital {
       .subscribe({
         next: (response: any) => {
           this.specialties = response.specialties;
-        },
-        error: (error) => {
-          this.handleError(error);
-        }
-      })
-  }
-
-  fetchAllDepartments() {
-    this.adminService.getDepartments()
-      .subscribe({
-        next: (response: any) => {
-          this.departments = response.departments;
         },
         error: (error) => {
           this.handleError(error);
@@ -104,15 +93,34 @@ export class AdminHospital {
       .pipe(
         startWith({}),
         switchMap((data: any) => {
-          return this.hospitalService.fetchHospitalData()
+          const params = this.getParams();
+          return this.hospitalService.fetchHospitalData(params)
             .pipe(
               finalize(() => this.loading = false)
             );
         })
       )
-      .subscribe((res) => {
-        this.dataSource = new MatTableDataSource(res.filteredHospitals);
-        this.resultsLength = res.filteredHospitals.length;
+      .subscribe(({ filteredHospitals }) => {
+        this.dataSource = new MatTableDataSource(filteredHospitals);
+        this.resultsLength = filteredHospitals.length;
       })
+  }
+
+  clearFiltiration() {
+    this.form.reset();
+  }
+
+  getParams() {
+    const params = {
+      ...this.form.value
+    }
+
+    for (let item in params) {
+      if (!params[item] || params[item] === null) {
+        delete params[item];
+      }
+    }
+
+    return params;
   }
 }

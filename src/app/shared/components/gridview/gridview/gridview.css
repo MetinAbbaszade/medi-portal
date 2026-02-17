@@ -1,6 +1,8 @@
 table {
     width: 100%;
+    table-layout: fixed;
 }
+
 
 tr.example-detail-row {
     height: 0;
@@ -15,10 +17,52 @@ tr.example-element-row:not(.example-expanded-row):active {
 }
 
 .example-element-detail {
-    overflow: hidden;
-    display: flex;
+    padding: 0 !important;
 }
+
+.element-detail,
+.expanded-row-detail {
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+}
+
 
 .example-element-description {
     padding: 16px;
+}
+
+.no-data {
+    height: 100px;
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .no-data-message {
+        font-size: 1.2rem;
+    }
+}
+
+.cdk-column-expandedDetail.mat-column-expandedDetail {
+    border-bottom: none;
+}
+
+.example-detail-row {
+    height: auto;
+}
+
+.element-detail {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+}
+
+.expanded-row-detail {
+    min-width: 0;
+    width: 100%;
+}
+
+.mat-column-expandAction {
+    width: 100px;
 }

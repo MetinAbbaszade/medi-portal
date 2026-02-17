@@ -14,7 +14,7 @@
             <th mat-header-cell *matHeaderCellDef>More</th>
             <td mat-cell *matCellDef="let element">
                 <button mat-icon-button (click)="expandedElement = expandedElement === element ? null : element">
-                    <mat-icon>{{expandedElement === element ? 'expanded_less' : 'expand_more'}}</mat-icon>
+                    <mat-icon>{{expandedElement === element ? 'expand_less' : 'expand_more'}}</mat-icon>
                 </button>
             </td>
         </ng-container>
@@ -24,7 +24,7 @@
                 class="example-element-detail">
                 <div class="element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                     <div class="expanded-row-detail">
-                        <div>Salam</div>
+                        <app-detail-component [element]="element"></app-detail-component>
                     </div>
                 </div>
             </td>
@@ -40,12 +40,13 @@
     </div>
 
     <ng-container *ngIf="!loading && !dataSource?.data?.length">
-        <p class="no-data-message">
-            No data exists
-        </p>
+        <div class="no-data">
+            <p class="no-data-message">
+                No data exists
+            </p>
+        </div>
     </ng-container>
 
     <mat-paginator [pageSizeOptions]="[10,50,100]" showFirstLastButtons [length]="resultsLength">
-
     </mat-paginator>
 </div>

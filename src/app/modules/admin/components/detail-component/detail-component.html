@@ -1,0 +1,109 @@
+<section>
+    <div class="wrapper">
+        <h2>Edit Information about Hospital</h2>
+        <mat-accordion>
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Main data</mat-panel-title>
+                </mat-expansion-panel-header>
+                <form [formGroup]="form">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Id</mat-label>
+                        <input matInput formControlName="id" type="text" />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="name" type="text" />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Type</mat-label>
+                        <input matInput formControlName="type" type="text" />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="description-field">
+                        <mat-label>Description</mat-label>
+                        <input matInput formControlName="description" type="text" />
+                    </mat-form-field>
+                </form>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Contacts</mat-panel-title>
+                </mat-expansion-panel-header>
+                <form [formGroup]="form">
+                    <div formArrayName="contacts">
+                        <div *ngFor="let _ of contactsFA.controls; let i = index" [formGroupName]="i">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Phone</mat-label>
+                                <input matInput formControlName="phone" type="text" />
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Email</mat-label>
+                                <input matInput formControlName="email" type="text" />
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Website</mat-label>
+                                <input matInput formControlName="website" type="text" />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Capacities</mat-panel-title>
+                </mat-expansion-panel-header>
+                <form [formGroup]="form">
+                    <div formArrayName="capacities">
+                        <div *ngFor="let _ of capacitiesFA.controls; let i = index" [formGroupName]="i">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Beds</mat-label>
+                                <input matInput formControlName="beds" type="text" />
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Icu beds</mat-label>
+                                <input matInput formControlName="icu_beds" type="text" />
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Emergency Capacity</mat-label>
+                                <input matInput formControlName="emergency_capacity" type="text" />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Addresses</mat-panel-title>
+                </mat-expansion-panel-header>
+                <form [formGroup]="form">
+                    <div formArrayName="adresses">
+                        <div *ngFor="let _ of adressesFA.controls; let i = index" [formGroupName]="i">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Street</mat-label>
+                                <input matInput formControlName="street" type="text" />
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>City</mat-label>
+                                <input matInput formControlName="city" type="text" />
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>State</mat-label>
+                                <input matInput formControlName="state" type="text" />
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Zip</mat-label>
+                                <input matInput formControlName="zip" type="text" />
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>County</mat-label>
+                                <input matInput formControlName="county" type="text" />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <button mat-raised-button color="primary" class="updateFN">Update</button>
+    </div>
+</section>

@@ -5,28 +5,28 @@
     </div>
     <div class="gridview-container">
         <div class="btn-wrapper">
-            <button mat-raised-button>Clear Filtiration</button>
+            <button mat-raised-button (click)="clearFiltiration()">Clear Filtiration</button>
             <button mat-raised-button color="primary">Add New Hospital</button>
         </div>
         <div class="filter-wrapper">
             <form [formGroup]="form">
                 <mat-form-field appearance="outline" class="name-search">
-                    <input matInput formControlName="name" type="text" placeholder="Search hospitals by name..." />
+                    <input matInput formControlName="Name" type="text" placeholder="Search hospitals by name..." />
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="specialty-search">
                     <mat-label>Search by Specialty</mat-label>
-                    <mat-select formControlName="specialtyId">
+                    <mat-select formControlName="SpecialtyId">
                         <mat-option value=""></mat-option>
-                        <mat-option [value]="specialty.id"
+                        <mat-option [value]="specialty.name"
                             *ngFor="let specialty of specialties">{{specialty.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field appearance="outline" class="department-search">
-                    <mat-label>Search by Deparment</mat-label>
-                    <mat-select formControlName="departmentId">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'Hospital.filterSort' | translate }}</mat-label>
+                    <mat-select id="sortHospitals" formControlName="Filter">
                         <mat-option value=""></mat-option>
-                        <mat-option [value]="department.id"
-                            *ngFor="let department of departments">{{department.name}}</mat-option>
+                        <mat-option value="name-asc">{{ 'Hospital.sortOptions.asc' | translate }}</mat-option>
+                        <mat-option value="name-desc">{{ 'Hospital.sortOptions.desc' | translate }}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </form>

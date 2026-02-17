@@ -86,3 +86,7 @@
 :host ::ng-deep .name-search.mat-focused .mat-form-field-outline-thick {
     border-color: #0066ff !important;
 }
+
+.table-wrapper {
+    margin: 10px;
+}
