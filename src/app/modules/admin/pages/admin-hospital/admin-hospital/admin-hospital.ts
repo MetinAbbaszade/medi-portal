@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, ɵInternalFormsSharedModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAnchor } from "@angular/material/button";
 import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
@@ -12,6 +12,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { HospitalService } from '../../../../hospital/services/hospital-service';
 import { finalize, merge, startWith, switchMap } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DetailComponent } from '../../../components/detail-component/detail-component';
 
 @Component({
   selector: 'app-admin-hospital',
@@ -46,11 +48,14 @@ export class AdminHospital {
   ];
   displayedColumns: Array<string> = ['expandAction', ...this.fieldToColumnNames.map((name: any) => name.column)];
 
+  private refresh$ = new EventEmitter<void>();
+
   constructor(
     private fb: FormBuilder,
     private adminService: AdminServices,
     private hospitalService: HospitalService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private dialog: MatDialog,
   ) { }
 
   form!: FormGroup;
@@ -89,7 +94,7 @@ export class AdminHospital {
 
   fetchData() {
     this.loading = true;
-    merge(this.form.valueChanges)
+    merge(this.form.valueChanges, this.refresh$)
       .pipe(
         startWith({}),
         switchMap((data: any) => {
@@ -122,5 +127,15 @@ export class AdminHospital {
     }
 
     return params;
+  }
+
+  triggerRefresh() {
+    this.refresh$.emit();
+  }
+
+  addNewHospital() {
+    this.dialog.open(DetailComponent, {
+      minHeight: '68%',
+    });
   }
 }

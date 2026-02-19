@@ -39,18 +39,6 @@ export default {
             {
                 icon: 'history',
                 label: 'Medical History',
-            },
-            {
-                icon: 'local_pharmacy',
-                label: 'Prescriptions',
-            },
-            {
-                icon: 'receipt_long',
-                label: 'Invoices & Payments',
-            },
-            {
-                icon: 'feedback',
-                label: 'Feedback',
             }
         ]
     },
@@ -70,19 +58,6 @@ export default {
             {
                 icon: 'event',
                 label: 'Appointments'
-            },
-            {
-                icon: 'note_add',
-                label: 'Medical Records'
-
-            },
-            {
-                icon: 'chat',
-                label: 'Messages'
-            },
-            {
-                icon: 'bar_chart',
-                label: 'Statistics'
             }
         ]
     },
@@ -106,18 +81,6 @@ export default {
             {
                 icon: 'event',
                 label: 'Appointments'
-            },
-            {
-                icon: 'insights',
-                label: 'Analytics / Reports'
-            },
-            {
-                icon: 'percent_discount',
-                label: 'Coupons / Discounts'
-            },
-            {
-                icon: 'settings',
-                label: 'Settings'
             }
         ]
     }

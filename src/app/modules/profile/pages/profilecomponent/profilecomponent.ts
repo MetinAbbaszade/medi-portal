@@ -59,7 +59,7 @@ export class Profilecomponent implements OnInit {
         return menuLinks[module as MenuLinkKey]
       })
       .filter(m => m)
-      .sort((a, b) => b.label.localeCompare(a.label))
+      .sort((a, b) => a.label.localeCompare(b.label))
 
     this.ActiveRoute = this.router.url.slice(9);
   }

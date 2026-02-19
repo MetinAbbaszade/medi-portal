@@ -24,7 +24,7 @@
                 class="example-element-detail">
                 <div class="element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                     <div class="expanded-row-detail">
-                        <app-detail-component [element]="element"></app-detail-component>
+                        <app-detail-component [element]="element" (refresh)="onRefresh()"></app-detail-component>
                     </div>
                 </div>
             </td>

@@ -20,7 +20,7 @@ export class Admin implements OnInit {
     private router: Router,
     private authService: AuthService
   ) { }
-  
+
   public navigation_links = [
     {
       icon: 'space_dashboard',
@@ -46,21 +46,6 @@ export class Admin implements OnInit {
       icon: 'event_available',
       label: 'Appointments',
       link: 'appointments'
-    },
-    {
-      icon: 'schedule',
-      label: 'Timetable',
-      link: 'timetable'
-    },
-    {
-      icon: 'payments',
-      label: 'Payments',
-      link: 'payments'
-    },
-    {
-      icon: 'bar_chart',
-      label: 'Reports',
-      link: 'reports'
     },
   ];
 

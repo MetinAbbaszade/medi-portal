@@ -6,7 +6,7 @@
     <div class="gridview-container">
         <div class="btn-wrapper">
             <button mat-raised-button (click)="clearFiltiration()">Clear Filtiration</button>
-            <button mat-raised-button color="primary">Add New Hospital</button>
+            <button mat-raised-button color="primary" (click)="addNewHospital()">Add New Hospital</button>
         </div>
         <div class="filter-wrapper">
             <form [formGroup]="form">
@@ -34,8 +34,8 @@
 
         <div class="table-wrapper">
             <app-gridview [dataSource]="dataSource" [fieldToColumnNames]="fieldToColumnNames"
-                [displayedColumns]="displayedColumns" [loading]="loading"
-                [resultsLength]="resultsLength"></app-gridview>
+                [displayedColumns]="displayedColumns" [loading]="loading" [resultsLength]="resultsLength"
+                (refresh)="triggerRefresh()"></app-gridview>
         </div>
     </div>
 </div>

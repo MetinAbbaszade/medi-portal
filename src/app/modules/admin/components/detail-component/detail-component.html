@@ -1,13 +1,13 @@
 <section>
     <div class="wrapper">
-        <h2>Edit Information about Hospital</h2>
+        <h2>{{!isAddDialog ? ' Edit Information about Hospital ' : 'Add new Hospital'}}</h2>
         <mat-accordion>
             <mat-expansion-panel [expanded]="true">
                 <mat-expansion-panel-header>
                     <mat-panel-title>Main data</mat-panel-title>
                 </mat-expansion-panel-header>
                 <form [formGroup]="form">
-                    <mat-form-field appearance="outline">
+                    <mat-form-field appearance="outline" *ngIf="!isAddDialog">
                         <mat-label>Id</mat-label>
                         <input matInput formControlName="id" type="text" />
                     </mat-form-field>
@@ -31,7 +31,8 @@
                 </mat-expansion-panel-header>
                 <form [formGroup]="form">
                     <div formArrayName="contacts">
-                        <div *ngFor="let _ of contactsFA.controls; let i = index" [formGroupName]="i">
+                        <div *ngFor="let _ of contactsFA.controls; let i = index" [formGroupName]="i"
+                            class="controls-wrapper">
                             <mat-form-field appearance="outline">
                                 <mat-label>Phone</mat-label>
                                 <input matInput formControlName="phone" type="text" />
@@ -54,7 +55,8 @@
                 </mat-expansion-panel-header>
                 <form [formGroup]="form">
                     <div formArrayName="capacities">
-                        <div *ngFor="let _ of capacitiesFA.controls; let i = index" [formGroupName]="i">
+                        <div *ngFor="let _ of capacitiesFA.controls; let i = index" [formGroupName]="i"
+                            class="controls-wrapper">
                             <mat-form-field appearance="outline">
                                 <mat-label>Beds</mat-label>
                                 <input matInput formControlName="beds" type="text" />
@@ -77,7 +79,8 @@
                 </mat-expansion-panel-header>
                 <form [formGroup]="form">
                     <div formArrayName="adresses">
-                        <div *ngFor="let _ of adressesFA.controls; let i = index" [formGroupName]="i">
+                        <div *ngFor="let _ of adressesFA.controls; let i = index" [formGroupName]="i"
+                            class="controls-wrapper">
                             <mat-form-field appearance="outline">
                                 <mat-label>Street</mat-label>
                                 <input matInput formControlName="street" type="text" />
@@ -95,15 +98,45 @@
                                 <input matInput formControlName="zip" type="text" />
                             </mat-form-field>
                             <mat-form-field appearance="outline">
-                                <mat-label>County</mat-label>
-                                <input matInput formControlName="county" type="text" />
+                                <mat-label>Country</mat-label>
+                                <input matInput formControlName="country" type="text" />
                             </mat-form-field>
                         </div>
                     </div>
                 </form>
             </mat-expansion-panel>
-        </mat-accordion>
+            <mat-expansion-panel *ngIf="isAddDialog">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Departments and Specialties</mat-panel-title>
+                </mat-expansion-panel-header>
+                <form [formGroup]="form">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Departments</mat-label>
+                        <mat-select formControlName="departments">
+                            <mat-option value=""></mat-option>
+                            <mat-option [value]="department.id"
+                                *ngFor="let department of departments">{{department.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Specialties</mat-label>
+                        <mat-select formControlName="specialties">
+                            <mat-option value=""></mat-option>
+                            <mat-option [value]="specialty.id"
+                                *ngFor="let specialty of specialties">{{specialty.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </form>
+            </mat-expansion-panel>
 
-        <button mat-raised-button color="primary" class="updateFN">Update</button>
+        </mat-accordion>
+        <ng-container *ngIf="!isAddDialog else addBtn">
+            <button mat-raised-button color="primary" class="updateFN" [disabled]="form.invalid || !hasRealChanges"
+                (click)="update()">Update</button>
+        </ng-container>
+        <ng-template #addBtn>
+            <button mat-raised-button color="primary" class="updateFN" [disabled]="form.invalid"
+                (click)="add()">Add</button>
+        </ng-template>
     </div>
 </section>

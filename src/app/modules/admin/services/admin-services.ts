@@ -14,10 +14,14 @@ export class AdminServices {
   ) { }
 
   getAllSpecialties() {
-    return this.http.get(`${this.BASE_URL}specialties`);
+    return this.http.get<{ specialties: any }>(`${this.BASE_URL}specialties`);
   }
 
   getDepartments() {
-    return this.http.get(`${this.BASE_URL}departments`);
+    return this.http.get<{ departments: any }>(`${this.BASE_URL}departments`);
+  }
+
+  updateHospitals(id: string, body: any) {
+    return this.http.put(`${this.BASE_URL}hospital/${id}`, body);
   }
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -28,7 +28,7 @@ import { DetailComponent } from "../../../../modules/admin/components/detail-com
     MatButtonModule,
     MatProgressSpinnerModule,
     DetailComponent
-],
+  ],
   templateUrl: './gridview.html',
   styleUrl: './gridview.css',
   animations: [
@@ -48,4 +48,10 @@ export class Gridview {
   @Input() displayedColumns!: any[];
   @Input() fieldToColumnNames!: any[];
   @Input() loading!: boolean;
+
+  @Output() refresh: EventEmitter<void> = new EventEmitter<void>();
+
+  onRefresh() {
+    this.refresh.emit();
+  }
 }
