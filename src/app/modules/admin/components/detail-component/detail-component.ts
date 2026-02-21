@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Optional, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators, ɵInternalFormsSharedModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
@@ -9,6 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AdminServices } from '../../services/admin-services';
 import Swal from 'sweetalert2';
 import { DialogRef } from '@angular/cdk/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-detail-component',
@@ -42,6 +43,7 @@ export class DetailComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     private service: AdminServices,
+    @Optional() private dialogRef?: MatDialogRef<DetailComponent>, // use optional for using when it is add dialog
   ) { }
 
   ngOnInit(): void {
@@ -149,6 +151,9 @@ export class DetailComponent implements OnInit {
             text: `New Hospital Created`,
             confirmButtonText: 'OK',
           })
+            .then(() => {
+              this.dialogRef?.close();
+            })
         },
         error: ({ error }) => {
           Swal.fire({

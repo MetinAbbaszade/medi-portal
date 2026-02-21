@@ -6,10 +6,6 @@ import { AdminHospital } from "./pages/admin-hospital/admin-hospital/admin-hospi
 import { AdminPanelDoctor } from "./pages/admin-doctor/admin-panel-doctor/admin-panel-doctor";
 import { AdminPanelPatient } from "./pages/admin-patient/admin-panel-patient/admin-panel-patient";
 import { ManageAppointments } from "./pages/admin-appointments/manage-appointments/manage-appointments";
-import { AdminTimeTable } from "./pages/admin-timetable/admin-time-table/admin-time-table";
-import { PaymentManagement } from "./pages/admin-payments/payment-management/payment-management";
-import { ManageReports } from "./pages/admin-reports/manage-reports/manage-reports";
-
 
 const routes: Routes = [
     {
@@ -25,10 +21,7 @@ const routes: Routes = [
             { path: "hospitals", component: AdminHospital },
             { path: "doctors", component: AdminPanelDoctor },
             { path: "patients", component: AdminPanelPatient },
-            { path: "appointments", component: ManageAppointments },
-            { path: "timetable", component: AdminTimeTable },
-            { path: "payments", component: PaymentManagement },
-            { path: "reports", component: ManageReports },
+            { path: "appointments", component: ManageAppointments }
         ]
     }
 ]

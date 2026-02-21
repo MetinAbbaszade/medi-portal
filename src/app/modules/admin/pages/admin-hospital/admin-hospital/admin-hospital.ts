@@ -134,8 +134,12 @@ export class AdminHospital {
   }
 
   addNewHospital() {
-    this.dialog.open(DetailComponent, {
+    const ref = this.dialog.open(DetailComponent, {
       minHeight: '68%',
     });
+
+    ref.afterClosed().subscribe((result) => {
+      this.triggerRefresh();
+    })
   }
 }
