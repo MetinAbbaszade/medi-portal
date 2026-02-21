@@ -24,4 +24,8 @@ export class AdminServices {
   updateHospitals(id: string, body: any) {
     return this.http.put(`${this.BASE_URL}hospital/${id}`, body);
   }
+
+  addHospital(body: any) {
+    return this.http.post(`${this.BASE_URL}hospital`, body);
+  }
 }

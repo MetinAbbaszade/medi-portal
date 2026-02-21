@@ -7,10 +7,6 @@
                     <mat-panel-title>Main data</mat-panel-title>
                 </mat-expansion-panel-header>
                 <form [formGroup]="form">
-                    <mat-form-field appearance="outline" *ngIf="!isAddDialog">
-                        <mat-label>Id</mat-label>
-                        <input matInput formControlName="id" type="text" />
-                    </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Name</mat-label>
                         <input matInput formControlName="name" type="text" />
@@ -112,16 +108,14 @@
                 <form [formGroup]="form">
                     <mat-form-field appearance="outline">
                         <mat-label>Departments</mat-label>
-                        <mat-select formControlName="departments">
-                            <mat-option value=""></mat-option>
+                        <mat-select formControlName="departments" multiple>
                             <mat-option [value]="department.id"
                                 *ngFor="let department of departments">{{department.name}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Specialties</mat-label>
-                        <mat-select formControlName="specialties">
-                            <mat-option value=""></mat-option>
+                        <mat-select formControlName="specialties" multiple>
                             <mat-option [value]="specialty.id"
                                 *ngFor="let specialty of specialties">{{specialty.name}}</mat-option>
                         </mat-select>

@@ -8,6 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { TranslateModule } from '@ngx-translate/core';
 import { AdminServices } from '../../services/admin-services';
 import Swal from 'sweetalert2';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-detail-component',
@@ -139,7 +140,25 @@ export class DetailComponent implements OnInit {
     const payload = this.form.value;
     delete payload.id;
 
-    console.log(payload);
+    this.service.addHospital(payload)
+      .subscribe({
+        next: (res) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Successfully Updated',
+            text: `New Hospital Created`,
+            confirmButtonText: 'OK',
+          })
+        },
+        error: ({ error }) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: error.message,
+            confirmButtonText: 'OK',
+          });
+        }
+      })
   }
 
 }
