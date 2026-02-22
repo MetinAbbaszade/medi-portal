@@ -1,5 +1,10 @@
 export interface IRes {
-    filteredHospitals: IHospital[]
+    filteredHospitals: {
+        items: IHospital[],
+        total: number,
+        page: number,
+        pageSize: number
+    }
 }
 
 export interface IHospitalResponse {

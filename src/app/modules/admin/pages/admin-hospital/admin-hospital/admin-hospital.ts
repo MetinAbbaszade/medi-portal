@@ -1,4 +1,4 @@
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ɵInternalFormsSharedModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAnchor } from "@angular/material/button";
 import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
@@ -47,6 +47,8 @@ export class AdminHospital {
     { column: 'description' }
   ];
   displayedColumns: Array<string> = ['expandAction', ...this.fieldToColumnNames.map((name: any) => name.column)];
+  @ViewChild(Gridview) gridview!: Gridview;
+
 
   private refresh$ = new EventEmitter<void>();
 
@@ -68,7 +70,10 @@ export class AdminHospital {
     })
 
     this.fetchAllSpecialties();
-    this.fetchData();
+  }
+
+  ngAfterViewInit() {
+    queueMicrotask(() => this.fetchData());
   }
 
   fetchAllSpecialties() {
@@ -93,11 +98,12 @@ export class AdminHospital {
   }
 
   fetchData() {
-    this.loading = true;
-    merge(this.form.valueChanges, this.refresh$)
+    merge(this.form.valueChanges, this.refresh$, this.gridview.paginator.page)
       .pipe(
         startWith({}),
-        switchMap((data: any) => {
+        switchMap(() => {
+          this.loading = true;
+          this.dataSource = new MatTableDataSource();
           const params = this.getParams();
           return this.hospitalService.fetchHospitalData(params)
             .pipe(
@@ -106,8 +112,8 @@ export class AdminHospital {
         })
       )
       .subscribe(({ filteredHospitals }) => {
-        this.dataSource = new MatTableDataSource(filteredHospitals);
-        this.resultsLength = filteredHospitals.length;
+        this.dataSource = new MatTableDataSource(filteredHospitals.items);
+        this.resultsLength = filteredHospitals.total;
       })
   }
 
@@ -117,7 +123,9 @@ export class AdminHospital {
 
   getParams() {
     const params = {
-      ...this.form.value
+      ...this.form.value,
+      page: this.gridview.paginator.pageIndex + 1,
+      pageSize: this.gridview.paginator.pageSize,
     }
 
     for (let item in params) {
