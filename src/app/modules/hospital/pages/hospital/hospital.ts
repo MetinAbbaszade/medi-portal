@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Subscription } from 'rxjs';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatPaginator } from "@angular/material/paginator";
 
 
 @Component({
@@ -33,7 +34,8 @@ import { TranslateModule } from '@ngx-translate/core';
     MatButtonModule,
     MatExpansionModule,
     MatSelectModule,
-    TranslateModule],
+    TranslateModule,
+  ],
   templateUrl: './hospital.html',
   styleUrls: ['./hospital.css'],
   standalone: true

@@ -28,4 +28,8 @@ export class AdminServices {
   addHospital(body: any) {
     return this.http.post(`${this.BASE_URL}hospital`, body);
   }
+
+  getHospitalList() {
+    return this.http.get<any>(`${this.BASE_URL}hospital/list`);
+  }
 }
