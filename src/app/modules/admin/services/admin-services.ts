@@ -32,4 +32,10 @@ export class AdminServices {
   getHospitalList() {
     return this.http.get<any>(`${this.BASE_URL}hospital/list`);
   }
+
+  getDoctors(params: {}) {
+    return this.http.get<any>(`${this.BASE_URL}doctors`, {
+      params: { isDetailed: false, ...params }
+    })
+  }
 }

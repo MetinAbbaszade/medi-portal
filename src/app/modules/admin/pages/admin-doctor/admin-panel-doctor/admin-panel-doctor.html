@@ -11,43 +11,43 @@
         <div class="filter-wrapper">
             <form [formGroup]="form">
                 <mat-form-field appearance="outline" class="name-search">
-                    <input matInput formControlName="Name" type="text" placeholder="Search doctors by name..." />
+                    <input matInput formControlName="name" type="text" placeholder="Search doctors by name..." />
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Search by Specialty</mat-label>
-                    <mat-select formControlName="Specialty">
-                        <mat-option [value]="specialty.name"
+                    <mat-select formControlName="specialty">
+                        <mat-option [value]="specialty.id"
                             *ngFor="let specialty of specialties">{{specialty.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Search by Department</mat-label>
-                    <mat-select formControlName="Department">
-                        <mat-option [value]="department.name"
+                    <mat-select formControlName="department">
+                        <mat-option [value]="department.id"
                             *ngFor="let department of departments">{{department.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Search by Hospital</mat-label>
-                    <mat-select formControlName="Hospital">
+                    <mat-select formControlName="hospital">
                         <mat-option [value]="hospital.id"
                             *ngFor="let hospital of hospitalList">{{hospital.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>{{ 'Hospital.filterSort' | translate }}</mat-label>
-                    <mat-select id="sortHospitals" formControlName="Sort">
-                        <mat-option value="name-asc">{{ 'Hospital.sortOptions.asc' | translate }}</mat-option>
-                        <mat-option value="name-desc">{{ 'Hospital.sortOptions.desc' | translate }}</mat-option>
+                    <mat-select id="sortHospitals" formControlName="sort">
+                        <mat-option value="asc">{{ 'Hospital.sortOptions.asc' | translate }}</mat-option>
+                        <mat-option value="desc">{{ 'Hospital.sortOptions.desc' | translate }}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </form>
         </div>
 
-        <!-- <div class="table-wrapper">
+        <div class="table-wrapper">
             <app-gridview [dataSource]="dataSource" [fieldToColumnNames]="fieldToColumnNames"
                 [displayedColumns]="displayedColumns" [loading]="loading" [resultsLength]="resultsLength"
-                (refresh)="triggerRefresh()"></app-gridview>
-        </div> -->
+                (refresh)="triggerRefresh()" [type]="'doctor'"></app-gridview>
+        </div>
     </div>
 </div>

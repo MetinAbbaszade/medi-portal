@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, ViewChild } from '@angular/core';
 import { ɵInternalFormsSharedModule, ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { MatAnchor } from "@angular/material/button";
 import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
 import { Gridview } from "../../../../../shared/components/gridview/gridview/gridview";
 import { TranslateModule } from '@ngx-translate/core';
 import { AdminServices } from '../../../services/admin-services';
+import { MatTableDataSource } from '@angular/material/table';
+import { finalize, merge, startWith, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-admin-panel-doctor',
@@ -20,7 +22,7 @@ import { AdminServices } from '../../../services/admin-services';
     ReactiveFormsModule,
     MatSelectModule,
     CommonModule,
-    // Gridview,
+    Gridview,
     TranslateModule,
   ],
   templateUrl: './admin-panel-doctor.html',
@@ -33,24 +35,79 @@ export class AdminPanelDoctor {
   departments !: any[];
   hospitalList !: any[];
 
+  dataSource!: MatTableDataSource<any>;
+  resultsLength!: number;
+  loading: boolean = false;
+
+  fieldToColumnNames: any = [
+    { column: 'name' },
+    { column: 'surname' },
+    { column: 'date_of_birth' },
+    { column: 'email' },
+    { column: 'adress' },
+    { column: 'experience' },
+  ];
+  displayedColumns: Array<string> = ['expandAction', ...this.fieldToColumnNames.map((name: any) => name.column)];
+
+  private refresh$ = new EventEmitter<void>();
+  @ViewChild(Gridview) gridview!: Gridview;
+
   constructor(
     private fb: FormBuilder,
     private adminService: AdminServices,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
     this.form = this.fb.group({
-      Hospital: '',
-      Specialty: '',
-      Department: '',
-      Name: '',
-      Sort: ''
+      hospital: '',
+      specialty: '',
+      department: '',
+      name: '',
+      sort: ''
     });
 
     this.fetchAllSpecialties();
     this.fetchAllDepartments();
     this.fetchAllHospitals();
   }
+
+  ngAfterViewInit() {
+    this.fetchDoctors();
+  }
+
+  fetchDoctors() {
+    merge(
+      this.form.valueChanges,
+      this.refresh$,
+      this.gridview.paginator.page,
+    ).pipe(
+      startWith({}),
+      tap(() => {
+        this.loading = true;
+        this.dataSource = new MatTableDataSource();
+        this.cdr.detectChanges();
+      }),
+      switchMap(() => {
+        const params = this.getParams();
+
+        return this.adminService.getDoctors(params)
+          .pipe(
+            finalize(() => this.loading = false)
+          )
+      })
+    )
+      .subscribe({
+        next: ({ data }) => {
+          this.dataSource = new MatTableDataSource(data.items);
+          this.resultsLength = data.total;
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      })
+  }
+
 
   clearFiltiration() {
     this.form.reset();
@@ -89,5 +146,25 @@ export class AdminPanelDoctor {
         console.error(error);
       }
     })
+  }
+
+  triggerRefresh() {
+    this.refresh$.emit();
+  }
+
+  private getParams() {
+    const params = {
+      ...this.form.value,
+      page: this.gridview.paginator.pageIndex + 1,
+      pageSize: this.gridview.paginator.pageSize,
+    }
+
+    for (let item in params) {
+      if (!params[item]) {
+        delete params[item];
+      }
+    }
+
+    return params;
   }
 }

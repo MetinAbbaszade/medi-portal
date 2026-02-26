@@ -38,7 +38,7 @@
 
         >form {
             display: flex;
-            justify-content: space-between;
+            gap: 2rem;
 
             >.name-search {
                 min-width: 200px;

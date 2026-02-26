@@ -35,7 +35,7 @@
         <div class="table-wrapper">
             <app-gridview [dataSource]="dataSource" [fieldToColumnNames]="fieldToColumnNames"
                 [displayedColumns]="displayedColumns" [loading]="loading" [resultsLength]="resultsLength"
-                (refresh)="triggerRefresh()"></app-gridview>
+                (refresh)="triggerRefresh()" [type]="'hospital'"></app-gridview>
         </div>
     </div>
 </div>

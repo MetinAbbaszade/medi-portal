@@ -35,7 +35,7 @@ import { DetailComponent } from "../../../../modules/admin/components/detail-com
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
       state('expanded', style({ height: '*' })),
-      transition('collapsed <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition('collapsed <=> expanded', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
@@ -48,6 +48,7 @@ export class Gridview {
   @Input() displayedColumns!: any[];
   @Input() fieldToColumnNames!: any[];
   @Input() loading!: boolean;
+  @Input() type!: string;
 
   @Output() refresh: EventEmitter<void> = new EventEmitter<void>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
