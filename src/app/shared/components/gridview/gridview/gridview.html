@@ -29,10 +29,10 @@
                         @case ('hospital') {
                         <app-detail-component [element]="element" (refresh)="onRefresh()"></app-detail-component>
                         }
-                        <!-- @case ('hospital') {
-                        <app-hospital-detail-component [element]="element"
-                            (refresh)="onRefresh()"></app-hospital-detail-component>
-                        } -->
+                        @case ('doctor') {
+                        <app-doctor-detail-component [element]="element"
+                            (refresh)="onRefresh()"></app-doctor-detail-component>
+                        }
                         @default {
                         <p>Unknown type</p>
                         }
@@ -47,7 +47,7 @@
             [class.expanded-row]="expandedElement === element" class="example-element-row"></tr>
         <tr mat-row *matRowDef="let row; columns: ['expandedDetail'];" class="example-detail-row"></tr>
     </table>
-    <div id="spinner" *ngIf="loading && !dataSource?.length">
+    <div id="spinner" *ngIf="loading && !dataSource?.length" class="loading-wrapper">
         <mat-spinner></mat-spinner>
     </div>
 

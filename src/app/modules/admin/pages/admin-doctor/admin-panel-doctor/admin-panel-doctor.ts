@@ -9,7 +9,9 @@ import { Gridview } from "../../../../../shared/components/gridview/gridview/gri
 import { TranslateModule } from '@ngx-translate/core';
 import { AdminServices } from '../../../services/admin-services';
 import { MatTableDataSource } from '@angular/material/table';
-import { finalize, merge, startWith, switchMap, tap } from 'rxjs';
+import { debounceTime, finalize, merge, startWith, switchMap, tap } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { DoctorDetailComponent } from '../../../components/doctor-detail-component/doctor-detail-component';
 
 @Component({
   selector: 'app-admin-panel-doctor',
@@ -55,7 +57,8 @@ export class AdminPanelDoctor {
   constructor(
     private fb: FormBuilder,
     private adminService: AdminServices,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -166,5 +169,13 @@ export class AdminPanelDoctor {
     }
 
     return params;
+  }
+
+  addNewDoctor() {
+    const ref = this.dialog.open(DoctorDetailComponent);
+
+    ref.afterClosed().subscribe((result) => {
+      this.triggerRefresh();
+    })
   }
 }

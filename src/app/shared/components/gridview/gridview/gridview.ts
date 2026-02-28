@@ -14,6 +14,7 @@ import {
   animate
 } from '@angular/animations';
 import { DetailComponent } from "../../../../modules/admin/components/detail-component/detail-component";
+import { DoctorDetailComponent } from '../../../../modules/admin/components/doctor-detail-component/doctor-detail-component';
 
 
 
@@ -27,7 +28,8 @@ import { DetailComponent } from "../../../../modules/admin/components/detail-com
     MatIconModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    DetailComponent
+    DetailComponent,
+    DoctorDetailComponent,
   ],
   templateUrl: './gridview.html',
   styleUrl: './gridview.css',

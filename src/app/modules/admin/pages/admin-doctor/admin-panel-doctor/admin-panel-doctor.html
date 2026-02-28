@@ -6,7 +6,7 @@
     <div class="gridview-container">
         <div class="btn-wrapper">
             <button mat-raised-button (click)="clearFiltiration()">Clear Filtiration</button>
-            <button mat-raised-button color="primary">Add New Doctor</button>
+            <button mat-raised-button color="primary" (click)="addNewDoctor()">Add New Doctor</button>
         </div>
         <div class="filter-wrapper">
             <form [formGroup]="form">

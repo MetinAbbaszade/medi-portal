@@ -1,0 +1,45 @@
+<section class="container">
+    <div class="wrapper">
+        <h2>{{!isAddDialog ? ' Edit Information about Hospital ' : 'Add new Hospital'}}</h2>
+        <mat-accordion>
+            <form [formGroup]="form">
+                @for(item of Object.entries(form.getRawValue()); track item[0]){
+                @if(item[0].toLowerCase().includes('date')){
+                <mat-form-field appearance="outline">
+                    <input matInput [matDatepicker]="picker" [placeholder]="item[0]"
+                        [formControl]="$any(form.get(item[0]))" autocomplete="off">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                }
+
+                @if(item[0].toLowerCase() === 'status'){
+                <mat-form-field appearance="outline">
+                    <mat-label>Status</mat-label>
+                    <mat-select [formControlName]="item[0]">
+                        <mat-option value="Active">Active</mat-option>
+                        <mat-option value="Inactive">Inactive</mat-option>
+                        <mat-option value="On Leave">On Leave</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                }
+                @if((item[0] !== 'id' && item[0] !== 'picture' && item[0] !== 'status')){
+                <mat-form-field appearance="outline">
+                    <mat-label>{{item[0]}}</mat-label>
+                    <input matInput [formControlName]="item[0]" type="text" />
+                </mat-form-field>
+                }
+                }
+            </form>
+        </mat-accordion>
+
+        <ng-container *ngIf="!isAddDialog else addBtn">
+            <button mat-raised-button color="primary" class="updateFN" [disabled]="form.invalid"
+                (click)="update()">Update</button>
+        </ng-container>
+        <ng-template #addBtn>
+            <button mat-raised-button color="primary" class="updateFN" [disabled]="form.invalid"
+                (click)="add()">Add</button>
+        </ng-template>
+    </div>
+</section>
