@@ -1,59 +1,83 @@
 # MediPortal
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.1.
+Web portal for booking doctor appointments. Patients choose a hospital and department, pick a doctor and an available time slot, and book it. Admins manage hospitals and doctors from a separate panel.
 
-## Development server
+This repository contains the Angular frontend only. It talks to a separate REST API (see [Backend](#backend)).
 
-To start a local development server, run:
+> Work in progress: some screens (admin patients, admin appointments, hospital details) are still placeholders.
 
-```bash
-ng serve
-```
+## Features
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Authentication**: login and registration with JWT. The token is stored in `localStorage` and attached to API requests by an HTTP interceptor.
+- **Role-based access**: route guards protect the app and the admin area. Menu items are shown or hidden by an `appPermittedIf` directive based on the user's modules and permissions.
+- **Hospitals**: browse hospitals with pagination.
+- **Appointment booking**: select department, hospital and doctor, load available time slots, and book an appointment.
+- **Admin panel** (`/admin`):
+  - Dashboard with a monthly calendar (angular-calendar)
+  - Create and edit hospitals
+  - Doctor list with pagination and a detail view
+- **Profile**: user profile page with role-based menu sections.
+- **Contact form** and about page.
+- **Translations**: English and Azerbaijani via ngx-translate (`src/assets/i18n`).
 
-## Code scaffolding
+## Tech stack
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Angular 20 (standalone components and lazy-loaded modules)
+- Angular Material and CDK
+- ngx-translate
+- angular-calendar with date-fns
+- RxJS
+- jwt-decode, SweetAlert2
+- Karma and Jasmine for unit tests
 
-```bash
-ng generate component component-name
-```
+## Getting started
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Requirements: Node.js 20+ and npm.
 
 ```bash
-ng test
+npm install
+npm start
 ```
 
-## Running end-to-end tests
+Then open `http://localhost:4200/`.
 
-For end-to-end (e2e) testing, run:
+### Backend
 
-```bash
-ng e2e
+The app expects the API at `http://localhost:4000/`. To change it, edit `src/environments/environment.ts`:
+
+```ts
+export const url = {
+    baseUrl: 'http://localhost:4000/'
+}
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Endpoints used include `api/auth/login`, `api/auth/register`, `api/hospital`, `api/departments`, `api/doctors`, `api/doctors/getTimeSlots` and `api/appointments`.
 
-## Additional Resources
+## Scripts
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+| Command | Description |
+| --- | --- |
+| `npm start` | Start the dev server at `localhost:4200` |
+| `npm run build` | Production build into `dist/` |
+| `npm run watch` | Development build in watch mode |
+| `npm test` | Run unit tests with Karma |
+
+## Project structure
+
+```
+src/app/
+├── modules/          # Feature areas
+│   ├── admin/        # Admin panel (dashboard, hospitals, doctors, ...)
+│   ├── auth/         # Login and registration
+│   ├── bookAppointment/
+│   ├── hospital/
+│   ├── home/
+│   ├── profile/
+│   ├── about/
+│   └── contact/
+├── shared/           # Navbar, sidebar, grid view, error and 404 pages
+├── interceptors/     # JWT auth interceptor
+├── directives/       # permittedIf directive
+├── auth.guard.ts     # Requires login
+└── admin-guard.ts    # Requires the Admin module
+```
